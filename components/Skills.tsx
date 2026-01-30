@@ -110,7 +110,7 @@ export default function Skills() {
             </h3>
             <p className="text-gray-500 leading-relaxed">
               As an IAM Developer apprentice at <span className="text-accent font-medium">PwC Switzerland</span>, 
-              I'm constantly expanding my skillset. Currently exploring advanced React patterns 
+              I&apos;m constantly expanding my skillset. Currently exploring advanced React patterns 
               and diving deeper into cybersecurity concepts.
             </p>
             <div className="flex flex-wrap gap-3 justify-center mt-6">

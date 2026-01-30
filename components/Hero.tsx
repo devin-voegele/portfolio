@@ -41,7 +41,7 @@ export default function Hero() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight"
           >
-            Hi, I'm <span className="text-accent">Devin</span>
+            Hi, I&apos;m <span className="text-accent">Devin</span>
           </motion.h1>
 
           {/* Role */}

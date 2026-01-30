@@ -48,7 +48,7 @@ export default function Contact() {
           </h2>
           <div className="w-20 h-1 bg-accent mx-auto mb-4" />
           <p className="text-gray-500 max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? Let's build something amazing together!
+            Have a project in mind or want to collaborate? Let&apos;s build something amazing together!
           </p>
         </motion.div>
 
@@ -62,10 +62,10 @@ export default function Contact() {
           >
             <div>
               <h3 className="text-2xl font-bold mb-6 text-white">
-                Let's Connect
+                Let&apos;s Connect
               </h3>
               <p className="text-gray-500 leading-relaxed mb-8">
-                I'm always open to discussing new projects, creative ideas, or opportunities 
+                I&apos;m always open to discussing new projects, creative ideas, or opportunities 
                 to be part of your vision. Whether you need a developer for your team or 
                 want to collaborate on something exciting, feel free to reach out!
               </p>

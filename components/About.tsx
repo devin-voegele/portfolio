@@ -94,10 +94,10 @@ export default function About() {
                 </div>
                 <div className="space-y-1 text-gray-400">
                   <p><span className="text-accent">const</span> <span className="text-white">developer</span> = {'{'}</p>
-                  <p className="pl-4"><span className="text-gray-500">name:</span> <span className="text-green-400">"Devin"</span>,</p>
-                  <p className="pl-4"><span className="text-gray-500">role:</span> <span className="text-green-400">"IAM Developer"</span>,</p>
-                  <p className="pl-4"><span className="text-gray-500">company:</span> <span className="text-green-400">"PwC Switzerland"</span>,</p>
-                  <p className="pl-4"><span className="text-gray-500">passion:</span> <span className="text-green-400">"Motorsport"</span>,</p>
+                  <p className="pl-4"><span className="text-gray-500">name:</span> <span className="text-green-400">&quot;Devin&quot;</span>,</p>
+                  <p className="pl-4"><span className="text-gray-500">role:</span> <span className="text-green-400">&quot;IAM Developer&quot;</span>,</p>
+                  <p className="pl-4"><span className="text-gray-500">company:</span> <span className="text-green-400">&quot;PwC Switzerland&quot;</span>,</p>
+                  <p className="pl-4"><span className="text-gray-500">passion:</span> <span className="text-green-400">&quot;Motorsport&quot;</span>,</p>
                   <p className="pl-4"><span className="text-gray-500">available:</span> <span className="text-accent">true</span></p>
                   <p>{'}'}</p>
                 </div>

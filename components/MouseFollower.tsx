@@ -5,11 +5,19 @@ import { motion, useSpring } from 'framer-motion';
 
 export default function MouseFollower() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   const cursorX = useSpring(0, { stiffness: 500, damping: 28 });
   const cursorY = useSpring(0, { stiffness: 500, damping: 28 });
 
   useEffect(() => {
+    // Check if device is mobile/touch
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(max-width: 768px)').matches || 'ontouchstart' in window);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -22,10 +30,14 @@ export default function MouseFollower() {
     window.addEventListener('mouseleave', hideCursor);
 
     return () => {
+      window.removeEventListener('resize', checkMobile);
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseleave', hideCursor);
     };
   }, [cursorX, cursorY]);
+
+  // Don't render cursor on mobile
+  if (isMobile) return null;
 
   return (
     <>

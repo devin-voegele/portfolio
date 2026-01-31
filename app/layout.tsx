@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} antialiased bg-black text-white cursor-none`}>
+      <body className={`${inter.className} antialiased bg-black text-white md:cursor-none`}>
         <MouseFollower />
         <ScrollProgress />
         <Navbar />

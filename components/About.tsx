@@ -61,15 +61,15 @@ export default function About() {
             </h3>
             <div className="space-y-4 text-gray-400 leading-relaxed">
               <p>
-                Hey! I'm Devin, a 17-year-old <span className="text-white font-medium">IAM Developer</span> apprentice 
+                Hey! I&apos;m Devin, a 17-year-old <span className="text-white font-medium">IAM Developer</span> apprentice 
                 at <span className="text-accent font-medium">PwC Switzerland</span>, currently in my 2nd year working in the IAM Team.
               </p>
               <p>
-                I'm passionate about creating innovative digital solutions that combine aesthetics with functionality. 
+                I&apos;m passionate about creating innovative digital solutions that combine aesthetics with functionality. 
                 My journey in tech has led me through web development, Linux-based projects, and even cybersecurity exploration.
               </p>
               <p>
-                When I'm not coding, you'll find me watching <span className="text-white font-medium">Formula 1</span> races, 
+                When I&apos;m not coding, you&apos;ll find me watching <span className="text-white font-medium">Formula 1</span> races, 
                 competing in sim racing, or designing graphics. I believe in building things that are not just functional, 
                 but also <span className="text-white font-medium">beautiful and fast</span>.
               </p>

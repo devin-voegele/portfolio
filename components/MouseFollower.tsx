@@ -7,8 +7,8 @@ export default function MouseFollower() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
-  const cursorX = useSpring(0, { stiffness: 500, damping: 28 });
-  const cursorY = useSpring(0, { stiffness: 500, damping: 28 });
+  const cursorX = useSpring(0, { stiffness: 300, damping: 30 });
+  const cursorY = useSpring(0, { stiffness: 300, damping: 30 });
 
   useEffect(() => {
     // Check if device is mobile/touch
@@ -53,22 +53,7 @@ export default function MouseFollower() {
         }}
       />
       
-      {/* Cursor trail */}
-      <motion.div
-        className="fixed top-0 left-0 w-6 h-6 border border-white/50 rounded-full pointer-events-none z-[9998]"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: '-50%',
-          translateY: '-50%',
-          opacity: isVisible ? 0.5 : 0,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 150,
-          damping: 15,
-        }}
-      />
+      {/* Cursor trail removed for performance */}
     </>
   );
 }

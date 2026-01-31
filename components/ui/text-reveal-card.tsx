@@ -148,37 +148,25 @@ export const TextRevealCardDescription = ({
 };
 
 const Stars = () => {
-  const randomMove = () => Math.random() * 4 - 2;
-  const randomOpacity = () => Math.random();
-  const random = () => Math.random();
   return (
     <div className="absolute inset-0">
-      {[...Array(80)].map((_, i) => (
-        <motion.span
+      {/* Reduced to 20 static stars for better performance */}
+      {[...Array(20)].map((_, i) => (
+        <span
           key={`star-${i}`}
-          animate={{
-            top: `calc(${random() * 100}% + ${randomMove()}px)`,
-            left: `calc(${random() * 100}% + ${randomMove()}px)`,
-            opacity: randomOpacity(),
-            scale: [1, 1.2, 0],
-          }}
-          transition={{
-            duration: random() * 10 + 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
           style={{
             position: "absolute",
-            top: `${random() * 100}%`,
-            left: `${random() * 100}%`,
+            top: `${(i * 5) % 100}%`,
+            left: `${(i * 7 + 10) % 100}%`,
             width: `2px`,
             height: `2px`,
             backgroundColor: "white",
             borderRadius: "50%",
+            opacity: 0.3,
             zIndex: 1,
           }}
           className="inline-block"
-        ></motion.span>
+        />
       ))}
     </div>
   );

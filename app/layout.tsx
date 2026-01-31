@@ -98,7 +98,7 @@ export default function RootLayout({
         <AIChatbot />
         <main className="relative">
           {children}
-          <BackgroundBeams className="fixed inset-0 z-0 pointer-events-none opacity-50" />
+          <BackgroundBeams className="fixed inset-0 z-0 pointer-events-none opacity-30" />
         </main>
       </body>
     </html>

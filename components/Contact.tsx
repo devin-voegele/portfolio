@@ -186,15 +186,61 @@ export default function Contact() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 1 }}
-          className="mt-20 text-center"
+          className="mt-20"
         >
-          <div className="w-full h-px bg-white/10 mb-8" />
-          <p className="text-gray-500">
-            Built with ❤️ and <span className="text-accent">Next.js</span> by Devin
-          </p>
-          <p className="text-gray-600 text-sm mt-2">
-            © 2026 Devin. All rights reserved.
-          </p>
+          <div className="w-full h-px bg-white/10 mb-12" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            {/* Brand */}
+            <div className="md:col-span-1">
+              <h3 className="text-xl font-bold text-white mb-4">Devin</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                IAM Developer at PwC Switzerland. Building secure and beautiful digital experiences.
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2">
+                <li><a href="#hero" className="text-gray-500 hover:text-accent transition-colors text-sm">Home</a></li>
+                <li><a href="#about" className="text-gray-500 hover:text-accent transition-colors text-sm">About</a></li>
+                <li><a href="#projects" className="text-gray-500 hover:text-accent transition-colors text-sm">Projects</a></li>
+                <li><a href="#skills" className="text-gray-500 hover:text-accent transition-colors text-sm">Skills</a></li>
+              </ul>
+            </div>
+
+            {/* Projects */}
+            <div>
+              <h4 className="text-white font-semibold mb-4">Projects</h4>
+              <ul className="space-y-2">
+                <li><a href="https://getmoneymap.org" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent transition-colors text-sm">MoneyMap</a></li>
+                <li><a href="#projects" className="text-gray-500 hover:text-accent transition-colors text-sm">AI Framework</a></li>
+                <li><a href="#projects" className="text-gray-500 hover:text-accent transition-colors text-sm">Sim Racing Telemetry</a></li>
+              </ul>
+            </div>
+
+            {/* Connect */}
+            <div>
+              <h4 className="text-white font-semibold mb-4">Connect</h4>
+              <ul className="space-y-2">
+                <li><a href="https://github.com/devin-voegele" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent transition-colors text-sm">GitHub</a></li>
+                <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent transition-colors text-sm">LinkedIn</a></li>
+                <li><a href="mailto:devin@voegele.dev" className="text-gray-500 hover:text-accent transition-colors text-sm">Email</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="w-full h-px bg-white/10 mb-6" />
+          
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-500 text-sm">
+              Built with <span className="text-accent">Next.js</span> and <span className="text-accent">Tailwind CSS</span>
+            </p>
+            <p className="text-gray-600 text-sm">
+              © 2026 Devin Vögele. All rights reserved.
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Code2, Rocket, Trophy, Zap } from 'lucide-react';
+import {
+  TextRevealCard,
+  TextRevealCardDescription,
+  TextRevealCardTitle,
+} from './ui/text-reveal-card';
 
 const highlights = [
   {
@@ -108,7 +113,7 @@ export default function About() {
         </div>
 
         {/* Highlights Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {highlights.map((item, index) => (
             <motion.div
               key={item.title}
@@ -125,6 +130,26 @@ export default function About() {
             </motion.div>
           ))}
         </div>
+
+        {/* Text Reveal Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 1 }}
+          className="flex items-center justify-center w-full"
+        >
+          <TextRevealCard
+            text="I write clean code"
+            revealText="I build secure systems"
+          >
+            <TextRevealCardTitle>
+              Hover to discover more
+            </TextRevealCardTitle>
+            <TextRevealCardDescription>
+              From web development to penetration testing, I combine creativity with security expertise to build robust digital experiences.
+            </TextRevealCardDescription>
+          </TextRevealCard>
+        </motion.div>
       </div>
     </section>
   );

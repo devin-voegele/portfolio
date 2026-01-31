@@ -5,7 +5,6 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import StatsCounter from "@/components/StatsCounter";
-import MovingLine from "@/components/ui/MovingLine";
 
 export default function Home() {
   return (
@@ -13,11 +12,9 @@ export default function Home() {
       <Hero />
       <HeroScroll />
       <StatsCounter />
-      <MovingLine>
-        <About />
-        <Projects />
-        <Skills />
-      </MovingLine>
+      <About />
+      <Projects />
+      <Skills />
       <Contact />
     </>
   );

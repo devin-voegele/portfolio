@@ -12,35 +12,33 @@ export default function MovingLine({ children }: MovingLineProps) {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end end'],
+    offset: ['start end', 'end start'],
   });
 
   const pathLengthValue = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  const PATH = 'M0.5 0L0.5 100%';
-
   return (
     <div
-      className="max-w-6xl mx-auto flex flex-row items-start w-full px-4"
+      className="relative w-full"
       ref={ref}
     >
-      {/* Vertical Line */}
-      <div className="hidden md:flex flex-shrink-0 mr-8 sticky top-20 h-screen">
+      {/* Vertical Line - Fixed on left side */}
+      <div className="hidden md:block fixed left-8 lg:left-16 top-0 bottom-0 z-10">
         <svg
           width="3"
           height="100%"
-          viewBox="0 0 3 800"
+          viewBox="0 0 3 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="h-[80vh]"
+          className="h-full"
           preserveAspectRatio="none"
         >
           {/* Background line */}
           <path
-            d="M1.5 0L1.5 800"
-            stroke="url(#paint0_linear)"
+            d="M1.5 0L1.5 100"
+            stroke="#0EA5E9"
             strokeWidth="1"
-            strokeOpacity="0.2"
+            strokeOpacity="0.1"
           />
           {/* Animated line */}
           <motion.path
@@ -50,42 +48,29 @@ export default function MovingLine({ children }: MovingLineProps) {
                 damping: 30,
               }),
             }}
-            d="M1.5 0L1.5 800"
-            stroke="url(#paint1_linear)"
+            d="M1.5 0L1.5 100"
+            stroke="url(#movingLineGradient)"
             strokeWidth="3"
             strokeLinecap="round"
           />
           <defs>
             <linearGradient
-              id="paint0_linear"
+              id="movingLineGradient"
               x1="1.5"
               y1="0"
               x2="1.5"
-              y2="800"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#0EA5E9" stopOpacity="0" />
-              <stop offset="0.5" stopColor="#0EA5E9" stopOpacity="0.3" />
-              <stop offset="1" stopColor="#0EA5E9" stopOpacity="0" />
-            </linearGradient>
-            <linearGradient
-              id="paint1_linear"
-              x1="1.5"
-              y1="0"
-              x2="1.5"
-              y2="800"
+              y2="100"
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#0EA5E9" />
-              <stop offset="0.5" stopColor="#38BDF8" />
-              <stop offset="1" stopColor="#0EA5E9" />
+              <stop offset="1" stopColor="#38BDF8" />
             </linearGradient>
           </defs>
         </svg>
       </div>
 
       {/* Content */}
-      <div className="flex flex-col w-full">
+      <div className="w-full">
         {children}
       </div>
     </div>

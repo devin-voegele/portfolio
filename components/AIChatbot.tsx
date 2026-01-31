@@ -16,8 +16,10 @@ About Devin:
 - Currently in his 2nd year, working in the IAM (Identity and Access Management) Team
 - Passionate about web development, motorsport (especially Formula 1), and sim racing
 - Skills: Next.js, React, Tailwind CSS, JavaScript, PHP, Node.js, MySQL, Git, Linux
+- Cybersecurity enthusiast - does penetration testing, exploring vulnerabilities like vsftpd backdoor exploits
+- Graphic designer with 3+ years experience using Adobe After Effects
+- His design work has reached over 40 million views total
 - Lewis Hamilton supporter
-- Enjoys graphic design and cybersecurity exploration
 - Located in Zürich, Switzerland
 
 Be friendly, helpful, and concise. Answer questions about Devin's skills, experience, projects, and interests. If asked about something you don't know, politely say you don't have that information but suggest they contact Devin directly.`;
@@ -92,7 +94,7 @@ export default function AIChatbot() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-8 right-24 z-50 p-4 bg-white text-black rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+            className="fixed bottom-20 right-20 md:bottom-8 md:right-24 z-50 p-3 md:p-4 bg-white text-black rounded-full shadow-lg hover:bg-gray-100 transition-colors"
           >
             <MessageCircle className="w-6 h-6" />
           </motion.button>
@@ -106,7 +108,7 @@ export default function AIChatbot() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-8 right-8 z-50 w-[380px] h-[500px] bg-black border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-0 right-0 md:bottom-8 md:right-8 z-50 w-full md:w-[380px] h-[80vh] md:h-[500px] bg-black border-t md:border border-white/10 md:rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-carbon-light">

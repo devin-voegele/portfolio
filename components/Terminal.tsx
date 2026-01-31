@@ -237,7 +237,7 @@ Type 'cat about.txt' for more info!`;
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-8 right-8 z-50 p-4 bg-accent text-white rounded-full shadow-lg hover:bg-accent-light transition-colors"
+          className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-50 p-3 md:p-4 bg-accent text-white rounded-full shadow-lg hover:bg-accent-light transition-colors"
         >
           <TerminalIcon className="w-6 h-6" />
         </motion.button>
@@ -249,7 +249,7 @@ Type 'cat about.txt' for more info!`;
           initial={{ scale: 0.8, opacity: 0, y: 100 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.8, opacity: 0, y: 100 }}
-          className="fixed bottom-8 right-8 z-50 w-[90vw] md:w-[700px] h-[500px] bg-black border border-gray-700 rounded-lg shadow-2xl overflow-hidden"
+          className="fixed bottom-0 right-0 md:bottom-8 md:right-8 z-50 w-full md:w-[600px] h-[70vh] md:h-[450px] bg-black border-t md:border border-gray-700 md:rounded-lg shadow-2xl overflow-hidden"
         >
           {/* Title Bar */}
           <div className="flex items-center justify-between px-4 py-2 bg-gray-900 border-b border-gray-700">
@@ -310,7 +310,7 @@ Type 'cat about.txt' for more info!`;
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           onClick={() => setIsMinimized(false)}
-          className="fixed bottom-8 right-8 z-50 px-4 py-2 bg-gray-900 text-white rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors flex items-center gap-2"
+          className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-50 px-3 py-2 bg-gray-900 text-white rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors flex items-center gap-2"
         >
           <TerminalIcon className="w-4 h-4" />
           <span className="text-sm font-mono">Terminal</span>

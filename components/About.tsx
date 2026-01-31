@@ -66,12 +66,13 @@ export default function About() {
               </p>
               <p>
                 I&apos;m passionate about creating innovative digital solutions that combine aesthetics with functionality. 
-                My journey in tech has led me through web development, Linux-based projects, and even cybersecurity exploration.
+                My journey in tech has led me through web development, Linux-based projects, and <span className="text-white font-medium">penetration testing</span> - 
+                exploring vulnerabilities like vsftpd backdoor exploits and other security research.
               </p>
               <p>
                 When I&apos;m not coding, you&apos;ll find me watching <span className="text-white font-medium">Formula 1</span> races, 
-                competing in sim racing, or designing graphics. I believe in building things that are not just functional, 
-                but also <span className="text-white font-medium">beautiful and fast</span>.
+                competing in sim racing, or creating motion graphics. As a <span className="text-white font-medium">graphic designer with 3+ years experience</span> using 
+                Adobe After Effects, my work has reached over <span className="text-accent font-medium">40 million views</span>.
               </p>
             </div>
           </motion.div>

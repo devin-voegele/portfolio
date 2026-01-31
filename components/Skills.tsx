@@ -15,19 +15,20 @@ const skills = [
     ],
   },
   {
-    category: 'Backend',
+    category: 'Backend & Security',
     items: [
       { name: 'PHP', level: 75 },
       { name: 'Node.js', level: 70 },
       { name: 'MySQL', level: 70 },
+      { name: 'Pentesting', level: 65 },
     ],
   },
   {
-    category: 'Tools & Others',
+    category: 'Design & Tools',
     items: [
+      { name: 'After Effects', level: 85 },
       { name: 'Git', level: 85 },
       { name: 'Linux', level: 80 },
-      { name: 'VS Code', level: 90 },
       { name: 'Figma', level: 70 },
     ],
   },
@@ -82,13 +83,19 @@ export default function Skills() {
                     </div>
                     
                     {/* Progress Bar */}
-                    <div className="h-1.5 bg-slate rounded-full overflow-hidden">
+                    <div className="h-2 bg-slate/50 rounded-full overflow-hidden">
                       <motion.div
-                        className="h-full bg-accent"
                         initial={{ width: 0 }}
                         animate={isInView ? { width: `${skill.level}%` } : {}}
-                        transition={{ duration: 1, delay: groupIndex * 0.2 + index * 0.1 }}
-                      />
+                        transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
+                        className="h-full bg-gradient-to-r from-accent to-accent-light rounded-full relative"
+                      >
+                        <motion.div
+                          className="absolute inset-0 bg-white/20"
+                          animate={{ x: ['-100%', '100%'] }}
+                          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: 1 + index * 0.2 }}
+                        />
+                      </motion.div>
                     </div>
                   </div>
                 ))}

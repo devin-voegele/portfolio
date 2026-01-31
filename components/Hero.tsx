@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, ChevronRight } from 'lucide-react';
+import TypewriterText from './TypewriterText';
+import FloatingIcons from './FloatingIcons';
 
 export default function Hero() {
   return (
@@ -15,6 +17,9 @@ export default function Hero() {
       {/* Light Glow Behind Hero */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.03] rounded-full blur-[100px]" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-white/[0.05] rounded-full blur-[80px]" />
+
+      {/* Floating Icons Background */}
+      <FloatingIcons />
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -61,8 +66,14 @@ export default function Hero() {
             transition={{ delay: 1.0 }}
             className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed"
           >
-            Building modern web experiences with clean code and thoughtful design.
-            Passionate about motorsport and technology.
+            <TypewriterText 
+              texts={[
+                'Building modern web experiences.',
+                'IAM & Identity Security.',
+                'Formula 1 enthusiast.',
+                'Clean code advocate.',
+              ]}
+            />
           </motion.p>
 
           {/* CTA Buttons */}

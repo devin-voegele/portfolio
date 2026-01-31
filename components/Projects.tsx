@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
+import BeamCard from './ui/BeamCard';
 
 const projects = [
   {
@@ -63,10 +64,11 @@ export default function Projects() {
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
             <ScrollReveal key={project.title} delay={index * 0.1}>
+              <BeamCard className="h-full">
               <motion.div
                 whileHover={{ y: -4 }}
-                transition={{ duration: 0.2 }}
-                className="group bg-black rounded-xl p-6 border border-white/10 hover:border-accent/30 transition-all h-full"
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                className="group p-6 hover:shadow-lg hover:shadow-accent/10 transition-all h-full"
               >
                 {/* Project Header */}
                 <div className="flex items-start justify-between mb-4">
@@ -108,6 +110,7 @@ export default function Projects() {
                   ))}
                 </div>
               </motion.div>
+              </BeamCard>
             </ScrollReveal>
           ))}
         </div>

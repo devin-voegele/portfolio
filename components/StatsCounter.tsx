@@ -35,13 +35,15 @@ function AnimatedCounter({ value, label, suffix = '', duration = 2 }: StatProps)
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5 }}
-      className="text-center relative"
+      className="text-center relative group"
     >
-      <motion.div className="text-5xl md:text-6xl font-bold mb-3 tracking-tight">
-        <motion.span className="text-white">{displayValue}</motion.span>
+      <motion.div 
+        className="text-5xl md:text-6xl font-bold mb-3 tracking-tight group-hover:scale-110 transition-transform duration-300"
+      >
+        <motion.span className="text-white group-hover:text-accent transition-colors duration-300">{displayValue}</motion.span>
         <span className="text-accent">{suffix}</span>
       </motion.div>
-      <div className="text-xs text-gray-500 uppercase tracking-widest font-medium">{label}</div>
+      <div className="text-xs text-gray-500 uppercase tracking-widest font-medium group-hover:text-white transition-colors duration-300">{label}</div>
     </motion.div>
   );
 }
@@ -49,9 +51,9 @@ function AnimatedCounter({ value, label, suffix = '', duration = 2 }: StatProps)
 export default function StatsCounter() {
   const stats = [
     { value: 3, label: 'Years Coding', suffix: '+' },
+    { value: 40, label: 'Million Views', suffix: 'M+' },
     { value: 15, label: 'Projects Built', suffix: '+' },
-    { value: 10, label: 'Technologies', suffix: '+' },
-    { value: 100, label: 'Commits', suffix: '+' },
+    { value: 3, label: 'Years Design', suffix: '+' },
   ];
 
   return (

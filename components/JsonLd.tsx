@@ -30,7 +30,8 @@ export default function JsonLd() {
     ],
     "sameAs": [
       "https://github.com/devin-voegele",
-      "https://linkedin.com/in/devinvoegele"
+      "https://linkedin.com/in/devinvoegele",
+      "https://www.wikidata.org/wiki/Q133482588"
     ],
     "address": {
       "@type": "PostalAddress",

@@ -255,7 +255,7 @@ Type 'cat about.txt' for more info!`;
           <div className="flex items-center justify-between px-4 py-2 bg-gray-900 border-b border-gray-700">
             <div className="flex items-center gap-2">
               <TerminalIcon className="w-4 h-4 text-white" />
-              <span className="text-sm text-white font-mono">devin@portfolio ~ terminal</span>
+              <span className="text-xs sm:text-sm text-white font-mono truncate">devin@portfolio ~ terminal</span>
             </div>
             <div className="flex items-center gap-2">
               <button
@@ -277,7 +277,7 @@ Type 'cat about.txt' for more info!`;
           <div className="h-[calc(100%-40px)] flex flex-col">
             <div
               ref={historyRef}
-              className="flex-1 overflow-y-auto p-4 font-mono text-sm text-accent"
+              className="flex-1 overflow-y-auto p-3 sm:p-4 font-mono text-xs sm:text-sm text-accent"
               onClick={() => inputRef.current?.focus()}
             >
               {history.map((line, i) => (
@@ -287,15 +287,15 @@ Type 'cat about.txt' for more info!`;
               ))}
               
               {/* Input Line */}
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-white">devin@portfolio:{currentPath}$</span>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-2">
+                <span className="text-white text-xs sm:text-sm shrink-0">devin@portfolio:{currentPath}$</span>
                 <input
                   ref={inputRef}
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="flex-1 bg-transparent outline-none text-accent"
+                  className="flex-1 bg-transparent outline-none text-accent text-sm min-w-0"
                   autoFocus
                 />
               </div>

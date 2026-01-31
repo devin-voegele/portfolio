@@ -6,6 +6,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import Terminal from "@/components/Terminal";
 import MouseFollower from "@/components/MouseFollower";
 import AIChatbot from "@/components/AIChatbot";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         <AIChatbot />
         <main className="relative">
           {children}
+          <BackgroundBeams className="fixed inset-0 z-0 pointer-events-none opacity-50" />
         </main>
       </body>
     </html>

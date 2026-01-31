@@ -7,7 +7,7 @@ import { Code2, Shield, Palette, Zap } from 'lucide-react';
 
 export default function HeroScroll() {
   return (
-    <section className="bg-black">
+    <section className="bg-black -mt-32 md:-mt-48">
       <ContainerScroll
         titleComponent={
           <div className="flex flex-col items-center">

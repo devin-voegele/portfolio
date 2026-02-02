@@ -6,7 +6,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import Terminal from "@/components/Terminal";
 import MouseFollower from "@/components/MouseFollower";
 import AIChatbot from "@/components/AIChatbot";
-import { BackgroundBeams } from "@/components/ui/background-beams";
+import { BackgroundBeams } from "@/components/ui/background-beams-static";
 import JsonLd from "@/components/JsonLd";
 
 const inter = Inter({ subsets: ["latin"] });

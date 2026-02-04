@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, ChevronRight } from 'lucide-react';
 import TypewriterText from './TypewriterText';
 import FloatingIcons from './FloatingIcons';
+import dynamic from 'next/dynamic';
+
+const StarsCanvas = dynamic(() => import('./StarsCanvas'), { ssr: false });
 
 export default function Hero() {
   return (
@@ -20,6 +23,9 @@ export default function Hero() {
 
       {/* Floating Icons Background */}
       <FloatingIcons />
+
+      {/* 3D Stars Background */}
+      <StarsCanvas />
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

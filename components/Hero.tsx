@@ -55,20 +55,20 @@ export default function Hero() {
           </motion.h1>
           
           {/* Sparkles Effect */}
-          <div className="w-full max-w-[40rem] mx-auto h-20 relative">
-            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[2px] w-3/4 blur-sm" />
-            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-3/4" />
-            <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-accent to-transparent h-[5px] w-1/4 blur-sm" />
-            <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-accent to-transparent h-px w-1/4" />
+          <div className="w-full max-w-[60rem] mx-auto h-32 md:h-40 relative mb-4">
+            <div className="absolute inset-x-10 md:inset-x-20 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[3px] md:h-[4px] w-4/5 blur-sm" />
+            <div className="absolute inset-x-10 md:inset-x-20 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[2px] w-4/5" />
+            <div className="absolute inset-x-20 md:inset-x-40 top-0 bg-gradient-to-r from-transparent via-accent to-transparent h-[6px] md:h-[8px] w-2/5 blur-sm" />
+            <div className="absolute inset-x-20 md:inset-x-40 top-0 bg-gradient-to-r from-transparent via-accent to-transparent h-[2px] w-2/5" />
             <SparklesCore
               background="transparent"
-              minSize={0.4}
-              maxSize={1}
-              particleDensity={800}
+              minSize={0.6}
+              maxSize={1.5}
+              particleDensity={600}
               className="w-full h-full"
               particleColor="#0EA5E9"
             />
-            <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+            <div className="absolute inset-0 w-full h-full [mask-image:radial-gradient(450px_250px_at_top,transparent_20%,black)]"></div>
           </div>
 
           {/* Role */}

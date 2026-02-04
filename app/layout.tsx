@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -9,7 +9,7 @@ import AIChatbot from "@/components/AIChatbot";
 import { BackgroundBeams } from "@/components/ui/background-beams-static";
 import JsonLd from "@/components/JsonLd";
 
-const inter = Inter({ subsets: ["latin"] });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://devin-voegele.vercel.app"),
@@ -90,7 +90,7 @@ export default function RootLayout({
       <head>
         <JsonLd />
       </head>
-      <body className={`${inter.className} antialiased bg-black text-white md:cursor-none`}>
+      <body className={`${spaceGrotesk.className} antialiased bg-black text-white md:cursor-none`}>
         <MouseFollower />
         <ScrollProgress />
         <Navbar />

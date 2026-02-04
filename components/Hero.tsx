@@ -5,6 +5,7 @@ import { ArrowDown, Github, Linkedin, ChevronRight } from 'lucide-react';
 import TypewriterText from './TypewriterText';
 import FloatingIcons from './FloatingIcons';
 import StarsBackground from './StarsBackground';
+import { SparklesCore } from './ui/sparkles';
 
 export default function Hero() {
   return (
@@ -48,10 +49,27 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-2 tracking-tight"
           >
             Hi, I&apos;m <span className="text-accent">Devin</span>
           </motion.h1>
+          
+          {/* Sparkles Effect */}
+          <div className="w-full max-w-[40rem] mx-auto h-20 relative">
+            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[2px] w-3/4 blur-sm" />
+            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-3/4" />
+            <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-accent to-transparent h-[5px] w-1/4 blur-sm" />
+            <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-accent to-transparent h-px w-1/4" />
+            <SparklesCore
+              background="transparent"
+              minSize={0.4}
+              maxSize={1}
+              particleDensity={800}
+              className="w-full h-full"
+              particleColor="#0EA5E9"
+            />
+            <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+          </div>
 
           {/* Role */}
           <motion.h2

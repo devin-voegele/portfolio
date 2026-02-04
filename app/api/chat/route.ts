@@ -14,18 +14,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('Making request to OpenRouter with model: anthropic/claude-sonnet-4');
+    console.log('Making request to OpenRouter with model: anthropic/claude-sonnet-4.5');
 
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'http://localhost:3001',
+        'HTTP-Referer': 'https://devin-voegele.vercel.app',
         'X-Title': 'Devin Portfolio Chatbot',
       },
       body: JSON.stringify({
-        model: 'anthropic/claude-sonnet-4',
+        model: 'anthropic/claude-sonnet-4.5',
         messages: [
           { role: 'system', content: systemPrompt },
           ...messages.map((msg: { role: string; content: string }) => ({

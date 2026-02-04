@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 const StarsCanvas = () => {
-  const [mounted, setMounted] = useState(false);
   const [ThreeComponents, setThreeComponents] = useState<any>(null);
 
   useEffect(() => {
-    setMounted(true);
+    let isMounted = true;
     
     // Dynamically import Three.js libraries
     Promise.all([
@@ -15,35 +14,47 @@ const StarsCanvas = () => {
       import('@react-three/drei'),
       import('maath/random/dist/maath-random.esm')
     ]).then(([fiber, drei, maath]) => {
-      setThreeComponents({
-        Canvas: fiber.Canvas,
-        useFrame: fiber.useFrame,
-        Points: drei.Points,
-        PointMaterial: drei.PointMaterial,
-        Preload: drei.Preload,
-        random: maath
-      });
+      if (isMounted) {
+        setThreeComponents({
+          Canvas: fiber.Canvas,
+          Points: drei.Points,
+          PointMaterial: drei.PointMaterial,
+          Preload: drei.Preload,
+          random: maath
+        });
+      }
+    }).catch(err => {
+      console.error('Failed to load Three.js:', err);
     });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  if (!mounted || !ThreeComponents) {
-    return <div className='w-full h-full absolute inset-0 z-0 bg-black' />;
+  const sphere = useMemo(() => {
+    if (ThreeComponents?.random) {
+      return ThreeComponents.random.inSphere(new Float32Array(3000), { radius: 1.2 });
+    }
+    return null;
+  }, [ThreeComponents]);
+
+  if (!ThreeComponents || !sphere) {
+    return null;
   }
 
-  const { Canvas, Points, PointMaterial, Preload, random } = ThreeComponents;
-
-  const sphere = random.inSphere(new Float32Array(3000), { radius: 1.2 });
+  const { Canvas, Points, PointMaterial, Preload } = ThreeComponents;
 
   return (
-    <div className='w-full h-full absolute inset-0 z-0'>
-      <Canvas camera={{ position: [0, 0, 1] }}>
+    <div className='w-full h-full absolute inset-0 z-0 pointer-events-none'>
+      <Canvas camera={{ position: [0, 0, 1] }} style={{ background: 'transparent' }}>
         <React.Suspense fallback={null}>
           <group rotation={[0, 0, Math.PI / 4]}>
             <Points positions={sphere} stride={3} frustumCulled>
               <PointMaterial
                 transparent
                 color='#0EA5E9'
-                size={0.002}
+                size={0.003}
                 sizeAttenuation={true}
                 depthWrite={false}
               />

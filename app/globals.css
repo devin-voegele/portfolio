@@ -24,6 +24,12 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .font-arial-bold,
+  .font-arial-bold * {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: 700 !important;
+  }
   
   .glass {
     background: rgba(30, 41, 59, 0.5);

@@ -14,7 +14,7 @@ export default function Hero() {
         baseHue={220}
         className="flex items-center justify-center w-full h-full min-h-screen px-4 sm:px-6 lg:px-8"
       >
-        <div className="max-w-5xl mx-auto text-center" style={{ fontFamily: 'Arial, sans-serif' }}>
+        <div className="font-arial-bold max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 border border-white/10 mb-8"
             >
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              <span className="text-sm text-gray-300" style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}>Available for opportunities</span>
+              <span className="text-sm text-gray-300">Available for opportunities</span>
             </motion.div>
 
             {/* Name */}
@@ -37,7 +37,6 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
               className="text-5xl md:text-7xl lg:text-8xl text-white mb-6 tracking-tight"
-              style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}
             >
               Hi, I&apos;m <span className="text-accent">Devin</span>
             </motion.h1>
@@ -48,7 +47,6 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
               className="text-xl md:text-2xl lg:text-3xl text-gray-400 mb-6"
-              style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}
             >
               Platform Development at <span className="text-white">PwC Switzerland</span>
             </motion.h2>
@@ -59,7 +57,6 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.0 }}
               className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed"
-              style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}
             >
               <TypewriterText
                 texts={[
@@ -81,7 +78,6 @@ export default function Hero() {
               <a
                 href="#projects"
                 className="group flex items-center gap-2 px-8 py-4 bg-white text-black rounded-lg transition-all hover:bg-gray-100 hover:scale-105"
-                style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}
               >
                 View My Work
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -89,7 +85,6 @@ export default function Hero() {
               <a
                 href="#contact"
                 className="px-8 py-4 border border-white/20 rounded-lg text-white hover:bg-white/5 transition-all hover:border-white/40"
-                style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}
               >
                 Get in Touch
               </a>

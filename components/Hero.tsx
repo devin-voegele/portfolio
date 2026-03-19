@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, ChevronRight } from 'lucide-react';
-import TypewriterText from './TypewriterText';
 import { Vortex } from './ui/vortex';
 
 export default function Hero() {
@@ -14,7 +13,7 @@ export default function Hero() {
         baseHue={220}
         className="flex items-center justify-center w-full h-full min-h-screen px-4 sm:px-6 lg:px-8"
       >
-        <div className="font-arial-bold max-w-5xl mx-auto text-center">
+        <div className="font-arial-bold max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -24,8 +23,8 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 border border-white/10 mb-8"
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 border border-white/10 mb-10"
             >
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
               <span className="text-sm text-gray-300">Available for opportunities</span>
@@ -35,44 +34,27 @@ export default function Hero() {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-5xl md:text-7xl lg:text-8xl text-white mb-6 tracking-tight"
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="text-6xl md:text-8xl lg:text-9xl text-white mb-4 tracking-tight"
             >
-              Hi, I&apos;m <span className="text-accent">Devin</span>
+              Devin.
             </motion.h1>
 
-            {/* Role */}
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="text-xl md:text-2xl lg:text-3xl text-gray-400 mb-6"
-            >
-              Platform Development at <span className="text-white">PwC Switzerland</span>
-            </motion.h2>
-
-            {/* Tagline */}
+            {/* One-liner */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.0 }}
-              className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed"
+              transition={{ delay: 0.9 }}
+              className="text-lg md:text-2xl text-gray-500 mb-12"
             >
-              <TypewriterText
-                texts={[
-                  'Building modern web experiences.',
-                  'Platform Development & Security.',
-                  'Formula 1 enthusiast.',
-                  'Clean code advocate.',
-                ]}
-              />
+              Developer · Designer · PwC Switzerland
             </motion.p>
 
             {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 }}
+              transition={{ delay: 1.1 }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
             >
               <a

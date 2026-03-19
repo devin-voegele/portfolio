@@ -46,13 +46,6 @@ export const HeroHighlight = ({
       )}
       onMouseMove={handleMouseMove}
     >
-      <motion.div
-        className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
-        style={{
-          background: useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px, rgba(99,102,241,0.08) 0%, transparent 80%)`,
-        }}
-      />
-
       <div className={cn("relative z-20", className)}>{children}</div>
     </div>
   );

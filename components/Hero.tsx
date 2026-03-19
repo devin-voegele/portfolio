@@ -2,17 +2,17 @@
 
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, ChevronRight } from 'lucide-react';
-import { Vortex } from './ui/vortex';
+import { ShootingStars } from './ui/shooting-stars';
+import { StarsBackground } from './ui/stars-background';
+import { Cover } from './ui/cover';
 
 export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen overflow-hidden bg-black">
-      <Vortex
-        backgroundColor="black"
-        particleCount={500}
-        baseHue={220}
-        className="flex items-center justify-center w-full h-full min-h-screen px-4 sm:px-6 lg:px-8"
-      >
+      <StarsBackground className="z-0" />
+      <ShootingStars className="z-0" />
+
+      <div className="relative z-10 flex items-center justify-center w-full h-full min-h-screen px-4 sm:px-6 lg:px-8">
         <div className="font-arial-bold max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -24,7 +24,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 border border-white/10 mb-10"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-10"
             >
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
               <span className="text-sm text-gray-300">Available for opportunities</span>
@@ -37,7 +37,7 @@ export default function Hero() {
               transition={{ delay: 0.5, duration: 0.8 }}
               className="text-6xl md:text-8xl lg:text-9xl text-white mb-4 tracking-tight"
             >
-              Devin.
+              Devin <Cover>Vögele</Cover>
             </motion.h1>
 
             {/* One-liner */}
@@ -113,7 +113,7 @@ export default function Hero() {
             </motion.div>
           </motion.div>
         </div>
-      </Vortex>
+      </div>
     </section>
   );
 }

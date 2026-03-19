@@ -6,13 +6,13 @@ export default function JsonLd() {
     "alternateName": ["Devin Voegele", "Devin"],
     "url": "https://devin-voegele.vercel.app",
     "image": "https://devin-voegele.vercel.app/og-image.png",
-    "jobTitle": "IAM Developer",
+    "jobTitle": "Platform Development Apprentice",
     "worksFor": {
       "@type": "Organization",
       "name": "PwC Switzerland",
       "url": "https://www.pwc.ch"
     },
-    "description": "17-year-old IAM Developer at PwC Switzerland specializing in Identity & Access Management, web development, penetration testing, and motion graphics design with 40M+ views.",
+    "description": "17-year-old Platform Development apprentice at PwC Switzerland specializing in web development, penetration testing, and motion graphics design with 40M+ views.",
     "knowsAbout": [
       "Identity and Access Management",
       "Web Development",
@@ -53,7 +53,7 @@ export default function JsonLd() {
       "@type": "Person",
       "name": "Devin Vögele"
     },
-    "description": "Portfolio website of Devin Vögele - IAM Developer, Web Developer, and Graphic Designer based in Zürich, Switzerland.",
+    "description": "Portfolio website of Devin Vögele - Platform Development Apprentice, Web Developer, and Graphic Designer based in Zürich, Switzerland.",
     "inLanguage": "en"
   };
 
@@ -61,10 +61,10 @@ export default function JsonLd() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "Devin Vögele - Developer & Designer",
-    "description": "IAM Development, Web Development, Penetration Testing, and Motion Graphics Design services.",
+    "description": "Platform Development, Web Development, Penetration Testing, and Motion Graphics Design services.",
     "url": "https://devin-voegele.vercel.app",
     "areaServed": "Switzerland",
-    "serviceType": ["Web Development", "IAM Development", "Graphic Design", "Motion Graphics"],
+    "serviceType": ["Web Development", "Platform Development", "Graphic Design", "Motion Graphics"],
     "provider": {
       "@type": "Person",
       "name": "Devin Vögele"

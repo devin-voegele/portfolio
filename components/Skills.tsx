@@ -116,7 +116,7 @@ export default function Skills() {
               Always Learning, Always Growing
             </h3>
             <p className="text-gray-500 leading-relaxed">
-              As an IAM Developer apprentice at <span className="text-accent font-medium">PwC Switzerland</span>, 
+              As a Platform Development apprentice at <span className="text-accent font-medium">PwC Switzerland</span>, 
               I&apos;m constantly expanding my skillset. Currently exploring advanced React patterns 
               and diving deeper into cybersecurity concepts.
             </p>

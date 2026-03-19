@@ -52,7 +52,7 @@ export default function Hero() {
             transition={{ delay: 0.8 }}
             className="text-xl md:text-2xl lg:text-3xl text-gray-400 mb-6 font-light"
           >
-            IAM Developer at <span className="text-white font-medium">PwC Switzerland</span>
+            Platform Development at <span className="text-white font-medium">PwC Switzerland</span>
           </motion.h2>
 
           {/* Tagline */}

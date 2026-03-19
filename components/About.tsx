@@ -13,8 +13,8 @@ import {
 const highlights = [
   {
     icon: Code2,
-    title: 'IAM Developer',
-    description: '2nd year apprentice at PwC Switzerland, IAM Team',
+    title: 'Platform Development',
+    description: '2nd year IT apprentice at PwC Switzerland',
   },
   {
     icon: Rocket,
@@ -66,8 +66,7 @@ export default function About() {
             </h3>
             <div className="space-y-4 text-gray-400 leading-relaxed">
               <p>
-                Hey! I&apos;m Devin, a 17-year-old <span className="text-white font-medium">IAM Developer</span> apprentice 
-                at <span className="text-accent font-medium">PwC Switzerland</span>, currently in my 2nd year working in the IAM Team.
+                Hey! I&apos;m Devin, a 17-year-old <span className="text-white font-medium">IT apprentice</span> at <span className="text-accent font-medium">PwC Switzerland</span>, currently in my 2nd year in Platform Development.
               </p>
               <p>
                 I&apos;m passionate about creating innovative digital solutions that combine aesthetics with functionality. 
@@ -101,7 +100,7 @@ export default function About() {
                 <div className="space-y-1 text-gray-400">
                   <p><span className="text-accent">const</span> <span className="text-white">developer</span> = {'{'}</p>
                   <p className="pl-4"><span className="text-gray-500">name:</span> <span className="text-green-400">&quot;Devin&quot;</span>,</p>
-                  <p className="pl-4"><span className="text-gray-500">role:</span> <span className="text-green-400">&quot;IAM Developer&quot;</span>,</p>
+                  <p className="pl-4"><span className="text-gray-500">role:</span> <span className="text-green-400">&quot;Platform Development&quot;</span>,</p>
                   <p className="pl-4"><span className="text-gray-500">company:</span> <span className="text-green-400">&quot;PwC Switzerland&quot;</span>,</p>
                   <p className="pl-4"><span className="text-gray-500">passion:</span> <span className="text-green-400">&quot;Motorsport&quot;</span>,</p>
                   <p className="pl-4"><span className="text-gray-500">available:</span> <span className="text-accent">true</span></p>

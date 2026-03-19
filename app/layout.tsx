@@ -14,14 +14,14 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://devin-voegele.vercel.app"),
   title: {
-    default: "Devin Vögele | IAM Developer & Graphic Designer | PwC Switzerland",
+    default: "Devin Vögele | Platform Development & Graphic Designer | PwC Switzerland",
     template: "%s | Devin Vögele"
   },
-  description: "Devin Vögele is a 17-year-old IAM Developer at PwC Switzerland specializing in Identity & Access Management, web development, penetration testing, and motion graphics design with 40M+ views. Based in Zürich, Switzerland.",
+  description: "Devin Vögele is a 17-year-old Platform Development apprentice at PwC Switzerland specializing in web development, penetration testing, and motion graphics design with 40M+ views. Based in Zürich, Switzerland.",
   keywords: [
     "Devin Vögele",
     "Devin Voegele", 
-    "IAM Developer",
+    "Platform Development",
     "Identity Access Management",
     "PwC Switzerland",
     "Web Developer",
@@ -56,21 +56,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://devin-voegele.vercel.app",
     siteName: "Devin Vögele Portfolio",
-    title: "Devin Vögele | IAM Developer & Graphic Designer",
-    description: "17-year-old IAM Developer at PwC Switzerland. Specializing in Identity & Access Management, web development, penetration testing, and motion graphics with 40M+ views.",
+    title: "Devin Vögele | Platform Development & Graphic Designer",
+    description: "17-year-old Platform Development apprentice at PwC Switzerland. Web development, penetration testing, and motion graphics with 40M+ views.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Devin Vögele - IAM Developer & Graphic Designer",
+        alt: "Devin Vögele - Platform Development & Graphic Designer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Devin Vögele | IAM Developer & Graphic Designer",
-    description: "17-year-old IAM Developer at PwC Switzerland. Web development, penetration testing, and motion graphics with 40M+ views.",
+    title: "Devin Vögele | Platform Development & Graphic Designer",
+    description: "17-year-old Platform Development apprentice at PwC Switzerland. Web development, penetration testing, and motion graphics with 40M+ views.",
     images: ["/og-image.png"],
     creator: "@devinvoegele",
   },

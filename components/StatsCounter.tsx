@@ -50,7 +50,7 @@ function AnimatedCounter({ value, label, suffix = '', duration = 2 }: StatProps)
 
 export default function StatsCounter() {
   const stats = [
-    { value: 3, label: 'Years Coding', suffix: '+' },
+    { value: 2, label: 'IT Apprenticeship', suffix: 'y' },
     { value: 40, label: 'Million Views', suffix: 'M+' },
     { value: 15, label: 'Projects Built', suffix: '+' },
     { value: 3, label: 'Years Design', suffix: '+' },

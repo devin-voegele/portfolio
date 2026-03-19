@@ -195,7 +195,7 @@ export default function Contact() {
             <div className="md:col-span-1">
               <h3 className="text-xl font-bold text-white mb-4">Devin</h3>
               <p className="text-gray-500 text-sm leading-relaxed">
-                IAM Developer at PwC Switzerland. Building secure and beautiful digital experiences.
+                Platform Development at PwC Switzerland. Building secure and beautiful digital experiences.
               </p>
             </div>
 

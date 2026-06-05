@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { cabinet, geist } from "./fonts";
 import "./globals.css";
-
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://devin-voegele.vercel.app"),
@@ -79,8 +77,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${spaceGrotesk.className} antialiased`}>
+    <html lang="en" className={`dark ${cabinet.variable} ${geist.variable}`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>

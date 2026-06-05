@@ -1,4 +1,5 @@
-import Hero from "@/components/Hero";
+// Task 1 temporary: Hero commented out — imports sparkles.tsx which uses removed @tsparticles/* (will be archived in Task 2)
+// import Hero from "@/components/Hero";
 import HeroHighlightSection from "@/components/HeroHighlightSection";
 import PointerHighlightSection from "@/components/PointerHighlightSection";
 import About from "@/components/About";
@@ -10,7 +11,7 @@ import StatsCounter from "@/components/StatsCounter";
 export default function Home() {
   return (
     <>
-      <Hero />
+      {/* <Hero /> */}
       <HeroHighlightSection />
       <PointerHighlightSection />
       <StatsCounter />

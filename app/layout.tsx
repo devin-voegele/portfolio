@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import ScrollProgress from "@/components/ScrollProgress";
-import Terminal from "@/components/Terminal";
-import MouseFollower from "@/components/MouseFollower";
-import AIChatbot from "@/components/AIChatbot";
-import { BackgroundBeams } from "@/components/ui/background-beams-static";
-import JsonLd from "@/components/JsonLd";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -20,7 +13,7 @@ export const metadata: Metadata = {
   description: "Devin Vögele is a 17-year-old Platform Development apprentice at PwC Switzerland specializing in web development, penetration testing, and motion graphics design with 40M+ views. Based in Zürich, Switzerland.",
   keywords: [
     "Devin Vögele",
-    "Devin Voegele", 
+    "Devin Voegele",
     "Platform Development",
     "Identity Access Management",
     "PwC Switzerland",
@@ -87,19 +80,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <head>
-        <JsonLd />
-      </head>
-      <body className={`${spaceGrotesk.className} antialiased bg-black text-white md:cursor-none`}>
-        <MouseFollower />
-        <ScrollProgress />
-        <Navbar />
-        <Terminal />
-        <AIChatbot />
-        <main className="relative">
-          {children}
-          <BackgroundBeams className="fixed inset-0 z-0 pointer-events-none opacity-30" />
-        </main>
+      <body className={`${spaceGrotesk.className} antialiased`}>
+        {children}
       </body>
     </html>
   );

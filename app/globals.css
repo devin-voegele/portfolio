@@ -43,6 +43,12 @@ h1 {
   letter-spacing: -0.04em;
 }
 
+.hero-headline {
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
 h2 {
   font-size: clamp(2rem, 5vw, 5rem);
   line-height: 1.0;

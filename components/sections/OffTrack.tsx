@@ -14,6 +14,7 @@ const INTERESTS = [
   { title: 'Sim Racing', sub: 'Virtual Circuit' },
   { title: 'Formula 1', sub: 'Open Wheel' },
   { title: 'GT3', sub: 'Endurance Class' },
+  { title: 'Enduro MTB', sub: 'Trail & Descent' },
 ]
 
 const META_ROWS = [

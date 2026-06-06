@@ -3,6 +3,7 @@ import { cabinet, geist } from "./fonts";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { CustomCursor } from "@/components/cursor/CustomCursor";
+import { PageIntro } from "@/components/providers/PageIntro";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://devin-voegele.vercel.app"),
@@ -81,6 +82,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${cabinet.variable} ${geist.variable}`}>
       <body className="antialiased">
+        <PageIntro />
         <SmoothScroll>{children}</SmoothScroll>
         <CustomCursor />
       </body>

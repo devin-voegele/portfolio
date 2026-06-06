@@ -42,7 +42,7 @@ export function Hero() {
         style={{
           top: '-200px',
           right: '-200px',
-          opacity: 0.35,
+          opacity: 0.12,
           zIndex: 0,
           pointerEvents: 'none',
         }}
@@ -52,7 +52,7 @@ export function Hero() {
         style={{
           bottom: '-200px',
           left: '-200px',
-          opacity: 0.2,
+          opacity: 0.08,
           zIndex: 0,
           pointerEvents: 'none',
         }}

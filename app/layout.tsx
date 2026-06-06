@@ -1,29 +1,29 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { cabinet, geist } from "./fonts";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { CustomCursor } from "@/components/cursor/CustomCursor";
 import { PageIntro } from "@/components/providers/PageIntro";
 
+export const viewport: Viewport = {
+  themeColor: '#0A0A0B',
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://devin-voegele.vercel.app"),
   title: {
-    default: "Devin Vögele | Platform Development & Graphic Designer | PwC Switzerland",
+    default: "Devin Vögele — Developer & Creative Technologist",
     template: "%s | Devin Vögele"
   },
-  description: "Devin Vögele is a 17-year-old Platform Development apprentice at PwC Switzerland specializing in web development, penetration testing, and motion graphics design with 40M+ views. Based in Zürich, Switzerland.",
+  description: "Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.",
   keywords: [
     "Devin Vögele",
     "Devin Voegele",
+    "Developer",
+    "Creative Technologist",
     "Platform Development",
-    "Identity Access Management",
     "PwC Switzerland",
     "Web Developer",
-    "Penetration Testing",
-    "Cybersecurity",
-    "Graphic Designer",
-    "Motion Graphics",
-    "After Effects",
     "Next.js Developer",
     "React Developer",
     "Zürich",
@@ -49,22 +49,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://devin-voegele.vercel.app",
-    siteName: "Devin Vögele Portfolio",
-    title: "Devin Vögele | Platform Development & Graphic Designer",
-    description: "17-year-old Platform Development apprentice at PwC Switzerland. Web development, penetration testing, and motion graphics with 40M+ views.",
+    siteName: "Devin Vögele",
+    title: "Devin Vögele — Developer & Creative Technologist",
+    description: "Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Devin Vögele - Platform Development & Graphic Designer",
+        alt: "Devin Vögele - Developer & Creative Technologist",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Devin Vögele | Platform Development & Graphic Designer",
-    description: "17-year-old Platform Development apprentice at PwC Switzerland. Web development, penetration testing, and motion graphics with 40M+ views.",
+    title: "Devin Vögele — Developer & Creative Technologist",
+    description: "Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.",
     images: ["/og-image.png"],
     creator: "@devinvoegele",
   },

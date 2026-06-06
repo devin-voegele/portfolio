@@ -70,7 +70,7 @@ body::after {
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--accent-subtle) 0%, transparent 50%);
+  background: radial-gradient(circle, var(--accent-subtle) 0%, transparent 40%);
   filter: blur(80px);
   pointer-events: none;
 }

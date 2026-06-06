@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap, Draggable } from '@/lib/gsap'
 import { prefersReducedMotion } from '@/lib/motion'
@@ -26,6 +26,14 @@ export function OffTrack() {
   const sectionRef = useRef<HTMLElement>(null)
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
+  // Default false (desktop/drag) to match SSR. Switch after mount on touch/reduced-motion.
+  const [isNativeScroll, setIsNativeScroll] = useState(false)
+
+  useEffect(() => {
+    const reduced = prefersReducedMotion()
+    const touch = window.matchMedia('(pointer: coarse)').matches
+    setIsNativeScroll(reduced || touch)
+  }, [])
 
   useGSAP(
     () => {
@@ -62,10 +70,6 @@ export function OffTrack() {
     },
     { scope: sectionRef, dependencies: [] },
   )
-
-  const isNativeScroll =
-    typeof window !== 'undefined' &&
-    (prefersReducedMotion() || window.matchMedia('(pointer: coarse)').matches)
 
   return (
     <SectionWipe>

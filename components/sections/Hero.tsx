@@ -61,7 +61,7 @@ export function Hero() {
           height: '600px',
           zIndex: 0,
           pointerEvents: 'none',
-          opacity: 0.5,
+          opacity: 0.12,
         }}
       />
 

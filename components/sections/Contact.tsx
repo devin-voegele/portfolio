@@ -54,8 +54,8 @@ export function Contact() {
           inset: 0,
           zIndex: 0,
           background:
-            'radial-gradient(ellipse 60% 50% at 20% 60%, var(--accent-glow) 0%, transparent 70%)',
-          opacity: 0.18,
+            'radial-gradient(ellipse 60% 50% at 20% 60%, var(--accent-subtle) 0%, transparent 60%)',
+          opacity: 0.12,
           pointerEvents: 'none',
         }}
       />

@@ -30,8 +30,8 @@ function Particles() {
     const arr = posAttr.array as Float32Array
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       arr[i * 3 + 2] += SPEED * delta
-      if (arr[i * 3 + 2] > 3) {
-        arr[i * 3 + 2] -= 14
+      if (arr[i * 3 + 2] > 1) {
+        arr[i * 3 + 2] -= 15
       }
     }
     posAttr.needsUpdate = true
@@ -50,13 +50,13 @@ function Particles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        color="#2E6BFF"
-        size={0.06}
+        color="#5B9DFF"
+        size={0.045}
         sizeAttenuation
         transparent
-        opacity={0.7}
+        opacity={0.55}
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        blending={THREE.NormalBlending}
       />
     </points>
   )

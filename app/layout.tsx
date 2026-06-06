@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { anton, geistSans, geistMono } from "./fonts";
 import "./globals.css";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 
 export const viewport: Viewport = {
   themeColor: '#0A0A0B',
@@ -79,7 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${anton.variable} ${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );

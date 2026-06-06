@@ -37,6 +37,6 @@
   ],
   "exclude": [
     "node_modules",
-    "components/_archive"
+    "components/_archive_v1"
   ]
 }

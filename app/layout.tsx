@@ -1,9 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { cabinet, geist } from "./fonts";
 import "./globals.css";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { CustomCursor } from "@/components/cursor/CustomCursor";
-import { PageIntro } from "@/components/providers/PageIntro";
 
 export const viewport: Viewport = {
   themeColor: '#0A0A0B',
@@ -82,9 +79,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${cabinet.variable} ${geist.variable}`}>
       <body className="antialiased">
-        <PageIntro />
-        <SmoothScroll>{children}</SmoothScroll>
-        <CustomCursor />
+        {children}
       </body>
     </html>
   );

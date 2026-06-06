@@ -1,10 +1,22 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import SectionLabel from '@/components/primitives/SectionLabel'
 import SplitReveal from '@/components/primitives/SplitReveal'
 import MagneticButton from '@/components/primitives/MagneticButton'
 
+const ParticleField = dynamic(() => import('@/components/3d/ParticleField'), { ssr: false })
+
 export function Hero() {
+  const [particlesEnabled, setParticlesEnabled] = useState(false)
+
+  useEffect(() => {
+    const isDesktop = window.matchMedia('(min-width: 768px)').matches
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    setParticlesEnabled(isDesktop && !prefersReduced)
+  }, [])
+
   return (
     <section
       id="top"
@@ -20,7 +32,9 @@ export function Hero() {
       }}
     >
       {/* Background depth layer */}
-      <div id="hero-particles" style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }} />
+      <div id="hero-particles" style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        {particlesEnabled && <ParticleField />}
+      </div>
 
       {/* Glow orbs */}
       <div

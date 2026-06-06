@@ -3,9 +3,10 @@ import { anton, geistSans, geistMono } from "./fonts";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { TrailCursor } from "@/components/cursor/TrailCursor";
+import { ScanlineOverlay } from "@/components/effects/ScanlineOverlay";
 
 export const viewport: Viewport = {
-  themeColor: '#0A0A0B',
+  themeColor: '#080B14',
 };
 
 export const metadata: Metadata = {
@@ -82,6 +83,7 @@ export default function RootLayout({
     <html lang="en" className={`dark ${anton.variable} ${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
         <SmoothScroll>{children}</SmoothScroll>
+        <ScanlineOverlay />
         <TrailCursor />
       </body>
     </html>

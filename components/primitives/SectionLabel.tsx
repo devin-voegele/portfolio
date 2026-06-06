@@ -20,12 +20,16 @@ const labelStyle: React.CSSProperties = {
 export default function SectionLabel({ children, className }: SectionLabelProps) {
   const ref = useRef<HTMLSpanElement>(null)
 
-  const reducedMotion = prefersReducedMotion()
-
   useGSAP(
     () => {
       const el = ref.current
-      if (!el || reducedMotion) return
+      if (!el) return
+
+      // Resolved after mount only — keeps server/client markup identical (no hydration mismatch).
+      if (prefersReducedMotion()) {
+        gsap.set(el, { letterSpacing: '0.1em' })
+        return
+      }
 
       gsap.set(el, { letterSpacing: '0.3em' })
 
@@ -48,7 +52,7 @@ export default function SectionLabel({ children, className }: SectionLabelProps)
       className={className}
       style={{
         ...labelStyle,
-        letterSpacing: reducedMotion ? '0.1em' : '0.3em',
+        letterSpacing: '0.3em',
       }}
     >
       {children}

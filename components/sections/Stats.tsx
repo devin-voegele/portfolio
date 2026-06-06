@@ -2,11 +2,8 @@
 
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollTrigger } from '@/lib/gsap'
+import { gsap } from '@/lib/gsap'
 import { prefersReducedMotion } from '@/lib/motion'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const STATS = [
   { value: '2+', label: 'YEARS EXPERIENCE' },

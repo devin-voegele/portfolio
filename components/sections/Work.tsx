@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
-import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { gsap } from '@/lib/gsap'
 import { prefersReducedMotion } from '@/lib/motion'
 import SplitReveal from '@/components/primitives/SplitReveal'
 import ProjectPlate from '@/components/primitives/ProjectPlate'
@@ -51,8 +51,6 @@ export function Work() {
     () => {
       const el = sectionRef.current
       if (!el || prefersReducedMotion()) return
-
-      gsap.registerPlugin(ScrollTrigger)
 
       // Stagger entrance for rows
       gsap.from('.work-row', {

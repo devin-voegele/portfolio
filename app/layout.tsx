@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { cabinet, geist } from "./fonts";
+import { anton, geistSans, geistMono } from "./fonts";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -77,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${cabinet.variable} ${geist.variable}`}>
+    <html lang="en" className={`dark ${anton.variable} ${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
         {children}
       </body>

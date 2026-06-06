@@ -1,13 +1,11 @@
 import localFont from 'next/font/local'
 import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 
-export const cabinet = localFont({
-  src: [
-    { path: '../public/fonts/CabinetGrotesk-Medium.woff2', weight: '500' },
-    { path: '../public/fonts/CabinetGrotesk-Bold.woff2', weight: '700' },
-    { path: '../public/fonts/CabinetGrotesk-Extrabold.woff2', weight: '800' },
-  ],
+export const anton = localFont({
+  src: [{ path: '../public/fonts/Anton-Regular.woff2', weight: '400', style: 'normal' }],
   variable: '--font-display',
   display: 'swap',
 })
-export const geist = GeistSans
+export const geistSans = GeistSans   // .variable === --font-geist-sans
+export const geistMono = GeistMono   // .variable === --font-geist-mono

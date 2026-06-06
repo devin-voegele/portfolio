@@ -3,6 +3,7 @@ import { anton, geistSans, geistMono } from "./fonts";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { LaunchSequence } from "@/components/providers/LaunchSequence";
+import { PerfProvider } from "@/components/providers/PerfProvider";
 import { TrailCursor } from "@/components/cursor/TrailCursor";
 import { ScanlineOverlay } from "@/components/effects/ScanlineOverlay";
 
@@ -83,10 +84,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${anton.variable} ${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
-        <LaunchSequence />
-        <SmoothScroll>{children}</SmoothScroll>
-        <ScanlineOverlay />
-        <TrailCursor />
+        <PerfProvider>
+          <LaunchSequence />
+          <SmoothScroll>{children}</SmoothScroll>
+          <ScanlineOverlay />
+          <TrailCursor />
+        </PerfProvider>
       </body>
     </html>
   );

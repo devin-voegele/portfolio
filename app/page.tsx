@@ -2,6 +2,7 @@ import { Nav } from '@/components/sections/Nav'
 import { Hero } from '@/components/sections/Hero'
 import { Telemetry } from '@/components/sections/Telemetry'
 import { Marquee } from '@/components/sections/Marquee'
+import { OnTrack } from '@/components/sections/OnTrack'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <Hero />
         <Telemetry />
         <Marquee />
+        <OnTrack />
       </main>
     </>
   )

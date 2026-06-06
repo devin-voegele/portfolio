@@ -149,3 +149,9 @@ body::after {
   background-color: var(--accent-subtle);
   color: var(--text-primary);
 }
+
+/* Marquee ticker */
+@keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { display: inline-flex; white-space: nowrap; animation: marquee-scroll 28s linear infinite; }
+.marquee-section:hover .marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }

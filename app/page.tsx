@@ -4,6 +4,9 @@ import { Stats } from '@/components/sections/Stats'
 import { Marquee } from '@/components/sections/Marquee'
 import { Work } from '@/components/sections/Work'
 import { Services } from '@/components/sections/Services'
+import { About } from '@/components/sections/About'
+import { Contact } from '@/components/sections/Contact'
+import { Footer } from '@/components/sections/Footer'
 
 export default function Home() {
   return (
@@ -15,7 +18,10 @@ export default function Home() {
         <Marquee />
         <Work />
         <Services />
+        <About />
+        <Contact />
       </main>
+      <Footer />
     </>
   )
 }

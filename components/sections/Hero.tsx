@@ -38,7 +38,9 @@ export function Hero() {
         {webgl && <VelocityField />}
       </div>
 
-      {/* Static fallback background / mobile / reduced-motion */}
+      {/* Static fallback background / mobile / reduced-motion.
+          Fully-inset radial layers — contained glow with no clippable element edge,
+          so no hard "band" can appear at any viewport edge. */}
       <div
         aria-hidden="true"
         style={{
@@ -47,21 +49,7 @@ export function Hero() {
           zIndex: 0,
           pointerEvents: 'none',
           background:
-            'radial-gradient(ellipse at 30% 40%, rgba(46,107,255,0.10), transparent 60%)',
-        }}
-      />
-      <div
-        className="glow-orb"
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: '20%',
-          left: '10%',
-          width: '600px',
-          height: '600px',
-          zIndex: 0,
-          pointerEvents: 'none',
-          opacity: 0.12,
+            'radial-gradient(ellipse 70% 55% at 28% 38%, rgba(46,107,255,0.13), transparent 70%), radial-gradient(circle 40% at 82% 18%, rgba(91,157,255,0.06), transparent 60%)',
         }}
       />
 

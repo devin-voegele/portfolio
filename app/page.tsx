@@ -4,6 +4,7 @@ import { Telemetry } from '@/components/sections/Telemetry'
 import { Marquee } from '@/components/sections/Marquee'
 import { OnTrack } from '@/components/sections/OnTrack'
 import { SpecSheet } from '@/components/sections/SpecSheet'
+import { OffTrack } from '@/components/sections/OffTrack'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Marquee />
         <OnTrack />
         <SpecSheet />
+        <OffTrack />
       </main>
     </>
   )

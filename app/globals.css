@@ -126,6 +126,49 @@ body::after {
   }
 }
 
+/* v2 Nav styles */
+.v2nav-link {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.v2nav-link:hover {
+  color: var(--accent);
+  letter-spacing: 0.2em;
+}
+
+.v2nav-pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: v2nav-pulse 2s ease-in-out infinite;
+}
+
+@keyframes v2nav-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--accent-glow);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 6px transparent;
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 768px) {
+  .v2nav-center {
+    display: none !important;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

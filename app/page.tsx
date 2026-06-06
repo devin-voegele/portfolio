@@ -1,3 +1,10 @@
+import { Nav } from '@/components/sections/Nav'
+
 export default function Home() {
-  return <main className="min-h-screen bg-[var(--bg-primary)]" />
+  return (
+    <>
+      <Nav />
+      <main className="bg-[var(--bg-primary)]" />
+    </>
+  )
 }

@@ -60,15 +60,6 @@ h2 {
   letter-spacing: -0.03em;
 }
 
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  background-image: url('/noise.png');
-  opacity: 0.035;
-}
 
 .glow-orb {
   position: absolute;
@@ -246,3 +237,21 @@ body::after {
   .fade-in-section { opacity: 1; transform: none; transition: none; }
   .animate-blob, .glitch-text::before, .glitch-text::after { animation: none; }
 }
+
+/* ─── Aurora background ──────────────────────────────────────────── */
+.aurora-bg {
+  position: absolute; inset: -25%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(40% 40% at 28% 30%, rgba(37,99,235,0.28), transparent 60%),
+    radial-gradient(38% 38% at 72% 62%, rgba(16,185,129,0.22), transparent 60%),
+    radial-gradient(42% 42% at 52% 82%, rgba(139,92,246,0.22), transparent 60%);
+  filter: blur(60px);
+  animation: aurora-shift 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes aurora-shift {
+  0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); }
+  50%  { transform: translate3d(2%, -2%, 0) scale(1.08) rotate(4deg); }
+  100% { transform: translate3d(-2%, 2%, 0) scale(1.04) rotate(-3deg); }
+}
+@media (prefers-reduced-motion: reduce) { .aurora-bg { animation: none; } }

@@ -2,10 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { anton, geistSans, geistMono } from "./fonts";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { LaunchSequence } from "@/components/providers/LaunchSequence";
 import { PerfProvider } from "@/components/providers/PerfProvider";
-import { TrailCursor } from "@/components/cursor/TrailCursor";
-import { ScanlineOverlay } from "@/components/effects/ScanlineOverlay";
 
 export const viewport: Viewport = {
   themeColor: '#080B14',
@@ -85,10 +82,7 @@ export default function RootLayout({
     <html lang="en" className={`dark ${anton.variable} ${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
         <PerfProvider>
-          <LaunchSequence />
           <SmoothScroll>{children}</SmoothScroll>
-          <ScanlineOverlay />
-          <TrailCursor />
         </PerfProvider>
       </body>
     </html>

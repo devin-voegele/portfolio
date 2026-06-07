@@ -1,12 +1,14 @@
 'use client'
 
-import SplitReveal from '@/components/primitives/SplitReveal'
+import { Mail } from 'lucide-react'
+import { SectionHeader } from '@/components/primitives/SectionHeader'
+import { FadeIn } from '@/components/primitives/FadeIn'
 
 function GitHubIcon() {
   return (
     <svg
-      width="22"
-      height="22"
+      width="20"
+      height="20"
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden
@@ -20,8 +22,8 @@ function GitHubIcon() {
 function LinkedInIcon() {
   return (
     <svg
-      width="22"
-      height="22"
+      width="20"
+      height="20"
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden
@@ -36,176 +38,143 @@ export function Contact() {
   return (
     <section
       id="contact"
-      style={{
-        minHeight: '90vh',
-        paddingBlock: 'var(--space-16)',
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}
+      style={{ paddingBlock: '7rem' }}
     >
-      {/* Background glow orb */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 0,
-          background:
-            'radial-gradient(ellipse 60% 50% at 20% 60%, var(--accent-subtle) 0%, transparent 60%)',
-          opacity: 0.12,
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* Content */}
       <div
         style={{
-          position: 'relative',
-          zIndex: 2,
-          maxWidth: '1280px',
+          maxWidth: '48rem',
           margin: '0 auto',
+          paddingInline: '1rem',
           width: '100%',
-          paddingInline: '32px',
+          textAlign: 'center',
         }}
       >
-        {/* Massive heading */}
-        <SplitReveal as="h2" trigger="scroll" className="font-display contact-heading">
-          READY TO RACE?
-        </SplitReveal>
+        <SectionHeader
+          index="07"
+          eyebrow="Contact"
+          title={
+            <>
+              Let&apos;s <span className="gradient-text">Connect</span>
+            </>
+          }
+        />
 
-        {/* Secondary line */}
-        <p
-          className="font-display"
-          style={{
-            fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
-            color: 'var(--text-secondary)',
-            marginTop: 'var(--space-2)',
-            lineHeight: 1.1,
-          }}
-        >
-          LET&apos;S BUILD SOMETHING.
-        </p>
-
-        {/* Email link */}
-        <a
-          href="mailto:devin.voegele@microsun.ch"
-          className="contact-email font-display"
-        >
-          devin.voegele@microsun.ch
-          <span className="contact-email-line" aria-hidden />
-        </a>
-
-        {/* Status line */}
-        <p
-          className="font-mono"
-          style={{
-            marginTop: 'var(--space-4)',
-            fontSize: '0.75rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.15em',
-            color: 'var(--accent)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5em',
-          }}
-        >
-          <span
-            aria-hidden
+        <FadeIn>
+          {/* Tagline */}
+          <p
             style={{
-              display: 'inline-block',
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              background: 'var(--accent)',
-              boxShadow: '0 0 8px var(--accent-glow)',
-              animation: 'contact-pulse 2s ease-in-out infinite',
-              flexShrink: 0,
+              color: 'var(--text-secondary)',
+              maxWidth: '36rem',
+              margin: '0 auto',
+              lineHeight: 1.7,
+              fontSize: '1rem',
             }}
-          />
-          // SYSTEMS ONLINE — AVAILABLE FOR WORK
-        </p>
+          >
+            Have a project in mind, or just want to talk shop? My inbox is open.
+          </p>
 
-        {/* Social icons */}
-        <div
-          style={{
-            marginTop: 'var(--space-6)',
-            display: 'flex',
-            gap: 'var(--space-3)',
-          }}
-        >
-          <a
-            href="https://github.com/devin-voegele/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="contact-social-icon"
+          {/* Email */}
+          <div style={{ marginBlock: '2rem' }}>
+            <a
+              href="mailto:devin.voegele@microsun.ch"
+              className="contact-email-link font-geist-sans"
+            >
+              devin.voegele@microsun.ch
+              <span className="contact-underline" aria-hidden />
+            </a>
+          </div>
+
+          {/* Social icon row */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '0.75rem',
+              marginBottom: '2rem',
+            }}
           >
-            <GitHubIcon />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/devin-voegele-2a5989293"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="contact-social-icon"
+            <a
+              href="https://github.com/devin-voegele/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="glass hover-lift social-icon-btn"
+            >
+              <GitHubIcon />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/devin-voegele-2a5989293"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="glass hover-lift social-icon-btn"
+            >
+              <LinkedInIcon />
+            </a>
+            <a
+              href="mailto:devin.voegele@microsun.ch"
+              aria-label="Email"
+              className="glass hover-lift social-icon-btn"
+            >
+              <Mail size={20} aria-hidden />
+            </a>
+          </div>
+
+          {/* Status line */}
+          <p
+            className="font-mono"
+            style={{
+              fontSize: '0.7rem',
+              letterSpacing: '0.12em',
+              color: 'var(--text-muted)',
+            }}
           >
-            <LinkedInIcon />
-          </a>
-        </div>
+            // open to work · based in switzerland
+          </p>
+        </FadeIn>
       </div>
 
       <style>{`
-        .contact-heading {
-          font-size: clamp(3rem, 10vw, 8rem);
+        .contact-email-link {
+          font-size: clamp(1.25rem, 3vw, 1.75rem);
+          font-weight: 600;
           color: var(--text-primary);
-          line-height: 1;
-          margin: 0;
-        }
-
-        .contact-email {
-          font-size: clamp(1.5rem, 4vw, 3rem);
-          color: var(--text-primary);
-          display: inline-block;
-          margin-top: var(--space-6);
-          position: relative;
           text-decoration: none;
-          line-height: 1.2;
+          display: inline-block;
+          position: relative;
+          letter-spacing: -0.01em;
+          transition: color 0.3s ease;
         }
-
-        .contact-email-line {
-          position: absolute;
-          bottom: -4px;
-          left: 0;
-          height: 2px;
-          width: 0;
-          background: var(--accent);
-          box-shadow: 0 0 12px var(--accent-glow);
-          transition: width 0.3s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+        .contact-email-link:hover {
+          color: var(--accent);
+        }
+        .contact-underline {
           display: block;
+          position: absolute;
+          bottom: -3px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: var(--accent);
+          border-radius: 2px;
+          transition: width 0.35s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
         }
-
-        .contact-email:hover .contact-email-line {
+        .contact-email-link:hover .contact-underline {
           width: 100%;
         }
-
-        .contact-social-icon {
-          color: var(--text-secondary);
-          transition: color 0.3s ease;
+        .social-icon-btn {
           display: flex;
           align-items: center;
           justify-content: center;
+          width: 2.75rem;
+          height: 2.75rem;
+          border-radius: 9999px;
+          color: var(--text-secondary);
+          text-decoration: none;
+          transition: color 0.3s ease, transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease, border-color 0.3s ease;
         }
-
-        .contact-social-icon:hover {
+        .social-icon-btn:hover {
           color: var(--accent);
-        }
-
-        @keyframes contact-pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(0.8); }
         }
       `}</style>
     </section>

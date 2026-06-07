@@ -3,8 +3,8 @@ import { About } from '@/components/sections/About'
 import { Skills } from '@/components/sections/Skills'
 import { CloudDevOps } from '@/components/sections/CloudDevOps'
 import { Homelab } from '@/components/sections/Homelab'
-import { OnTrack } from '@/components/sections/OnTrack'
-import { OffTrack } from '@/components/sections/OffTrack'
+import { Projects } from '@/components/sections/Projects'
+import { Hobbies } from '@/components/sections/Hobbies'
 import { Contact } from '@/components/sections/Contact'
 import { Footer } from '@/components/sections/Footer'
 
@@ -17,8 +17,8 @@ export default function Home() {
         <Skills />
         <CloudDevOps />
         <Homelab />
-        <OnTrack />
-        <OffTrack />
+        <Projects />
+        <Hobbies />
         <Contact />
       </main>
       <Footer />

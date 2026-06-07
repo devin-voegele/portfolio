@@ -1,164 +1,174 @@
 'use client'
 
-import SplitReveal from '@/components/primitives/SplitReveal'
-import TelemetryLabel from '@/components/primitives/TelemetryLabel'
-import MagneticButton from '@/components/primitives/MagneticButton'
 import TypingRoles from '@/components/primitives/TypingRoles'
 import { BlobGlows } from '@/components/effects/BlobGlows'
 
 const ROLES = [
-  'Platform Developer @ PwC',
+  'Developer',
   'Creative Technologist',
-  'Next.js / TypeScript / React',
+  'Platform Developer',
+  'Next.js & TypeScript',
   'Motorsport Media',
-  'Docker · AWS · Python',
 ]
 
 export function Hero() {
   return (
     <section
       id="top"
-      style={{
-        position: 'relative',
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: '0 32px',
-        overflow: 'hidden',
-      }}
+      className="relative overflow-hidden flex flex-col justify-center items-center text-center"
+      style={{ minHeight: '100vh', padding: '5rem 1.5rem' }}
     >
-      {/* Blob glows — fixed, z0, behind everything */}
+      {/* Blob glows — fixed, behind everything */}
       <BlobGlows />
 
-      {/* Static radial gradient background */}
+      {/* Radial gradient glow */}
       <div
         aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          position: 'absolute',
-          inset: 0,
           zIndex: 0,
-          pointerEvents: 'none',
           background:
-            'radial-gradient(ellipse 70% 55% at 28% 38%, rgba(46,107,255,0.13), transparent 70%), radial-gradient(circle 40% at 82% 18%, rgba(91,157,255,0.06), transparent 60%)',
+            'radial-gradient(ellipse at center, rgba(37,99,235,0.10), transparent 70%)',
         }}
       />
 
-      {/* Vignette overlay */}
+      {/* Content container */}
       <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 1,
-          pointerEvents: 'none',
-          background:
-            'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.45) 100%)',
-        }}
-      />
-
-      {/* Content */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          maxWidth: '1280px',
-          width: '100%',
-        }}
+        className="relative mx-auto w-full"
+        style={{ zIndex: 10, maxWidth: '56rem' }}
       >
         {/* Badge pill */}
-        <div
-          className="glass font-mono"
+        <div style={{ marginBottom: '1rem' }}>
+          <span
+            style={{
+              display: 'inline-block',
+              padding: '0.25rem 1rem',
+              borderRadius: '9999px',
+              fontSize: '0.875rem',
+              fontWeight: 500,
+              background: 'var(--accent-subtle)',
+              color: 'var(--accent)',
+              border: '1px solid rgba(37,99,235,0.25)',
+            }}
+          >
+            Platform Developer @ PwC Switzerland
+          </span>
+        </div>
+
+        {/* Name with glitch effect */}
+        <h1
+          className="glitch-text"
+          data-text="Devin Vögele"
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '6px 14px',
-            borderRadius: '9999px',
-            fontSize: '0.72rem',
-            letterSpacing: '0.12em',
-            color: 'var(--text-secondary)',
-            textTransform: 'uppercase',
-            marginBottom: 'var(--space-3)',
+            fontSize: 'clamp(2.5rem, 7vw, 5rem)',
+            fontWeight: 800,
+            color: 'var(--text-primary)',
+            lineHeight: 1.1,
+            letterSpacing: '-0.02em',
+            marginBottom: '1.5rem',
           }}
         >
-          {/* Pulsing dot */}
-          <span className="v2nav-pulse-dot" />
-          <span style={{ color: 'var(--accent)' }}>DEVIN VÖGELE</span>
-          <span style={{ opacity: 0.5 }}>&nbsp;//&nbsp;</span>
-          <span>PLATFORM DEVELOPER @ PwC</span>
-        </div>
+          Devin Vögele
+        </h1>
 
-        {/* Eyebrow */}
-        <TelemetryLabel>WÜRENLOS, CH // 47.4373° N — 2026</TelemetryLabel>
-
-        {/* Three-line headline */}
-        <div style={{ marginTop: 'var(--space-3)' }}>
-          <SplitReveal as="h1" trigger="mount" className="font-display hero-headline">
-            DEVELOPER.
-          </SplitReveal>
-          {/* CREATIVE gets the blue→green gradient for the blend */}
-          <SplitReveal as="h1" trigger="mount" className="font-display hero-headline hero-headline-gradient">
-            CREATIVE
-          </SplitReveal>
-          <SplitReveal as="h1" trigger="mount" className="font-display hero-headline">
-            TECHNOLOGIST.
-          </SplitReveal>
-        </div>
-
-        {/* Terminal typing line */}
+        {/* Typing roles */}
         <div
-          className="font-mono"
           style={{
-            marginTop: 'var(--space-2)',
+            height: '3rem',
             display: 'flex',
+            justifyContent: 'center',
             alignItems: 'center',
-            gap: '8px',
-            fontSize: 'clamp(0.85rem, 1.2vw, 1rem)',
+            marginBottom: '2rem',
           }}
         >
-          <span style={{ color: 'var(--accent)', userSelect: 'none' }}>{'>'}</span>
-          <TypingRoles roles={ROLES} />
+          <span
+            style={{
+              fontSize: 'clamp(1.25rem, 3vw, 1.875rem)',
+            }}
+          >
+            <TypingRoles roles={ROLES} />
+          </span>
         </div>
 
-        {/* Subline */}
+        {/* Description paragraph */}
         <p
+          className="mx-auto"
           style={{
+            fontSize: 'clamp(1rem, 1.8vw, 1.125rem)',
             color: 'var(--text-secondary)',
-            fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
-            maxWidth: '480px',
-            marginTop: 'var(--space-3)',
-            lineHeight: 1.6,
+            maxWidth: '42rem',
+            lineHeight: 1.75,
+            marginBottom: '2.5rem',
           }}
         >
-          Building premium web experiences at race pace.
+          Developer and creative technologist based in Switzerland, building premium
+          web experiences, motorsport media platforms, and interactive tools —
+          currently in platform development at PwC Switzerland.
         </p>
 
-        {/* Button row */}
+        {/* CTA buttons */}
         <div
-          style={{
-            marginTop: 'var(--space-6)',
-            display: 'flex',
-            gap: 'var(--space-2)',
-            flexWrap: 'wrap',
-          }}
+          className="flex flex-wrap justify-center"
+          style={{ gap: '1rem', marginBottom: '3rem' }}
         >
-          <MagneticButton href="#work" variant="solid">
-            VIEW WORK →
-          </MagneticButton>
-          <MagneticButton href="#contact" variant="ghost">
-            GET IN TOUCH
-          </MagneticButton>
+          <a
+            href="#work"
+            className="hover-lift"
+            style={{
+              display: 'inline-block',
+              padding: '0.75rem 2rem',
+              borderRadius: '9999px',
+              fontWeight: 500,
+              fontSize: '1rem',
+              background: 'var(--accent)',
+              color: '#fff',
+              textDecoration: 'none',
+              transition: 'filter 0.25s ease, box-shadow 0.25s ease',
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLAnchorElement
+              el.style.filter = 'brightness(1.15)'
+              el.style.boxShadow = '0 0 15px var(--accent-glow)'
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLAnchorElement
+              el.style.filter = ''
+              el.style.boxShadow = ''
+            }}
+          >
+            View Projects
+          </a>
+          <a
+            href="#contact"
+            className="hover-lift"
+            style={{
+              display: 'inline-block',
+              padding: '0.75rem 2rem',
+              borderRadius: '9999px',
+              fontWeight: 500,
+              fontSize: '1rem',
+              background: 'transparent',
+              color: 'var(--accent)',
+              border: '2px solid var(--accent)',
+              textDecoration: 'none',
+              transition: 'background 0.25s ease',
+            }}
+            onMouseEnter={(e) => {
+              ;(e.currentTarget as HTMLAnchorElement).style.background =
+                'var(--accent-subtle)'
+            }}
+            onMouseLeave={(e) => {
+              ;(e.currentTarget as HTMLAnchorElement).style.background = 'transparent'
+            }}
+          >
+            Get in Touch
+          </a>
         </div>
 
         {/* Social icons */}
         <div
-          style={{
-            marginTop: 'var(--space-4)',
-            display: 'flex',
-            gap: '20px',
-            alignItems: 'center',
-          }}
+          className="flex justify-center"
+          style={{ gap: '1.5rem', marginTop: '3rem' }}
         >
           {/* GitHub */}
           <a
@@ -166,16 +176,28 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub profile"
-            className="social-icon-link"
+            style={{
+              color: 'var(--text-secondary)',
+              transition: 'color 0.25s ease',
+              display: 'inline-flex',
+              alignItems: 'center',
+            }}
+            onMouseEnter={(e) => {
+              ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)'
+            }}
+            onMouseLeave={(e) => {
+              ;(e.currentTarget as HTMLAnchorElement).style.color =
+                'var(--text-secondary)'
+            }}
           >
             <svg
-              width="20"
-              height="20"
+              width="22"
+              height="22"
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
             >
-              <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
             </svg>
           </a>
 
@@ -185,11 +207,23 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn profile"
-            className="social-icon-link"
+            style={{
+              color: 'var(--text-secondary)',
+              transition: 'color 0.25s ease',
+              display: 'inline-flex',
+              alignItems: 'center',
+            }}
+            onMouseEnter={(e) => {
+              ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)'
+            }}
+            onMouseLeave={(e) => {
+              ;(e.currentTarget as HTMLAnchorElement).style.color =
+                'var(--text-secondary)'
+            }}
           >
             <svg
-              width="20"
-              height="20"
+              width="22"
+              height="22"
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
@@ -197,77 +231,59 @@ export function Hero() {
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
             </svg>
           </a>
+
+          {/* Email */}
+          <a
+            href="mailto:devin.voegele@microsun.ch"
+            aria-label="Send email"
+            style={{
+              color: 'var(--text-secondary)',
+              transition: 'color 0.25s ease',
+              display: 'inline-flex',
+              alignItems: 'center',
+            }}
+            onMouseEnter={(e) => {
+              ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)'
+            }}
+            onMouseLeave={(e) => {
+              ;(e.currentTarget as HTMLAnchorElement).style.color =
+                'var(--text-secondary)'
+            }}
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z" />
+            </svg>
+          </a>
         </div>
       </div>
 
-      {/* Scroll cue */}
+      {/* Scroll indicator — bounce chevron */}
       <div
-        className="font-mono"
+        className="absolute flex flex-col items-center animate-bounce"
         aria-hidden="true"
         style={{
-          position: 'absolute',
-          bottom: 'var(--space-4)',
-          left: '32px',
-          zIndex: 2,
-          fontSize: '0.7rem',
-          textTransform: 'uppercase',
-          letterSpacing: '0.2em',
-          color: 'var(--text-muted)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
+          bottom: '2.5rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 10,
         }}
       >
-        <span>SCROLL // 00</span>
-        <span
+        <div
           style={{
-            display: 'inline-block',
-            width: '1px',
-            height: '24px',
-            background: 'var(--text-muted)',
-            animation: 'heroScrollLine 1.4s ease-in-out infinite',
-            opacity: 0.6,
+            width: '1.5rem',
+            height: '1.5rem',
+            borderRight: '2px solid var(--accent)',
+            borderBottom: '2px solid var(--accent)',
+            transform: 'rotate(45deg)',
           }}
         />
       </div>
-
-      <style>{`
-        .hero-headline {
-          color: var(--text-primary);
-          line-height: 0.9 !important;
-          margin: 0 !important;
-        }
-        .hero-headline-gradient {
-          background: linear-gradient(90deg, var(--accent), var(--accent-2));
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent !important;
-          line-height: 0.9 !important;
-          margin: 0 !important;
-        }
-        /* SplitReveal word spans inherit color:transparent — that's fine,
-           gradient-clip propagates through the inline spans correctly */
-        .hero-headline-gradient .split-line,
-        .hero-headline-gradient [style] {
-          background: inherit;
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent !important;
-        }
-        .social-icon-link {
-          color: var(--text-muted);
-          transition: color 0.25s ease;
-          display: inline-flex;
-          align-items: center;
-        }
-        .social-icon-link:hover {
-          color: var(--accent);
-        }
-        @keyframes heroScrollLine {
-          0%, 100% { transform: scaleY(1); opacity: 0.6; }
-          50% { transform: scaleY(0.4); opacity: 0.2; }
-        }
-      `}</style>
     </section>
   )
 }

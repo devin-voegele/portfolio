@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary:#080B14; --bg-secondary:#0C1120; --bg-surface:#111A2E; --navy-line:#1B2740;
-  --text-primary:#EAEEF5; --text-secondary:#8A95AD; --text-muted:#4C5878;
-  --accent:#2E6BFF; --accent-bright:#5B9DFF; --accent-subtle:rgba(46,107,255,0.14);
-  --accent-glow:rgba(46,107,255,0.45);
-  --accent-2:#10B981;
-  --accent-3:#8B5CF6;
-  --glass-bg:rgba(26,33,52,0.35);
-  --glass-border:rgba(255,255,255,0.08);
+  --bg-primary:#0a0a0a; --bg-secondary:#111111; --bg-surface:#1a1a1a; --navy-line:#222222;
+  --text-primary:#ededed; --text-secondary:#a1a1aa; --text-muted:#71717a;
+  --accent:#2563eb; --accent-bright:#3b82f6; --accent-subtle:rgba(37,99,235,0.12);
+  --accent-glow:rgba(37,99,235,0.40);
+  --accent-2:#10b981;
+  --accent-3:#8b5cf6;
+  --glass-bg:rgba(26,26,26,0.30);
+  --glass-border:rgba(255,255,255,0.10);
   --glass-blur:10px;
-  --border:rgba(234,238,245,0.08); --border-hover:rgba(91,157,255,0.40);
+  --border:rgba(255,255,255,0.08); --border-hover:rgba(255,255,255,0.18);
   --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
   --ease-in-out:cubic-bezier(0.87,0,0.13,1);
   --ease-spring:cubic-bezier(0.34,1.56,0.64,1);

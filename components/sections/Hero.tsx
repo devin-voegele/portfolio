@@ -1,21 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
 import SplitReveal from '@/components/primitives/SplitReveal'
 import TelemetryLabel from '@/components/primitives/TelemetryLabel'
 import MagneticButton from '@/components/primitives/MagneticButton'
 
-const VelocityField = dynamic(() => import('@/components/3d/VelocityField'), { ssr: false })
-
 export function Hero() {
-  const [webgl, setWebgl] = useState(false)
-
-  useEffect(() => {
-    const desktop = window.matchMedia('(min-width:768px)').matches
-    const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    setWebgl(desktop && !noMotion)
-  }, [])
 
   return (
     <section
@@ -30,15 +19,7 @@ export function Hero() {
         overflow: 'hidden',
       }}
     >
-      {/* Background: WebGL container (Task 16) */}
-      <div
-        id="hero-webgl"
-        style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}
-      >
-        {webgl && <VelocityField />}
-      </div>
-
-      {/* Static fallback background / mobile / reduced-motion.
+      {/* Static gradient background / mobile / reduced-motion.
           Fully-inset radial layers — contained glow with no clippable element edge,
           so no hard "band" can appear at any viewport edge. */}
       <div

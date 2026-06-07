@@ -7,6 +7,11 @@
   --text-primary:#EAEEF5; --text-secondary:#8A95AD; --text-muted:#4C5878;
   --accent:#2E6BFF; --accent-bright:#5B9DFF; --accent-subtle:rgba(46,107,255,0.14);
   --accent-glow:rgba(46,107,255,0.45);
+  --accent-2:#10B981;
+  --accent-3:#8B5CF6;
+  --glass-bg:rgba(26,33,52,0.35);
+  --glass-border:rgba(255,255,255,0.08);
+  --glass-blur:10px;
   --border:rgba(234,238,245,0.08); --border-hover:rgba(91,157,255,0.40);
   --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
   --ease-in-out:cubic-bezier(0.87,0,0.13,1);
@@ -204,3 +209,40 @@ body::after {
 .v2marquee-track { display: inline-flex; white-space: nowrap; will-change: transform; animation: v2marquee-scroll 20s linear infinite; }
 .v2marquee-section:hover .v2marquee-track { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .v2marquee-track { animation: none; } }
+
+/* ─── Lightweight effect utilities (v3) ─────────────────────────── */
+
+/* Gradient text */
+.gradient-text { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.gradient-text-2 { background: linear-gradient(90deg, var(--accent), var(--accent-3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Glass */
+.glass { background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: 1px solid var(--glass-border); }
+
+/* Hover lift */
+.hover-lift { transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease, border-color 0.3s ease; }
+.hover-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 30px -8px rgba(0,0,0,0.5); }
+
+/* Blink caret */
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+.animate-blink { animation: blink 0.8s step-end infinite; }
+
+/* Glitch text — RGB split using blue + green channels */
+.glitch-text { position: relative; display: inline-block; }
+.glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; inset: 0; opacity: 0.85; pointer-events: none; }
+.glitch-text::before { color: var(--accent); animation: glitch-anim 0.85s cubic-bezier(0.25,0.46,0.45,0.94) both infinite; }
+.glitch-text::after { color: var(--accent-2); animation: glitch-anim 0.85s cubic-bezier(0.25,0.46,0.45,0.94) reverse both infinite; }
+@keyframes glitch-anim { 0%{transform:translate(0);} 20%{transform:translate(-1px,1px);} 40%{transform:translate(-1px,-1px);} 60%{transform:translate(1px,1px);} 80%{transform:translate(1px,-1px);} 100%{transform:translate(0);} }
+
+/* Blob glows */
+@keyframes blob { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(24px,-32px) scale(1.08);} 66%{transform:translate(-20px,20px) scale(0.94);} }
+.animate-blob { animation: blob 14s ease-in-out infinite; }
+.blob-glow { position: fixed; width: 22rem; height: 22rem; border-radius: 9999px; filter: blur(80px); mix-blend-mode: screen; opacity: 0.16; pointer-events: none; z-index: 0; }
+
+/* Fade-in-on-scroll (IntersectionObserver toggles .is-visible) */
+.fade-in-section { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
+.fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-section { opacity: 1; transform: none; transition: none; }
+  .animate-blob, .glitch-text::before, .glitch-text::after { animation: none; }
+}

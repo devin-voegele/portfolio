@@ -11,9 +11,8 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     })
-    const onScroll = (e: { velocity: number }) => {
+    const onScroll = () => {
       ScrollTrigger.update()
-      window.__lenisVelocity = e.velocity
     }
     lenis.on('scroll', onScroll)
     const raf = (time: number) => lenis.raf(time * 1000)
@@ -23,7 +22,6 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       gsap.ticker.remove(raf)
       lenis.off('scroll', onScroll)
       lenis.destroy()
-      window.__lenisVelocity = 0
     }
   }, [])
   return <>{children}</>

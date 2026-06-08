@@ -1,10 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Mail } from 'lucide-react'
+import { Mail, MapPin } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
-import { Magnetic } from '@/components/primitives/Magnetic'
 
 function GitHubIcon() {
   return (
@@ -50,6 +49,7 @@ export function Contact() {
   const [message, setMessage] = useState('')
   const [errors, setErrors] = useState<FormErrors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   function validate(): boolean {
     const next: FormErrors = {}
@@ -67,437 +67,301 @@ export function Contact() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (!validate()) return
+    setIsSubmitting(true)
     const subject = encodeURIComponent('Portfolio inquiry from ' + name.trim())
     const body = encodeURIComponent(
       message.trim() + '\n\n— ' + name.trim() + ' (' + email.trim() + ')'
     )
     window.location.href = `mailto:devin.voegele@microsun.ch?subject=${subject}&body=${body}`
     setSubmitted(true)
+    setIsSubmitting(false)
   }
 
+  const inputCls =
+    'w-full px-4 py-3 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent transition-colors text-[var(--text-primary)] placeholder:text-[var(--text-muted)]'
+
   return (
-    <section
-      id="contact"
-      style={{ paddingBlock: '7rem' }}
-    >
-      <div
-        style={{
-          maxWidth: '72rem',
-          margin: '0 auto',
-          paddingInline: '1rem',
-          width: '100%',
-        }}
-      >
+    <section id="contact" className="py-24 px-4 relative">
+      {/* Decorative radial blob */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
+        <div
+          className="absolute bottom-0 left-0 w-full h-full"
+          style={{
+            background:
+              'radial-gradient(ellipse at bottom left, rgba(16,185,129,0.07), transparent 70%)',
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto max-w-5xl relative z-10">
         <SectionHeader
           index="07"
-          eyebrow="Contact"
+          eyebrow="Contact Me"
           title={
             <>
-              Let&apos;s <span className="gradient-text">Connect</span>
+              Get in <span className="gradient-text">Touch</span>
             </>
           }
         />
 
-        {/* 2-col grid */}
-        <div className="contact-grid">
+        <p
+          className="text-center max-w-2xl mx-auto mb-14 text-base"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          Interested in working together, or just want to talk shop? Drop me a line — I read
+          everything.
+        </p>
 
-          {/* LEFT column */}
-          <FadeIn>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1.75rem',
-              }}
-            >
-              {/* Tagline */}
-              <p
-                style={{
-                  color: 'var(--text-secondary)',
-                  lineHeight: 1.7,
-                  fontSize: '1rem',
-                }}
-              >
-                Have a project in mind, or just want to talk shop? My inbox is open.
-              </p>
-
-              {/* Big email link */}
-              <a
-                href="mailto:devin.voegele@microsun.ch"
-                className="contact-email-link font-geist-sans"
-              >
-                devin.voegele@microsun.ch
-                <span className="contact-underline" aria-hidden />
-              </a>
-
-              {/* Social icon row */}
+        <FadeIn>
+          <div className="flex flex-col md:flex-row gap-16 items-start">
+            {/* LEFT — Form */}
+            <div className="md:w-1/2 order-2 md:order-1 w-full">
               <div
-                style={{
-                  display: 'flex',
-                  gap: '0.75rem',
-                }}
+                className="bg-[var(--bg-surface)] p-8 rounded-xl shadow-lg border border-[var(--border)] hover-lift"
               >
-                <a
-                  href="https://github.com/devin-voegele/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  className="glass hover-lift social-icon-btn"
+                <h3
+                  className="text-xl font-bold mb-6"
+                  style={{ color: 'var(--accent)' }}
                 >
-                  <GitHubIcon />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/devin-voegele-2a5989293"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="glass hover-lift social-icon-btn"
-                >
-                  <LinkedInIcon />
-                </a>
-                <a
-                  href="mailto:devin.voegele@microsun.ch"
-                  aria-label="Email"
-                  className="glass hover-lift social-icon-btn"
-                >
-                  <Mail size={20} aria-hidden />
-                </a>
-              </div>
+                  Send a Message
+                </h3>
 
-              {/* Status line */}
-              <p
-                className="font-mono"
-                style={{
-                  fontSize: '0.7rem',
-                  letterSpacing: '0.12em',
-                  color: 'var(--text-muted)',
-                }}
-              >
-                // open to work · based in switzerland
-              </p>
+                {submitted ? (
+                  <div className="flex flex-col items-center justify-center gap-3 py-12 text-center">
+                    <div
+                      className="w-12 h-12 rounded-full flex items-center justify-center"
+                      style={{
+                        background: 'rgba(16,185,129,0.15)',
+                        color: 'var(--accent-2)',
+                      }}
+                    >
+                      <Mail size={22} aria-hidden />
+                    </div>
+                    <p
+                      className="font-semibold text-base"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      Opening your mail app…
+                    </p>
+                    <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                      Your message is pre-filled and ready to send.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSubmitted(false)
+                        setName('')
+                        setEmail('')
+                        setMessage('')
+                      }}
+                      className="mt-2 text-sm underline"
+                      style={{ color: 'var(--accent)', background: 'none', border: 'none', cursor: 'pointer' }}
+                    >
+                      Send another
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                    {/* Name */}
+                    <div>
+                      <label
+                        htmlFor="contact-name"
+                        className="block text-sm font-medium mb-2"
+                      >
+                        Your Name
+                      </label>
+                      <input
+                        id="contact-name"
+                        type="text"
+                        name="name"
+                        required
+                        autoComplete="name"
+                        placeholder="John Doe"
+                        value={name}
+                        onChange={e => {
+                          setName(e.target.value)
+                          if (errors.name) setErrors(p => ({ ...p, name: undefined }))
+                        }}
+                        className={inputCls}
+                      />
+                      {errors.name && (
+                        <p className="mt-1 text-xs" style={{ color: '#f87171' }}>
+                          {errors.name}
+                        </p>
+                      )}
+                    </div>
 
-              {/* Thin divider + caption */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                <div
-                  aria-hidden
-                  style={{
-                    height: '1px',
-                    background: 'linear-gradient(90deg, var(--border), transparent)',
-                    opacity: 0.6,
-                  }}
-                />
-                <p
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.68rem',
-                    letterSpacing: '0.12em',
-                    color: 'var(--text-muted)',
-                    opacity: 0.65,
-                  }}
-                >
-                  // drop a line — i read everything.
-                </p>
+                    {/* Email */}
+                    <div>
+                      <label
+                        htmlFor="contact-email"
+                        className="block text-sm font-medium mb-2"
+                      >
+                        Your Email
+                      </label>
+                      <input
+                        id="contact-email"
+                        type="email"
+                        name="email"
+                        required
+                        autoComplete="email"
+                        placeholder="john@example.com"
+                        value={email}
+                        onChange={e => {
+                          setEmail(e.target.value)
+                          if (errors.email) setErrors(p => ({ ...p, email: undefined }))
+                        }}
+                        className={inputCls}
+                      />
+                      {errors.email && (
+                        <p className="mt-1 text-xs" style={{ color: '#f87171' }}>
+                          {errors.email}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                      <label
+                        htmlFor="contact-message"
+                        className="block text-sm font-medium mb-2"
+                      >
+                        Message
+                      </label>
+                      <textarea
+                        id="contact-message"
+                        name="message"
+                        required
+                        rows={5}
+                        placeholder="Your message here…"
+                        value={message}
+                        onChange={e => {
+                          setMessage(e.target.value)
+                          if (errors.message) setErrors(p => ({ ...p, message: undefined }))
+                        }}
+                        className={`${inputCls} resize-none`}
+                      />
+                      {errors.message && (
+                        <p className="mt-1 text-xs" style={{ color: '#f87171' }}>
+                          {errors.message}
+                        </p>
+                      )}
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full py-3 px-6 text-white font-semibold rounded-lg hover-lift disabled:opacity-70 disabled:cursor-not-allowed"
+                      style={{
+                        background:
+                          'linear-gradient(to right, var(--accent), var(--accent-2))',
+                      }}
+                    >
+                      {isSubmitting ? 'Opening…' : 'Send Message'}
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
-          </FadeIn>
 
-          {/* RIGHT column — contact form */}
-          <FadeIn>
-            <div
-              className="glass"
-              style={{
-                borderRadius: '1rem',
-                padding: '2rem',
-              }}
-            >
-              {submitted ? (
+            {/* RIGHT — Info */}
+            <div className="md:w-1/2 order-1 md:order-2 w-full">
+              <div className="space-y-8">
+                {/* Email card */}
                 <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.75rem',
-                    minHeight: '260px',
-                    textAlign: 'center',
-                  }}
+                  className="flex items-start gap-4 p-5 bg-[var(--bg-surface)] rounded-xl border border-[var(--border)] hover-lift"
                 >
                   <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                     style={{
-                      width: '3rem',
-                      height: '3rem',
-                      borderRadius: '50%',
-                      background: 'rgba(16,185,129,0.15)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--accent-2)',
+                      background: 'rgba(37,99,235,0.10)',
+                      color: 'var(--accent)',
                     }}
                   >
                     <Mail size={22} aria-hidden />
                   </div>
-                  <p
-                    className="font-geist-sans"
-                    style={{
-                      fontWeight: 600,
-                      fontSize: '1.05rem',
-                      color: 'var(--text-primary)',
-                    }}
-                  >
-                    Opening your mail app…
-                  </p>
-                  <p
-                    className="font-mono"
-                    style={{
-                      fontSize: '0.72rem',
-                      letterSpacing: '0.1em',
-                      color: 'var(--text-muted)',
-                    }}
-                  >
-                    // message ready to send
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSubmitted(false)
-                      setName('')
-                      setEmail('')
-                      setMessage('')
-                    }}
-                    className="font-mono"
-                    style={{
-                      marginTop: '0.5rem',
-                      fontSize: '0.72rem',
-                      letterSpacing: '0.1em',
-                      color: 'var(--accent)',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      textDecoration: 'underline',
-                    }}
-                  >
-                    send another
-                  </button>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-1">Email</h3>
+                    <a
+                      href="mailto:devin.voegele@microsun.ch"
+                      className="text-sm transition-colors hover:text-[var(--accent)]"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      devin.voegele@microsun.ch
+                    </a>
+                  </div>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
 
-                  {/* Name field */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                    <label
-                      htmlFor="contact-name"
-                      className="font-mono"
-                      style={{
-                        fontSize: '0.68rem',
-                        letterSpacing: '0.15em',
-                        textTransform: 'uppercase',
-                        color: 'var(--text-muted)',
-                      }}
-                    >
-                      Name
-                    </label>
-                    <input
-                      id="contact-name"
-                      type="text"
-                      required
-                      autoComplete="name"
-                      value={name}
-                      onChange={e => { setName(e.target.value); if (errors.name) setErrors(p => ({ ...p, name: undefined })) }}
-                      placeholder="Your name"
-                      className="contact-input"
-                    />
-                    {errors.name && (
-                      <span className="font-mono contact-field-error">{errors.name}</span>
-                    )}
+                {/* Location card */}
+                <div
+                  className="flex items-start gap-4 p-5 bg-[var(--bg-surface)] rounded-xl border border-[var(--border)] hover-lift"
+                >
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{
+                      background: 'rgba(16,185,129,0.10)',
+                      color: 'var(--accent-2)',
+                    }}
+                  >
+                    <MapPin size={22} aria-hidden />
                   </div>
-
-                  {/* Email field */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                    <label
-                      htmlFor="contact-email"
-                      className="font-mono"
-                      style={{
-                        fontSize: '0.68rem',
-                        letterSpacing: '0.15em',
-                        textTransform: 'uppercase',
-                        color: 'var(--text-muted)',
-                      }}
-                    >
-                      Email
-                    </label>
-                    <input
-                      id="contact-email"
-                      type="email"
-                      required
-                      autoComplete="email"
-                      value={email}
-                      onChange={e => { setEmail(e.target.value); if (errors.email) setErrors(p => ({ ...p, email: undefined })) }}
-                      placeholder="you@example.com"
-                      className="contact-input"
-                    />
-                    {errors.email && (
-                      <span className="font-mono contact-field-error">{errors.email}</span>
-                    )}
+                  <div>
+                    <h3 className="text-lg font-semibold mb-1">Location</h3>
+                    <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                      Würenlos, Switzerland
+                    </p>
                   </div>
+                </div>
 
-                  {/* Message field */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                    <label
-                      htmlFor="contact-message"
-                      className="font-mono"
-                      style={{
-                        fontSize: '0.68rem',
-                        letterSpacing: '0.15em',
-                        textTransform: 'uppercase',
-                        color: 'var(--text-muted)',
-                      }}
+                {/* Connect card */}
+                <div
+                  className="bg-[var(--bg-surface)] p-6 rounded-xl border border-[var(--border)] hover-lift"
+                >
+                  <h3
+                    className="text-xl font-bold mb-5"
+                    style={{ color: 'var(--accent)' }}
+                  >
+                    Connect With Me
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href="https://github.com/devin-voegele/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="GitHub"
+                      className="flex items-center gap-3 px-4 py-3 bg-[var(--bg-secondary)] rounded-lg transition-colors hover:bg-[var(--accent)]/10 hover:text-[var(--accent)]"
+                      style={{ color: 'var(--text-secondary)' }}
                     >
-                      Message
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      required
-                      rows={5}
-                      value={message}
-                      onChange={e => { setMessage(e.target.value); if (errors.message) setErrors(p => ({ ...p, message: undefined })) }}
-                      placeholder="What's on your mind?"
-                      className="contact-input contact-textarea"
-                    />
-                    {errors.message && (
-                      <span className="font-mono contact-field-error">{errors.message}</span>
-                    )}
+                      <GitHubIcon />
+                      <span className="text-sm font-medium">GitHub</span>
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/devin-voegele-2a5989293"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn"
+                      className="flex items-center gap-3 px-4 py-3 bg-[var(--bg-secondary)] rounded-lg transition-colors hover:bg-[var(--accent)]/10 hover:text-[var(--accent)]"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      <LinkedInIcon />
+                      <span className="text-sm font-medium">LinkedIn</span>
+                    </a>
+                    <a
+                      href="mailto:devin.voegele@microsun.ch"
+                      aria-label="Email"
+                      className="flex items-center gap-3 px-4 py-3 bg-[var(--bg-secondary)] rounded-lg transition-colors hover:bg-[var(--accent)]/10 hover:text-[var(--accent)]"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      <Mail size={20} aria-hidden />
+                      <span className="text-sm font-medium">Email</span>
+                    </a>
                   </div>
-
-                  {/* Submit */}
-                  <Magnetic>
-                    <button
-                      type="submit"
-                      className="contact-submit hover-lift font-geist-sans"
-                    >
-                      Send Message
-                    </button>
-                  </Magnetic>
-                </form>
-              )}
+                </div>
+              </div>
             </div>
-          </FadeIn>
-
-        </div>
+          </div>
+        </FadeIn>
       </div>
-
-      <style>{`
-        .contact-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 3rem;
-          align-items: start;
-        }
-        @media (min-width: 1024px) {
-          .contact-grid {
-            grid-template-columns: 1fr 1fr;
-          }
-        }
-
-        /* Email link */
-        .contact-email-link {
-          font-size: clamp(1.1rem, 2.5vw, 1.75rem);
-          font-weight: 600;
-          color: var(--text-primary);
-          text-decoration: none;
-          display: inline-block;
-          position: relative;
-          letter-spacing: -0.01em;
-          transition: color 0.3s ease;
-        }
-        .contact-email-link:hover {
-          color: var(--accent);
-        }
-        .contact-underline {
-          display: block;
-          position: absolute;
-          bottom: -3px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: var(--accent);
-          border-radius: 2px;
-          transition: width 0.35s var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
-        }
-        .contact-email-link:hover .contact-underline {
-          width: 100%;
-        }
-
-        /* Social icon buttons */
-        .social-icon-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 2.75rem;
-          height: 2.75rem;
-          border-radius: 9999px;
-          color: var(--text-secondary);
-          text-decoration: none;
-          transition: color 0.3s ease, transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-        .social-icon-btn:hover {
-          color: var(--accent);
-        }
-
-        /* Form inputs */
-        .contact-input {
-          background: var(--bg-surface);
-          border: 1px solid var(--border);
-          border-radius: 0.5rem;
-          padding: 0.75rem 1rem;
-          font-size: 0.9rem;
-          color: var(--text-primary);
-          font-family: var(--font-body), system-ui, sans-serif;
-          outline: none;
-          transition: border-color 0.25s ease, box-shadow 0.25s ease;
-          width: 100%;
-        }
-        .contact-input::placeholder {
-          color: var(--text-muted);
-        }
-        .contact-input:focus {
-          border-color: var(--accent);
-          box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
-        }
-        .contact-textarea {
-          resize: vertical;
-          min-height: 120px;
-        }
-
-        /* Field errors */
-        .contact-field-error {
-          font-size: 0.68rem;
-          letter-spacing: 0.05em;
-          color: #f87171;
-        }
-
-        /* Submit button */
-        .contact-submit {
-          width: 100%;
-          padding: 0.85rem 1.5rem;
-          border-radius: 9999px;
-          background: var(--accent);
-          color: #fff;
-          font-size: 0.95rem;
-          font-weight: 600;
-          letter-spacing: 0.01em;
-          border: none;
-          cursor: pointer;
-          transition: background 0.25s ease, transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease;
-        }
-        .contact-submit:hover {
-          background: var(--accent-bright);
-          box-shadow: 0 0 20px rgba(37,99,235,0.45);
-        }
-        .contact-submit:focus-visible {
-          outline: 2px solid var(--accent);
-          outline-offset: 3px;
-        }
-      `}</style>
     </section>
   )
 }

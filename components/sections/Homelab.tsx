@@ -1,37 +1,74 @@
 'use client'
 
 import React from 'react'
+import { Check } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
-import { TiltCard } from '@/components/primitives/TiltCard'
 
-interface TerminalRow {
-  marker: string
+interface PlannedRow {
+  borderColor: string
   name: string
-  comment: string
-  active: boolean
+  desc: string
 }
 
-const TERMINAL_ROWS: TerminalRow[] = [
-  { marker: '[~]', name: 'k8s-cluster       ', comment: '// provisioning', active: true },
-  { marker: '[ ]', name: 'ci-cd-runners      ', comment: '// planned', active: false },
-  { marker: '[ ]', name: 'self-hosted-svcs   ', comment: '// planned', active: false },
-  { marker: '[ ]', name: 'monitoring-stack   ', comment: '// planned', active: false },
-  { marker: '[ ]', name: 'vpn / networking   ', comment: '// planned', active: false },
+const plannedRows: PlannedRow[] = [
+  {
+    borderColor: 'var(--accent-2)',
+    name: 'Kubernetes Cluster',
+    desc: 'Container orchestration for self-hosted workloads · planned',
+  },
+  {
+    borderColor: 'var(--accent)',
+    name: 'CI/CD Runners',
+    desc: 'Self-hosted pipeline runners · planned',
+  },
+  {
+    borderColor: 'var(--accent-3)',
+    name: 'Self-Hosted Services',
+    desc: 'Media, dashboards, internal tools · planned',
+  },
+  {
+    borderColor: 'var(--accent-2)',
+    name: 'Monitoring & Alerting',
+    desc: 'Metrics, logs, uptime · planned',
+  },
+  {
+    borderColor: 'var(--accent)',
+    name: 'VPN / Networking',
+    desc: 'Segmented VLANs and secure remote access · planned',
+  },
+]
+
+const goals = [
+  'Experiment with the same platform tooling I use at work',
+  'Run Kubernetes, CI/CD and self-hosted services on real hardware',
+  'Build hands-on depth in infra, networking and security',
+  'A safe place to break things and learn',
+]
+
+const statusStats = [
+  { value: 'Soon', label: 'Status' },
+  { value: 'k8s', label: 'Core' },
+  { value: 'CI/CD', label: 'Pipelines' },
+  { value: 'Self-host', label: 'Services' },
 ]
 
 export function Homelab() {
   return (
-    <section
-      id="homelab"
-      style={{
-        paddingTop: '6rem',
-        paddingBottom: '6rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      {/* animations */}
+    <section id="homelab" className="py-24 px-4 relative">
+      {/* faint bg accent */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(139,92,246,0.05) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* pulsing dot animation */}
       <style>{`
         @keyframes hl-pulse {
           0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
@@ -40,317 +77,122 @@ export function Homelab() {
         .hl-dot { animation: hl-pulse 2s ease-in-out infinite; }
       `}</style>
 
-      {/* faint bg accent */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(139,92,246,0.04) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }}
-      />
-
-      <div
-        style={{
-          maxWidth: '72rem',
-          margin: '0 auto',
-          paddingLeft: '1rem',
-          paddingRight: '1rem',
-          position: 'relative',
-        }}
-      >
+      <div className="container mx-auto max-w-6xl relative z-10">
         <SectionHeader
           index="04"
           eyebrow="Homelab"
           title={
             <>
-              Self-Hosted{' '}
-              <span
-                style={{
-                  background: 'linear-gradient(90deg, var(--accent), var(--accent-3))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                Lab
-              </span>
+              Self-Hosted <span className="gradient-text">Lab</span>
             </>
           }
         />
 
-        {/* 2-col layout */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            gap: '2.5rem',
-            alignItems: 'center',
-          }}
-          className="homelab-grid"
-        >
-          {/* LEFT — text content */}
-          <FadeIn>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              {/* status badge */}
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '0.3rem 0.85rem',
-                  borderRadius: '9999px',
-                  border: '1px solid rgba(16,185,129,0.3)',
-                  width: 'fit-content',
-                }}
-              >
-                <span
-                  className="hl-dot"
-                  style={{
-                    display: 'inline-block',
-                    width: '0.5rem',
-                    height: '0.5rem',
-                    borderRadius: '9999px',
-                    background: 'var(--accent-2)',
-                    flexShrink: 0,
-                  }}
-                />
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.72rem',
-                    letterSpacing: '0.15em',
-                    color: 'var(--accent-2)',
-                  }}
-                >
-                  // STATUS: IN PROGRESS
-                </span>
-              </div>
+        {/* Status badge */}
+        <div className="flex justify-center mb-6">
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border font-mono"
+            style={{
+              border: '1px solid rgba(16,185,129,0.3)',
+              fontSize: '0.72rem',
+              letterSpacing: '0.15em',
+            }}
+          >
+            <span
+              className="hl-dot inline-block w-2 h-2 rounded-full flex-shrink-0"
+              style={{ background: 'var(--accent-2)' }}
+            />
+            <span style={{ color: 'var(--accent-2)' }}>// STATUS: IN PROGRESS</span>
+          </div>
+        </div>
 
-              {/* heading */}
-              <h3
-                style={{
-                  fontWeight: 700,
-                  fontSize: 'clamp(1.5rem, 3.5vw, 2rem)',
-                  color: 'var(--text-primary)',
-                  lineHeight: 1.2,
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                A homelab is on the way.
+        <p
+          className="text-center max-w-3xl mx-auto mb-16 leading-relaxed"
+          style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}
+        >
+          A self-hosted lab is on the way — built to run the same platform tooling I use professionally, on my own hardware.
+        </p>
+
+        <FadeIn>
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            {/* LEFT — Planned Architecture card */}
+            <div
+              className="rounded-xl p-6 border"
+              style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}
+            >
+              <h3 className="text-xl font-bold mb-6" style={{ color: 'var(--accent)' }}>
+                Planned Architecture
               </h3>
 
-              {/* copy */}
-              <p
-                style={{
-                  color: 'var(--text-secondary)',
-                  lineHeight: 1.75,
-                  maxWidth: '36rem',
-                }}
-              >
-                I&apos;m building a self-hosted lab to run Kubernetes, CI/CD, and self-hosted
-                services on my own hardware — a place to experiment with the same platform tooling
-                I use professionally. Hardware&apos;s being assembled; the rack&apos;s getting
-                built.
-              </p>
-
-              {/* mono note */}
-              <p
-                className="font-mono"
-                style={{
-                  fontSize: '0.72rem',
-                  color: 'var(--text-muted)',
-                  letterSpacing: '0.08em',
-                }}
-              >
-                // more details once hardware is provisioned
-              </p>
-            </div>
-          </FadeIn>
-
-          {/* RIGHT — terminal blueprint panel */}
-          <TiltCard intensity={6} className="w-full">
-            <div
-              className="glass"
-              style={{
-                borderRadius: '1rem',
-                overflow: 'hidden',
-                position: 'relative',
-              }}
-            >
-              {/* subtle corner glow */}
-              <div
-                aria-hidden
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  width: '12rem',
-                  height: '12rem',
-                  background:
-                    'radial-gradient(circle at top right, rgba(139,92,246,0.1) 0%, transparent 60%)',
-                  pointerEvents: 'none',
-                }}
-              />
-
-              {/* terminal titlebar */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '0.75rem 1.25rem',
-                  borderBottom: '1px solid var(--border)',
-                  background: 'rgba(255,255,255,0.02)',
-                }}
-              >
-                {/* window dots */}
-                {['rgba(255,90,90,0.7)', 'rgba(255,185,0,0.7)', 'rgba(40,200,80,0.7)'].map((c, i) => (
-                  <span
-                    key={i}
-                    aria-hidden
-                    style={{
-                      display: 'inline-block',
-                      width: '0.6rem',
-                      height: '0.6rem',
-                      borderRadius: '9999px',
-                      background: c,
-                      flexShrink: 0,
-                    }}
-                  />
-                ))}
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.7rem',
-                    color: 'var(--text-muted)',
-                    marginLeft: '0.5rem',
-                    letterSpacing: '0.05em',
-                  }}
-                >
-                  ~/homelab/setup.yaml
-                </span>
-              </div>
-
-              {/* terminal body */}
-              <div
-                style={{
-                  padding: '1.5rem 1.25rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.1rem',
-                  overflowX: 'hidden',
-                }}
-              >
-                {/* yaml header comment */}
-                <p
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.75rem',
-                    color: 'var(--text-muted)',
-                    marginBottom: '0.75rem',
-                    letterSpacing: '0.04em',
-                  }}
-                >
-                  # planned setup manifest
-                </p>
-
-                {TERMINAL_ROWS.map((row, i) => (
+              <div className="space-y-4">
+                {plannedRows.map(({ borderColor, name, desc }) => (
                   <div
-                    key={row.name}
-                    className="font-mono"
+                    key={name}
+                    className="p-4 rounded-lg"
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      fontSize: 'clamp(0.68rem, 2.2vw, 0.8rem)',
-                      padding: '0.3rem 0',
-                      minWidth: 0,
+                      borderLeft: `4px solid ${borderColor}`,
+                      background: 'rgba(255,255,255,0.02)',
                     }}
                   >
-                    <span
-                      style={{
-                        color: row.active ? 'var(--accent-2)' : 'var(--accent-3)',
-                        flexShrink: 0,
-                      }}
-                    >
-                      {row.marker}
-                    </span>
-                    <span
-                      className="homelab-terminal-row-name"
-                      style={{
-                        color: 'var(--text-secondary)',
-                        flexGrow: 1,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        minWidth: 0,
-                      }}
-                    >
-                      {row.name.trim()}
-                    </span>
-                    <span
-                      style={{
-                        color: 'rgba(16,185,129,0.5)',
-                        fontSize: 'clamp(0.6rem, 2vw, 0.72rem)',
-                        letterSpacing: '0.04em',
-                        flexShrink: 0,
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      {row.comment}
-                    </span>
-                    {/* blinking cursor on last row */}
-                    {i === TERMINAL_ROWS.length - 1 && (
-                      <span
-                        className="animate-blink"
-                        aria-hidden
-                        style={{
-                          display: 'inline-block',
-                          width: '0.5rem',
-                          height: '1em',
-                          background: 'var(--accent-2)',
-                          opacity: 0.7,
-                          marginLeft: '0.25rem',
-                          verticalAlign: 'text-bottom',
-                        }}
-                      />
-                    )}
+                    <h4 className="font-semibold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>
+                      {name}
+                    </h4>
+                    <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                      {desc}
+                    </p>
                   </div>
                 ))}
-
-                {/* bottom prompt */}
-                <p
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.72rem',
-                    color: 'var(--text-muted)',
-                    marginTop: '1rem',
-                    letterSpacing: '0.05em',
-                  }}
-                >
-                  <span style={{ color: 'var(--accent-2)' }}>➜</span>
-                  {' '}
-                  <span style={{ color: 'var(--accent-3)' }}>~/homelab</span>
-                  {' '}
-                  <span style={{ color: 'var(--text-muted)' }}>git:(main)</span>
-                </p>
               </div>
             </div>
-          </TiltCard>
-        </div>
-      </div>
 
-      <style>{`
-        @media (min-width: 768px) {
-          .homelab-grid {
-            grid-template-columns: 1fr 1fr !important;
-            gap: 3rem !important;
-          }
-        }
-      `}</style>
+            {/* RIGHT — Goals card + stat row */}
+            <div className="space-y-6">
+              <div
+                className="rounded-xl p-6 border"
+                style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}
+              >
+                <h3 className="text-xl font-bold mb-6" style={{ color: 'var(--accent)' }}>
+                  What It&apos;s For
+                </h3>
+
+                <ul className="space-y-4">
+                  {goals.map((goal) => (
+                    <li key={goal} className="flex items-start gap-3">
+                      <span
+                        className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
+                        style={{ background: 'rgba(37,99,235,0.1)' }}
+                      >
+                        <Check size={14} style={{ color: 'var(--accent)' }} strokeWidth={2.5} />
+                      </span>
+                      <span className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                        {goal}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Honest placeholder stats */}
+              <div className="grid grid-cols-2 gap-4">
+                {statusStats.map(({ value, label }) => (
+                  <div
+                    key={label}
+                    className="text-center p-3 rounded-lg"
+                    style={{ background: 'rgba(37,99,235,0.08)' }}
+                  >
+                    <div className="text-lg font-bold mb-0.5" style={{ color: 'var(--accent)' }}>
+                      {value}
+                    </div>
+                    <div className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                      {label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
     </section>
   )
 }

@@ -5,6 +5,7 @@ import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { PerfProvider } from "@/components/providers/PerfProvider";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { CustomCursor } from "@/components/cursor/CustomCursor";
+import { MountainBackdrop } from "@/components/effects/MountainBackdrop";
 
 export const viewport: Viewport = {
   themeColor: '#080B14',
@@ -85,6 +86,8 @@ export default function RootLayout({
       <body className="antialiased">
         <ScrollProgress />
         <CustomCursor />
+        {/* Mountain silhouette backdrop — fixed, behind all content, parallax-scrolled */}
+        <MountainBackdrop />
         {/* Site-wide ambient radial glow — very faint, keeps sections from pure black */}
         <div
           aria-hidden

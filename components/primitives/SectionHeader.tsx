@@ -9,7 +9,7 @@ interface SectionHeaderProps {
 
 export function SectionHeader({ index, eyebrow, title, className }: SectionHeaderProps) {
   return (
-    <div className={`text-center mb-16 ${className ?? ''}`}>
+    <div className={`text-center mb-10 ${className ?? ''}`}>
       {index && (
         <p
           className="font-mono mb-2"
@@ -38,8 +38,8 @@ export function SectionHeader({ index, eyebrow, title, className }: SectionHeade
         className="font-geist-sans"
         style={{
           fontWeight: 800,
-          fontSize: 'clamp(2rem, 5vw, 3.25rem)',
-          lineHeight: 1.1,
+          fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
+          lineHeight: 1.05,
           letterSpacing: '-0.02em',
           color: 'var(--text-primary)',
           marginTop: '1rem',
@@ -50,10 +50,10 @@ export function SectionHeader({ index, eyebrow, title, className }: SectionHeade
 
       <div
         style={{
-          width: '5rem',
+          width: '3.5rem',
           height: '4px',
           borderRadius: '9999px',
-          margin: '1.25rem auto 0',
+          margin: '1rem auto 0',
           background: 'linear-gradient(90deg, var(--accent), var(--accent-2))',
         }}
       />

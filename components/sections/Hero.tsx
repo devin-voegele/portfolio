@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { Aurora } from '@/components/effects/Aurora'
 import { LiveTerminal } from '@/components/primitives/LiveTerminal'
 import { usePerfMode } from '@/components/providers/PerfProvider'
+import { Magnetic } from '@/components/primitives/Magnetic'
 
 // Lazy-load WebGL — SSR: false, no suspense fallback needed (gate handles it)
 const HeroObject = dynamic(() => import('@/components/3d/HeroObject'), {
@@ -69,7 +70,7 @@ export function Hero() {
         {/* ── LEFT COLUMN — textual content ────────────────────────── */}
         <div className="flex flex-col" style={{ gap: '0' }}>
           {/* 1. Badge pill */}
-          <div style={{ marginBottom: '1.25rem' }}>
+          <div className="reveal-load" style={{ marginBottom: '1.25rem', animationDelay: '0.05s' }}>
             <span
               style={{
                 display: 'inline-block',
@@ -88,7 +89,7 @@ export function Hero() {
 
           {/* 2. Glitch name */}
           <h1
-            className="glitch-text"
+            className="glitch-text reveal-load"
             data-text="Devin Vögele"
             style={{
               fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
@@ -99,6 +100,7 @@ export function Hero() {
               letterSpacing: '-0.02em',
               marginBottom: '1rem',
               textAlign: 'left',
+              animationDelay: '0.12s',
             }}
           >
             Devin Vögele
@@ -106,12 +108,14 @@ export function Hero() {
 
           {/* 3. One-line subtitle */}
           <p
+            className="reveal-load"
             style={{
               fontSize: 'clamp(1rem, 2vw, 1.2rem)',
               color: 'var(--text-secondary)',
               marginBottom: '2rem',
               lineHeight: 1.4,
               textAlign: 'left',
+              animationDelay: '0.2s',
             }}
           >
             Developer &amp;{' '}
@@ -119,71 +123,75 @@ export function Hero() {
           </p>
 
           {/* 4. Live Terminal — centerpiece */}
-          <div style={{ marginBottom: '2rem' }}>
+          <div className="reveal-load" style={{ marginBottom: '2rem', animationDelay: '0.3s' }}>
             <LiveTerminal />
           </div>
 
           {/* 5. CTA pills */}
           <div
-            className="flex flex-wrap"
-            style={{ gap: '1rem', marginBottom: '2rem' }}
+            className="flex flex-wrap reveal-load"
+            style={{ gap: '1rem', marginBottom: '2rem', animationDelay: '0.42s' }}
           >
-            <a
-              href="#work"
-              className="hover-lift"
-              style={{
-                display: 'inline-block',
-                padding: '0.75rem 2rem',
-                borderRadius: '9999px',
-                fontWeight: 500,
-                fontSize: '1rem',
-                background: 'var(--accent)',
-                color: '#fff',
-                textDecoration: 'none',
-                transition: 'filter 0.25s ease, box-shadow 0.25s ease',
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLAnchorElement
-                el.style.filter = 'brightness(1.15)'
-                el.style.boxShadow = '0 0 15px var(--accent-glow)'
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLAnchorElement
-                el.style.filter = ''
-                el.style.boxShadow = ''
-              }}
-            >
-              View Projects
-            </a>
-            <a
-              href="#contact"
-              className="hover-lift"
-              style={{
-                display: 'inline-block',
-                padding: '0.75rem 2rem',
-                borderRadius: '9999px',
-                fontWeight: 500,
-                fontSize: '1rem',
-                background: 'transparent',
-                color: 'var(--accent)',
-                border: '2px solid var(--accent)',
-                textDecoration: 'none',
-                transition: 'background 0.25s ease',
-              }}
-              onMouseEnter={(e) => {
-                ;(e.currentTarget as HTMLAnchorElement).style.background =
-                  'var(--accent-subtle)'
-              }}
-              onMouseLeave={(e) => {
-                ;(e.currentTarget as HTMLAnchorElement).style.background = 'transparent'
-              }}
-            >
-              Get in Touch
-            </a>
+            <Magnetic>
+              <a
+                href="#work"
+                className="hover-lift"
+                style={{
+                  display: 'inline-block',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '9999px',
+                  fontWeight: 500,
+                  fontSize: '1rem',
+                  background: 'var(--accent)',
+                  color: '#fff',
+                  textDecoration: 'none',
+                  transition: 'filter 0.25s ease, box-shadow 0.25s ease',
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLAnchorElement
+                  el.style.filter = 'brightness(1.15)'
+                  el.style.boxShadow = '0 0 15px var(--accent-glow)'
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLAnchorElement
+                  el.style.filter = ''
+                  el.style.boxShadow = ''
+                }}
+              >
+                View Projects
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="#contact"
+                className="hover-lift"
+                style={{
+                  display: 'inline-block',
+                  padding: '0.75rem 2rem',
+                  borderRadius: '9999px',
+                  fontWeight: 500,
+                  fontSize: '1rem',
+                  background: 'transparent',
+                  color: 'var(--accent)',
+                  border: '2px solid var(--accent)',
+                  textDecoration: 'none',
+                  transition: 'background 0.25s ease',
+                }}
+                onMouseEnter={(e) => {
+                  ;(e.currentTarget as HTMLAnchorElement).style.background =
+                    'var(--accent-subtle)'
+                }}
+                onMouseLeave={(e) => {
+                  ;(e.currentTarget as HTMLAnchorElement).style.background = 'transparent'
+                }}
+              >
+                Get in Touch
+              </a>
+            </Magnetic>
           </div>
 
           {/* 6. Social icons */}
-          <div className="flex" style={{ gap: '1.5rem' }}>
+          <div className="flex reveal-load" style={{ gap: '1.5rem', animationDelay: '0.52s' }}>
             {/* GitHub */}
             <a
               href="https://github.com/devin-voegele/"

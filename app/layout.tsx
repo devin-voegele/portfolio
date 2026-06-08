@@ -3,6 +3,8 @@ import { anton, geistSans, geistMono } from "./fonts";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { PerfProvider } from "@/components/providers/PerfProvider";
+import { ScrollProgress } from "@/components/effects/ScrollProgress";
+import { CustomCursor } from "@/components/cursor/CustomCursor";
 
 export const viewport: Viewport = {
   themeColor: '#080B14',
@@ -81,6 +83,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${anton.variable} ${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased">
+        <ScrollProgress />
+        <CustomCursor />
         {/* Site-wide ambient radial glow — very faint, keeps sections from pure black */}
         <div
           aria-hidden

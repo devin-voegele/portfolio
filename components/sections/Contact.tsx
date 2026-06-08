@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Mail } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
+import { Magnetic } from '@/components/primitives/Magnetic'
 
 function GitHubIcon() {
   return (
@@ -345,12 +346,14 @@ export function Contact() {
                   </div>
 
                   {/* Submit */}
-                  <button
-                    type="submit"
-                    className="contact-submit hover-lift font-geist-sans"
-                  >
-                    Send Message
-                  </button>
+                  <Magnetic>
+                    <button
+                      type="submit"
+                      className="contact-submit hover-lift font-geist-sans"
+                    >
+                      Send Message
+                    </button>
+                  </Magnetic>
                 </form>
               )}
             </div>

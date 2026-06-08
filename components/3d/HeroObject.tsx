@@ -5,6 +5,10 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Float } from '@react-three/drei'
 import type { Group } from 'three'
 
+export interface HeroObjectProps {
+  inView?: boolean
+}
+
 // ── Crystal mesh (rim-lit dark faceted icosahedron) ───────────────────────────
 function Crystal() {
   const groupRef = useRef<Group>(null)
@@ -73,12 +77,13 @@ function Scene() {
 }
 
 // ── Exported canvas component ─────────────────────────────────────────────────
-export default function HeroObject() {
+export default function HeroObject({ inView = true }: HeroObjectProps) {
   return (
     <Canvas
       gl={{ alpha: true, antialias: true }}
       camera={{ position: [0, 0, 5], fov: 45 }}
-      dpr={[1, 1.5]}
+      dpr={[1, 1.25]}
+      frameloop={inView ? 'always' : 'never'}
       style={{
         position: 'absolute',
         inset: 0,

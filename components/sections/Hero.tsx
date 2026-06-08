@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { Aurora } from '@/components/effects/Aurora'
 import { LiveTerminal } from '@/components/primitives/LiveTerminal'
@@ -44,17 +44,35 @@ function GlowOrb() {
 export function Hero() {
   const tier = usePerfMode()
   const [showWebGL, setShowWebGL] = useState(false)
+  const [inView, setInView] = useState(true)
+  const heroRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const isDesktop = window.matchMedia('(min-width:1024px)').matches
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (isDesktop && tier !== 'off' && !reduced) {
+    // Gate: 'full' tier only — weaker machines fall back to GlowOrb
+    if (isDesktop && tier === 'full' && !reduced) {
       setShowWebGL(true)
     }
   }, [tier])
 
+  // Pause WebGL render loop when the hero section is not in the viewport
+  useEffect(() => {
+    const node = heroRef.current
+    if (!node) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting)
+      },
+      { threshold: 0 }
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section
+      ref={heroRef}
       id="top"
       className="relative overflow-hidden flex flex-col justify-center"
       style={{ minHeight: '100vh', padding: '5rem 1.5rem' }}
@@ -276,7 +294,7 @@ export function Hero() {
               height: '28rem',
             }}
           >
-            {showWebGL ? <HeroObject /> : <GlowOrb />}
+            {showWebGL ? <HeroObject inView={inView} /> : <GlowOrb />}
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { usePerfMode } from '@/components/providers/PerfProvider'
 
 // Three SVG path layers (back → front). Each is a full-width ridge.
 // Viewbox 1440×240 — fills container via preserveAspectRatio slice.
@@ -33,11 +34,15 @@ const LAYERS = [
 export function MountainBackdrop() {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number | null>(null)
+  const tier = usePerfMode()
 
   useEffect(() => {
     // Respect prefers-reduced-motion — render static, no scroll animation
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduced) return
+
+    // On 'off' tier (very weak machines) skip all per-frame work — static at 0.9
+    if (tier === 'off') return
 
     const wrapper = wrapperRef.current
     if (!wrapper) return
@@ -54,6 +59,12 @@ export function MountainBackdrop() {
       const fadeEnd = vh * 1.4
       const opacity = Math.max(0, 0.9 * (1 - scrollY / fadeEnd))
       wrapper!.style.opacity = String(opacity)
+
+      // Once fully faded, skip per-layer transform writes — no work deeper in page
+      if (opacity <= 0) {
+        rafRef.current = null
+        return
+      }
 
       // Parallax translate each layer
       layers.forEach((layer, i) => {

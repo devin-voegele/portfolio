@@ -35,7 +35,7 @@ export function PerfProvider({ children }: { children: React.ReactNode }) {
         return
       }
       const fps = (frames / (now - start)) * 1000
-      const next: PerfTier = fps < 45 || lowCores ? 'reduced' : 'full'
+      const next: PerfTier = fps < 50 || lowCores ? 'reduced' : 'full'
       setTier(next)
     }
 

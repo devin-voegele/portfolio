@@ -240,8 +240,9 @@ export function Hero() {
           bottom: 0,
           left: 0,
           right: 0,
-          height: '25vh',
-          background: 'linear-gradient(to bottom, transparent, #0a0a0a)',
+          height: '34vh',
+          background:
+            'linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.55) 55%, #0a0a0a 100%)',
           zIndex: 5,
           pointerEvents: 'none',
         }}

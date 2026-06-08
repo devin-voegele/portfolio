@@ -107,6 +107,10 @@ export function MountainBackdrop() {
         zIndex: 0,
         pointerEvents: 'none',
         overflow: 'hidden',
+        // Fade the backdrop in from its top so there's no hard horizontal edge
+        // where the fixed layer begins.
+        WebkitMaskImage: 'linear-gradient(to top, #000 55%, transparent 100%)',
+        maskImage: 'linear-gradient(to top, #000 55%, transparent 100%)',
         // Initial opacity 0.9; JS will drive it. Also fallback for no-JS / static.
         opacity: 0.9,
       }}

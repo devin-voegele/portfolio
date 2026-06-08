@@ -1,14 +1,15 @@
 'use client'
 
-import React, { useEffect, useRef, ElementType } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 interface FadeInProps {
   children: React.ReactNode
   className?: string
-  as?: ElementType
+  /** HTML tag to render, defaults to 'div' */
+  as?: string
 }
 
-export function FadeIn({ children, className, as: Tag = 'div' }: FadeInProps) {
+export function FadeIn({ children, className, as = 'div' }: FadeInProps) {
   const ref = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -37,12 +38,12 @@ export function FadeIn({ children, className, as: Tag = 'div' }: FadeInProps) {
     return () => observer.disconnect()
   }, [])
 
-  return (
-    <Tag
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className={`fade-in-section${className ? ` ${className}` : ''}`}
-    >
-      {children}
-    </Tag>
+  return React.createElement(
+    as,
+    {
+      ref,
+      className: `fade-in-section${className ? ` ${className}` : ''}`,
+    },
+    children
   )
 }

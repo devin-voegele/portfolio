@@ -11,6 +11,8 @@
   "dependencies": {
     "@fontsource/anton": "^5.2.7",
     "@gsap/react": "^2.1.2",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.0",
     "geist": "^1.7.2",
@@ -24,12 +26,14 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "simplex-noise": "^4.0.3",
-    "tailwind-merge": "^2.2.0"
+    "tailwind-merge": "^2.2.0",
+    "three": "^0.176.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.176.0",
     "autoprefixer": "^10.4.0",
     "eslint": "^8.55.0",
     "eslint-config-next": "^15.0.0",

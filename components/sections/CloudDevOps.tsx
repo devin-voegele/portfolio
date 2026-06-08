@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import type { LucideIcon } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
 import {
@@ -23,7 +24,7 @@ const GREEN_ICON = 'var(--accent-2)'
 const PURPLE_ICON = 'var(--accent-3)'
 
 interface Capability {
-  icon: React.ElementType
+  icon: LucideIcon
   title: string
   description: string
   tintBg: string

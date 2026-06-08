@@ -1,192 +1,175 @@
 'use client'
 
 import React from 'react'
+import { Code2, Cloud, ShieldCheck, Sparkles } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
-import { TiltCard } from '@/components/primitives/TiltCard'
 
-const categories = [
+const categoryCards = [
   {
-    label: '// frontend',
-    caption: 'Interfaces, motion & component systems.',
+    title: 'Frontend',
+    subtitle: 'Next.js · React · TypeScript',
     accentVar: 'var(--accent)',
-    skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Framer Motion'],
+    accentRgba: 'rgba(37,99,235,0.1)',
+    accentRgbaHover: 'rgba(37,99,235,0.2)',
+    icon: Code2,
   },
   {
-    label: '// backend & cloud',
-    caption: 'Containers, pipelines & cloud infra.',
+    title: 'Cloud & DevOps',
+    subtitle: 'Docker · K8s · CI/CD',
     accentVar: 'var(--accent-2)',
-    skills: ['Docker', 'AWS', 'Python', 'Kubernetes', 'CI/CD'],
+    accentRgba: 'rgba(16,185,129,0.1)',
+    accentRgbaHover: 'rgba(16,185,129,0.2)',
+    icon: Cloud,
   },
   {
-    label: '// platform & process',
-    caption: 'Identity, orchestration & process automation.',
+    title: 'Platform & IAM',
+    subtitle: 'Entra ID · CloudPods',
     accentVar: 'var(--accent-3)',
-    skills: ['Azure Entra ID (IAM)', 'BPMN', 'CloudPods'],
+    accentRgba: 'rgba(139,92,246,0.1)',
+    accentRgbaHover: 'rgba(139,92,246,0.2)',
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Creative',
+    subtitle: 'GSAP · Motion · WebGL',
+    accentVar: 'var(--accent)',
+    accentRgba: 'rgba(37,99,235,0.1)',
+    accentRgbaHover: 'rgba(37,99,235,0.2)',
+    icon: Sparkles,
   },
 ] as const
 
+const skillTags = [
+  'Next.js',
+  'React',
+  'TypeScript',
+  'Tailwind CSS',
+  'GSAP',
+  'Framer Motion',
+  'Docker',
+  'AWS',
+  'Azure',
+  'Kubernetes',
+  'CI/CD',
+  'Azure Entra ID',
+  'CloudPods',
+  'Python',
+  'BPMN',
+]
+
 export function Skills() {
   return (
-    <section id="skills" className="relative" style={{ padding: '7rem 0', overflow: 'hidden' }}>
-      {/* Bg glow shifted right */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          top: '50%',
-          right: '-10%',
-          transform: 'translateY(-50%)',
-          width: '40rem',
-          height: '40rem',
-          borderRadius: '9999px',
-          background: 'radial-gradient(ellipse, rgba(139,92,246,0.07) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }}
-      />
-
-      <div className="relative mx-auto px-4" style={{ maxWidth: '72rem', zIndex: 1 }}>
-        <SectionHeader
-          index="02"
-          eyebrow="Toolkit"
-          title={
-            <>
-              My <span className="gradient-text">Stack</span>
-            </>
-          }
+    <section id="skills" className="py-24 px-4 relative">
+      {/* Background decorative blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute -right-20 top-1/4 w-80 h-80 rounded-full"
+          style={{ background: 'var(--accent)', opacity: 0.05, filter: 'blur(80px)' }}
         />
-
-        <div className="flex flex-col" style={{ gap: '2.5rem' }}>
-          {categories.map(({ label, caption, accentVar, skills }) => (
-            <div key={label}>
-              {/* Category label + count + caption */}
-              <div style={{ marginBottom: '1rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.3rem' }}>
-                  <p
-                    className="font-mono uppercase"
-                    style={{
-                      fontSize: '0.72rem',
-                      letterSpacing: '0.18em',
-                      color: accentVar,
-                      margin: 0,
-                    }}
-                  >
-                    {label}
-                  </p>
-                  <span
-                    className="font-mono"
-                    style={{
-                      fontSize: '0.62rem',
-                      letterSpacing: '0.1em',
-                      color: 'var(--text-muted)',
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid var(--glass-border)',
-                      borderRadius: '4px',
-                      padding: '0.1rem 0.4rem',
-                    }}
-                  >
-                    {String(skills.length).padStart(2, '0')}
-                  </span>
-                </div>
-                <p
-                  style={{
-                    fontSize: '0.75rem',
-                    color: 'var(--text-muted)',
-                    margin: 0,
-                    letterSpacing: '0.01em',
-                  }}
-                >
-                  {caption}
-                </p>
-              </div>
-
-              {/* Thin divider */}
-              <div
-                aria-hidden
-                style={{
-                  width: '100%',
-                  height: '1px',
-                  background: 'var(--glass-border)',
-                  marginBottom: '1rem',
-                }}
-              />
-
-              {/* Staggered skill tile grid */}
-              <FadeIn>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(2, 1fr)',
-                    gap: '0.625rem',
-                  }}
-                  className="skills-grid"
-                >
-                  {skills.map((skill, idx) => (
-                    <TiltCard key={skill} intensity={6}>
-                      <div
-                        className="glass hover-lift rounded-xl flex items-center gap-3"
-                        style={{
-                          padding: '0.75rem 1rem',
-                          opacity: 0,
-                          animation: `skill-fade-in 0.5s var(--ease-out-expo) forwards`,
-                          animationDelay: `${idx * 80}ms`,
-                          transition:
-                            'transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease, border-color 0.3s ease',
-                        }}
-                        onMouseEnter={(e) => {
-                          const el = e.currentTarget
-                          el.style.borderColor = accentVar
-                          el.style.boxShadow = `0 0 20px -4px ${
-                            accentVar === 'var(--accent)'
-                              ? 'rgba(37,99,235,0.25)'
-                              : accentVar === 'var(--accent-2)'
-                              ? 'rgba(16,185,129,0.25)'
-                              : 'rgba(139,92,246,0.25)'
-                          }`
-                        }}
-                        onMouseLeave={(e) => {
-                          const el = e.currentTarget
-                          el.style.borderColor = ''
-                          el.style.boxShadow = ''
-                        }}
-                      >
-                        {/* Accent dot */}
-                        <span
-                          style={{
-                            display: 'inline-block',
-                            width: '5px',
-                            height: '5px',
-                            borderRadius: '50%',
-                            flexShrink: 0,
-                            background: accentVar,
-                            opacity: 0.85,
-                          }}
-                        />
-                        <span
-                          className="font-medium"
-                          style={{ fontSize: '0.8rem', color: 'var(--text-primary)' }}
-                        >
-                          {skill}
-                        </span>
-                      </div>
-                    </TiltCard>
-                  ))}
-                </div>
-              </FadeIn>
-            </div>
-          ))}
-        </div>
+        <div
+          className="absolute -left-40 bottom-1/4 w-80 h-80 rounded-full"
+          style={{ background: 'var(--accent-2)', opacity: 0.05, filter: 'blur(80px)' }}
+        />
       </div>
 
-      {/* Responsive grid columns + stagger keyframe */}
-      <style>{`
-        @media (min-width: 640px) { #skills .skills-grid { grid-template-columns: repeat(3, 1fr) !important; } }
-        @media (min-width: 768px) { #skills .skills-grid { grid-template-columns: repeat(4, 1fr) !important; } }
-        @keyframes skill-fade-in {
-          from { opacity: 0; transform: translateY(10px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
+      <div className="container mx-auto max-w-5xl relative z-10">
+        <SectionHeader
+          index="02"
+          eyebrow="My Expertise"
+          title={
+            <>
+              Skills &amp; <span className="gradient-text">Technologies</span>
+            </>
+          }
+          className="mb-16"
+        />
+
+        <FadeIn>
+          <div className="flex flex-col md:flex-row gap-16 items-center">
+            {/* LEFT — 2x2 category cards */}
+            <div className="md:w-1/2 order-2 md:order-1 w-full">
+              <div className="grid grid-cols-2 gap-6">
+                {categoryCards.map(({ title, subtitle, accentVar, accentRgba, accentRgbaHover, icon: Icon }) => (
+                  <div
+                    key={title}
+                    className="p-6 rounded-xl shadow-lg hover-lift group transition-all duration-300 text-center"
+                    style={{ background: 'var(--bg-surface)' }}
+                    onMouseEnter={(e) => {
+                      const circle = e.currentTarget.querySelector<HTMLElement>('.icon-circle')
+                      if (circle) circle.style.background = accentRgbaHover
+                    }}
+                    onMouseLeave={(e) => {
+                      const circle = e.currentTarget.querySelector<HTMLElement>('.icon-circle')
+                      if (circle) circle.style.background = accentRgba
+                    }}
+                  >
+                    <div
+                      className="icon-circle w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-colors duration-300"
+                      style={{ background: accentRgba, color: accentVar }}
+                    >
+                      <Icon size={28} strokeWidth={1.5} />
+                    </div>
+                    <h3
+                      className="text-lg font-bold mb-1"
+                      style={{ color: accentVar }}
+                    >
+                      {title}
+                    </h3>
+                    <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                      {subtitle}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT — heading, paragraph, skill tags */}
+            <div className="md:w-1/2 order-1 md:order-2">
+              <h3
+                className="text-2xl md:text-3xl font-bold mb-6"
+                style={{ color: 'var(--accent)' }}
+              >
+                Technical Proficiency
+              </h3>
+
+              <p
+                className="text-lg leading-relaxed mb-8"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                I work across the stack and into the platform &mdash; from polished,
+                motion-driven front-ends to the cloud, automation, and identity systems
+                that run behind them.
+              </p>
+
+              {/* Skill tag pills */}
+              <div className="flex flex-wrap gap-2">
+                {skillTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1.5 text-sm rounded-full transition-colors"
+                    style={{
+                      background: 'var(--bg-surface)',
+                      border: '1px solid var(--border)',
+                      color: 'var(--text-secondary)',
+                      cursor: 'default',
+                    }}
+                    onMouseEnter={(e) => {
+                      ;(e.currentTarget as HTMLElement).style.borderColor =
+                        'rgba(37,99,235,0.5)'
+                    }}
+                    onMouseLeave={(e) => {
+                      ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
     </section>
   )
 }

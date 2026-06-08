@@ -13,6 +13,24 @@ const stats = [
   { to: 5, suffix: '+', label: 'Stacks', accent: 'var(--accent)' },
 ] as const
 
+const focusAreas = [
+  {
+    tag: '// web & product',
+    text: 'Premium interfaces, interactive tools, and motion-driven experiences.',
+    accent: 'var(--accent)',
+  },
+  {
+    tag: '// platform & cloud',
+    text: 'Infrastructure, automation pipelines, and identity (IAM).',
+    accent: 'var(--accent-2)',
+  },
+  {
+    tag: '// media',
+    text: 'Motorsport content creation and video editing.',
+    accent: 'var(--accent-3)',
+  },
+] as const
+
 export function About() {
   return (
     <section id="about" className="relative" style={{ padding: '7rem 0' }}>
@@ -45,38 +63,90 @@ export function About() {
 
         {/* 2-col grid: bio left, profile card right */}
         <div
-          className="grid items-center gap-12"
+          className="grid items-start gap-12"
           style={{
             gridTemplateColumns: 'repeat(1, 1fr)',
           }}
         >
-          {/* LEFT — bio + meta */}
+          {/* LEFT — bio + focus list */}
           <FadeIn className="lg-col-bio">
             <p
-              className="text-lg leading-relaxed"
-              style={{ color: 'var(--text-secondary)', marginBottom: '1.25rem' }}
+              className="text-base leading-relaxed"
+              style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}
             >
               I&apos;m a developer and creative technologist based in Würenlos,
               Switzerland, currently in platform development at PwC Switzerland.
               I build premium web experiences, motorsport media platforms, and
-              interactive tools — and I work across cloud, automation, and
-              identity infrastructure.
+              interactive tools — working across cloud, automation, and identity
+              infrastructure.
             </p>
             <p
-              className="text-lg leading-relaxed"
-              style={{ color: 'var(--text-secondary)', marginBottom: '1.75rem' }}
+              className="text-base leading-relaxed"
+              style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem' }}
             >
               I care about building things that are as considered as they are
               fast — clean systems, sharp interfaces, and infrastructure that
               just works.
             </p>
+
+            {/* Meta line */}
             <p
-              className="font-mono text-sm"
-              style={{ color: 'var(--text-muted)' }}
+              className="font-mono"
+              style={{ fontSize: '0.7rem', letterSpacing: '0.14em', color: 'var(--text-muted)', marginBottom: '1.75rem' }}
             >
-              Education: BZU Switzerland &nbsp;&middot;&nbsp; Languages: German
-              (native), English (fluent)
+              Education: BZU Switzerland &nbsp;&middot;&nbsp; Languages: German (native), English (fluent)
             </p>
+
+            {/* Thin divider */}
+            <div
+              aria-hidden
+              style={{
+                width: '100%',
+                height: '1px',
+                background: 'var(--glass-border)',
+                marginBottom: '1.5rem',
+              }}
+            />
+
+            {/* Focus mini-list */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              {focusAreas.map(({ tag, text, accent }) => (
+                <div
+                  key={tag}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '0.875rem',
+                    paddingLeft: '0.75rem',
+                    borderLeft: `2px solid ${accent}`,
+                  }}
+                >
+                  <div>
+                    <span
+                      className="font-mono"
+                      style={{
+                        fontSize: '0.68rem',
+                        letterSpacing: '0.14em',
+                        color: accent,
+                        display: 'block',
+                        marginBottom: '0.15rem',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '0.8rem',
+                        color: 'var(--text-secondary)',
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {text}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </FadeIn>
 
           {/* RIGHT — glass profile card with tilt */}
@@ -88,7 +158,6 @@ export function About() {
                   padding: '2rem',
                   position: 'relative',
                   overflow: 'hidden',
-                  /* Subtle inner accent glow */
                   boxShadow: 'inset 0 0 60px rgba(37,99,235,0.05), 0 20px 60px rgba(0,0,0,0.4)',
                 }}
               >
@@ -108,7 +177,6 @@ export function About() {
 
                 {/* Header row */}
                 <div className="flex items-center gap-2" style={{ marginBottom: '1.5rem' }}>
-                  {/* Pulsing green dot */}
                   <span
                     style={{
                       display: 'inline-block',
@@ -138,6 +206,7 @@ export function About() {
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
                     gap: '1rem',
+                    marginBottom: '1.25rem',
                   }}
                 >
                   {stats.map((stat) => (
@@ -181,6 +250,25 @@ export function About() {
                       </p>
                     </div>
                   ))}
+                </div>
+
+                {/* Footer location line */}
+                <div
+                  style={{
+                    borderTop: '1px solid var(--glass-border)',
+                    paddingTop: '0.875rem',
+                  }}
+                >
+                  <span
+                    className="font-mono"
+                    style={{
+                      fontSize: '0.65rem',
+                      letterSpacing: '0.15em',
+                      color: 'var(--text-muted)',
+                    }}
+                  >
+                    // würenlos, ch &nbsp;&middot;&nbsp; available
+                  </span>
                 </div>
               </div>
             </TiltCard>

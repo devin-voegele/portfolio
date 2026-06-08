@@ -8,16 +8,19 @@ import { TiltCard } from '@/components/primitives/TiltCard'
 const categories = [
   {
     label: '// frontend',
+    caption: 'Interfaces, motion & component systems.',
     accentVar: 'var(--accent)',
     skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Framer Motion'],
   },
   {
     label: '// backend & cloud',
+    caption: 'Containers, pipelines & cloud infra.',
     accentVar: 'var(--accent-2)',
     skills: ['Docker', 'AWS', 'Python', 'Kubernetes', 'CI/CD'],
   },
   {
     label: '// platform & process',
+    caption: 'Identity, orchestration & process automation.',
     accentVar: 'var(--accent-3)',
     skills: ['Azure Entra ID (IAM)', 'BPMN', 'CloudPods'],
   },
@@ -53,21 +56,60 @@ export function Skills() {
           }
         />
 
-        <div className="flex flex-col" style={{ gap: '3rem' }}>
-          {categories.map(({ label, accentVar, skills }) => (
+        <div className="flex flex-col" style={{ gap: '2.5rem' }}>
+          {categories.map(({ label, caption, accentVar, skills }) => (
             <div key={label}>
-              {/* Category label */}
-              <p
-                className="font-mono uppercase"
+              {/* Category label + count + caption */}
+              <div style={{ marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.3rem' }}>
+                  <p
+                    className="font-mono uppercase"
+                    style={{
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.18em',
+                      color: accentVar,
+                      margin: 0,
+                    }}
+                  >
+                    {label}
+                  </p>
+                  <span
+                    className="font-mono"
+                    style={{
+                      fontSize: '0.62rem',
+                      letterSpacing: '0.1em',
+                      color: 'var(--text-muted)',
+                      background: 'rgba(255,255,255,0.04)',
+                      border: '1px solid var(--glass-border)',
+                      borderRadius: '4px',
+                      padding: '0.1rem 0.4rem',
+                    }}
+                  >
+                    {String(skills.length).padStart(2, '0')}
+                  </span>
+                </div>
+                <p
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--text-muted)',
+                    margin: 0,
+                    letterSpacing: '0.01em',
+                  }}
+                >
+                  {caption}
+                </p>
+              </div>
+
+              {/* Thin divider */}
+              <div
+                aria-hidden
                 style={{
-                  fontSize: '0.72rem',
-                  letterSpacing: '0.18em',
-                  color: accentVar,
-                  marginBottom: '1.25rem',
+                  width: '100%',
+                  height: '1px',
+                  background: 'var(--glass-border)',
+                  marginBottom: '1rem',
                 }}
-              >
-                {label}
-              </p>
+              />
 
               {/* Staggered skill tile grid */}
               <FadeIn>
@@ -75,7 +117,7 @@ export function Skills() {
                   style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(2, 1fr)',
-                    gap: '0.75rem',
+                    gap: '0.625rem',
                   }}
                   className="skills-grid"
                 >
@@ -84,20 +126,23 @@ export function Skills() {
                       <div
                         className="glass hover-lift rounded-xl flex items-center gap-3"
                         style={{
-                          padding: '0.875rem 1.125rem',
+                          padding: '0.75rem 1rem',
                           opacity: 0,
                           animation: `skill-fade-in 0.5s var(--ease-out-expo) forwards`,
                           animationDelay: `${idx * 80}ms`,
-                          /* Per-category accent border glow on hover */
                           transition:
                             'transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease, border-color 0.3s ease',
                         }}
                         onMouseEnter={(e) => {
                           const el = e.currentTarget
-                          el.style.borderColor = accentVar.replace('var(', '').replace(')', '')
-                            ? accentVar
-                            : 'var(--border-hover)'
-                          el.style.boxShadow = `0 0 20px -4px ${accentVar.replace('var(--accent)', 'rgba(37,99,235,0.25)').replace('var(--accent-2)', 'rgba(16,185,129,0.25)').replace('var(--accent-3)', 'rgba(139,92,246,0.25)')}`
+                          el.style.borderColor = accentVar
+                          el.style.boxShadow = `0 0 20px -4px ${
+                            accentVar === 'var(--accent)'
+                              ? 'rgba(37,99,235,0.25)'
+                              : accentVar === 'var(--accent-2)'
+                              ? 'rgba(16,185,129,0.25)'
+                              : 'rgba(139,92,246,0.25)'
+                          }`
                         }}
                         onMouseLeave={(e) => {
                           const el = e.currentTarget
@@ -109,8 +154,8 @@ export function Skills() {
                         <span
                           style={{
                             display: 'inline-block',
-                            width: '6px',
-                            height: '6px',
+                            width: '5px',
+                            height: '5px',
                             borderRadius: '50%',
                             flexShrink: 0,
                             background: accentVar,
@@ -118,8 +163,8 @@ export function Skills() {
                           }}
                         />
                         <span
-                          className="text-sm font-medium"
-                          style={{ color: 'var(--text-primary)' }}
+                          className="font-medium"
+                          style={{ fontSize: '0.8rem', color: 'var(--text-primary)' }}
                         >
                           {skill}
                         </span>
@@ -138,7 +183,7 @@ export function Skills() {
         @media (min-width: 640px) { #skills .skills-grid { grid-template-columns: repeat(3, 1fr) !important; } }
         @media (min-width: 768px) { #skills .skills-grid { grid-template-columns: repeat(4, 1fr) !important; } }
         @keyframes skill-fade-in {
-          from { opacity: 0; transform: translateY(12px); }
+          from { opacity: 0; transform: translateY(10px); }
           to   { opacity: 1; transform: translateY(0); }
         }
       `}</style>

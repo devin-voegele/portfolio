@@ -32,12 +32,18 @@ const BLUE_BORDER = 'rgba(37,99,235,0.55)'
 const GREEN_BORDER = 'rgba(16,185,129,0.55)'
 const PURPLE_BORDER = 'rgba(139,92,246,0.55)'
 
+const BLUE_TAG = 'rgba(37,99,235,0.8)'
+const GREEN_TAG = 'rgba(16,185,129,0.8)'
+const PURPLE_TAG = 'rgba(139,92,246,0.8)'
+
 interface Capability {
   icon: LucideIcon
   title: string
   description: string
+  tag: string
   tintBg: string
   tintIcon: string
+  tagColor: string
   glowColor: string
   borderColor: string
 }
@@ -46,72 +52,88 @@ const CAPABILITIES: Capability[] = [
   {
     icon: Boxes,
     title: 'Kubernetes',
-    description: 'Container orchestration & cluster management.',
+    description: 'Container orchestration, cluster management, and workload scheduling across environments.',
+    tag: '// orchestration',
     tintBg: BLUE,
     tintIcon: BLUE_ICON,
+    tagColor: BLUE_TAG,
     glowColor: BLUE_GLOW,
     borderColor: BLUE_BORDER,
   },
   {
     icon: GitBranch,
     title: 'CI / CD',
-    description: 'Automated build, test & deploy pipelines.',
+    description: 'Automated build, test, and deploy pipelines from commit to production.',
+    tag: '// pipelines',
     tintBg: GREEN,
     tintIcon: GREEN_ICON,
+    tagColor: GREEN_TAG,
     glowColor: GREEN_GLOW,
     borderColor: GREEN_BORDER,
   },
   {
     icon: Cloud,
     title: 'Cloud — AWS & Azure',
-    description: 'Infrastructure and services across AWS and Azure.',
+    description: 'Infrastructure and managed services across AWS and Azure cloud platforms.',
+    tag: '// infra',
     tintBg: BLUE,
     tintIcon: BLUE_ICON,
+    tagColor: BLUE_TAG,
     glowColor: BLUE_GLOW,
     borderColor: BLUE_BORDER,
   },
   {
     icon: ShieldCheck,
     title: 'IAM — Azure Entra ID',
-    description: 'Identity & access management with Microsoft Entra ID.',
+    description: 'Identity and access management with Microsoft Entra ID, roles, and policies.',
+    tag: '// identity',
     tintBg: PURPLE,
     tintIcon: PURPLE_ICON,
+    tagColor: PURPLE_TAG,
     glowColor: PURPLE_GLOW,
     borderColor: PURPLE_BORDER,
   },
   {
     icon: Network,
     title: 'CloudPods',
-    description: 'Private & multi-cloud platform management.',
+    description: 'Private and multi-cloud platform management across unified infrastructure.',
+    tag: '// platform',
     tintBg: GREEN,
     tintIcon: GREEN_ICON,
+    tagColor: GREEN_TAG,
     glowColor: GREEN_GLOW,
     borderColor: GREEN_BORDER,
   },
   {
     icon: Container,
     title: 'Docker',
-    description: 'Containerized apps & reproducible environments.',
+    description: 'Containerized applications and reproducible, portable build environments.',
+    tag: '// containers',
     tintBg: BLUE,
     tintIcon: BLUE_ICON,
+    tagColor: BLUE_TAG,
     glowColor: BLUE_GLOW,
     borderColor: BLUE_BORDER,
   },
   {
     icon: Terminal,
     title: 'Python Automation',
-    description: 'Scripting & infrastructure automation.',
+    description: 'Scripting and infrastructure automation to reduce manual toil.',
+    tag: '// scripting',
     tintBg: PURPLE,
     tintIcon: PURPLE_ICON,
+    tagColor: PURPLE_TAG,
     glowColor: PURPLE_GLOW,
     borderColor: PURPLE_BORDER,
   },
   {
     icon: Workflow,
     title: 'BPMN',
-    description: 'Business process modeling & automation.',
+    description: 'Business process modeling and workflow automation at the process layer.',
+    tag: '// process',
     tintBg: GREEN,
     tintIcon: GREEN_ICON,
+    tagColor: GREEN_TAG,
     glowColor: GREEN_GLOW,
     borderColor: GREEN_BORDER,
   },
@@ -140,10 +162,10 @@ function CapabilityCard({ cap, index }: { cap: Capability; index: number }) {
         onMouseLeave={() => setHovered(false)}
         style={{
           borderRadius: '0.75rem',
-          padding: '1.5rem',
+          padding: '1.25rem',
           display: 'flex',
           flexDirection: 'column',
-          gap: '0.75rem',
+          gap: '0.6rem',
           height: '100%',
           transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
           borderColor: hovered ? cap.borderColor : 'var(--glass-border)',
@@ -155,8 +177,8 @@ function CapabilityCard({ cap, index }: { cap: Capability; index: number }) {
         {/* icon square */}
         <div
           style={{
-            width: '2.5rem',
-            height: '2.5rem',
+            width: '2.25rem',
+            height: '2.25rem',
             borderRadius: '0.5rem',
             background: cap.tintBg,
             display: 'flex',
@@ -165,28 +187,16 @@ function CapabilityCard({ cap, index }: { cap: Capability; index: number }) {
             flexShrink: 0,
           }}
         >
-          <Icon size={18} color={cap.tintIcon} strokeWidth={1.8} />
+          <Icon size={16} color={cap.tintIcon} strokeWidth={1.8} />
         </div>
-
-        {/* slash comment */}
-        <p
-          className="font-mono"
-          style={{
-            fontSize: '0.8rem',
-            color: 'var(--text-muted)',
-            letterSpacing: '0.05em',
-          }}
-        >
-          //
-        </p>
 
         {/* title */}
         <p
           style={{
             fontWeight: 600,
+            fontSize: '0.875rem',
             color: 'var(--text-primary)',
             lineHeight: 1.3,
-            marginTop: '-0.5rem',
           }}
         >
           {cap.title}
@@ -195,12 +205,28 @@ function CapabilityCard({ cap, index }: { cap: Capability; index: number }) {
         {/* description */}
         <p
           style={{
-            fontSize: '0.875rem',
+            fontSize: '0.78rem',
             color: 'var(--text-secondary)',
-            lineHeight: 1.6,
+            lineHeight: 1.55,
+            flexGrow: 1,
           }}
         >
           {cap.description}
+        </p>
+
+        {/* mono tag at bottom */}
+        <p
+          className="font-mono"
+          style={{
+            fontSize: '0.65rem',
+            letterSpacing: '0.12em',
+            color: cap.tagColor,
+            marginTop: '0.25rem',
+            paddingTop: '0.5rem',
+            borderTop: '1px solid var(--glass-border)',
+          }}
+        >
+          {cap.tag}
         </p>
       </div>
     </TiltCard>
@@ -263,6 +289,7 @@ export function CloudDevOps() {
 
         <p
           style={{
+            fontSize: '0.9rem',
             color: 'var(--text-secondary)',
             textAlign: 'center',
             maxWidth: '40rem',
@@ -270,15 +297,15 @@ export function CloudDevOps() {
             lineHeight: 1.7,
           }}
         >
-          The platform side of what I do — building, automating, and securing cloud-native systems.
+          The platform side of what I do — building, automating, and securing cloud-native systems across AWS and Azure.
         </p>
 
         <FadeIn>
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 18rem), 1fr))',
-              gap: '1.25rem',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 16rem), 1fr))',
+              gap: '1rem',
             }}
           >
             {CAPABILITIES.map((cap, idx) => (

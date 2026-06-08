@@ -1,5 +1,6 @@
 'use client'
 
+import React, { useState } from 'react'
 import { Mail } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
@@ -34,7 +35,45 @@ function LinkedInIcon() {
   )
 }
 
+interface FormErrors {
+  name?: string
+  email?: string
+  message?: string
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 export function Contact() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [submitted, setSubmitted] = useState(false)
+
+  function validate(): boolean {
+    const next: FormErrors = {}
+    if (!name.trim()) next.name = 'Name is required'
+    if (!email.trim()) {
+      next.email = 'Email is required'
+    } else if (!EMAIL_RE.test(email.trim())) {
+      next.email = 'Please enter a valid email'
+    }
+    if (!message.trim()) next.message = 'Message is required'
+    setErrors(next)
+    return Object.keys(next).length === 0
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (!validate()) return
+    const subject = encodeURIComponent('Portfolio inquiry from ' + name.trim())
+    const body = encodeURIComponent(
+      message.trim() + '\n\n— ' + name.trim() + ' (' + email.trim() + ')'
+    )
+    window.location.href = `mailto:devin.voegele@microsun.ch?subject=${subject}&body=${body}`
+    setSubmitted(true)
+  }
+
   return (
     <section
       id="contact"
@@ -42,11 +81,10 @@ export function Contact() {
     >
       <div
         style={{
-          maxWidth: '48rem',
+          maxWidth: '72rem',
           margin: '0 auto',
           paddingInline: '1rem',
           width: '100%',
-          textAlign: 'center',
         }}
       >
         <SectionHeader
@@ -59,84 +97,284 @@ export function Contact() {
           }
         />
 
-        <FadeIn>
-          {/* Tagline */}
-          <p
-            style={{
-              color: 'var(--text-secondary)',
-              maxWidth: '36rem',
-              margin: '0 auto',
-              lineHeight: 1.7,
-              fontSize: '1rem',
-            }}
-          >
-            Have a project in mind, or just want to talk shop? My inbox is open.
-          </p>
+        {/* 2-col grid */}
+        <div className="contact-grid">
 
-          {/* Email */}
-          <div style={{ marginBlock: '2rem' }}>
-            <a
-              href="mailto:devin.voegele@microsun.ch"
-              className="contact-email-link font-geist-sans"
+          {/* LEFT column */}
+          <FadeIn>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.75rem',
+              }}
             >
-              devin.voegele@microsun.ch
-              <span className="contact-underline" aria-hidden />
-            </a>
-          </div>
+              {/* Tagline */}
+              <p
+                style={{
+                  color: 'var(--text-secondary)',
+                  lineHeight: 1.7,
+                  fontSize: '1rem',
+                }}
+              >
+                Have a project in mind, or just want to talk shop? My inbox is open.
+              </p>
 
-          {/* Social icon row */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '0.75rem',
-              marginBottom: '2rem',
-            }}
-          >
-            <a
-              href="https://github.com/devin-voegele/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="glass hover-lift social-icon-btn"
-            >
-              <GitHubIcon />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/devin-voegele-2a5989293"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="glass hover-lift social-icon-btn"
-            >
-              <LinkedInIcon />
-            </a>
-            <a
-              href="mailto:devin.voegele@microsun.ch"
-              aria-label="Email"
-              className="glass hover-lift social-icon-btn"
-            >
-              <Mail size={20} aria-hidden />
-            </a>
-          </div>
+              {/* Big email link */}
+              <a
+                href="mailto:devin.voegele@microsun.ch"
+                className="contact-email-link font-geist-sans"
+              >
+                devin.voegele@microsun.ch
+                <span className="contact-underline" aria-hidden />
+              </a>
 
-          {/* Status line */}
-          <p
-            className="font-mono"
-            style={{
-              fontSize: '0.7rem',
-              letterSpacing: '0.12em',
-              color: 'var(--text-muted)',
-            }}
-          >
-            // open to work · based in switzerland
-          </p>
-        </FadeIn>
+              {/* Social icon row */}
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '0.75rem',
+                }}
+              >
+                <a
+                  href="https://github.com/devin-voegele/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="glass hover-lift social-icon-btn"
+                >
+                  <GitHubIcon />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/devin-voegele-2a5989293"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="glass hover-lift social-icon-btn"
+                >
+                  <LinkedInIcon />
+                </a>
+                <a
+                  href="mailto:devin.voegele@microsun.ch"
+                  aria-label="Email"
+                  className="glass hover-lift social-icon-btn"
+                >
+                  <Mail size={20} aria-hidden />
+                </a>
+              </div>
+
+              {/* Status line */}
+              <p
+                className="font-mono"
+                style={{
+                  fontSize: '0.7rem',
+                  letterSpacing: '0.12em',
+                  color: 'var(--text-muted)',
+                }}
+              >
+                // open to work · based in switzerland
+              </p>
+            </div>
+          </FadeIn>
+
+          {/* RIGHT column — contact form */}
+          <FadeIn>
+            <div
+              className="glass"
+              style={{
+                borderRadius: '1rem',
+                padding: '2rem',
+              }}
+            >
+              {submitted ? (
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.75rem',
+                    minHeight: '260px',
+                    textAlign: 'center',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '3rem',
+                      height: '3rem',
+                      borderRadius: '50%',
+                      background: 'rgba(16,185,129,0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--accent-2)',
+                    }}
+                  >
+                    <Mail size={22} aria-hidden />
+                  </div>
+                  <p
+                    className="font-geist-sans"
+                    style={{
+                      fontWeight: 600,
+                      fontSize: '1.05rem',
+                      color: 'var(--text-primary)',
+                    }}
+                  >
+                    Opening your mail app…
+                  </p>
+                  <p
+                    className="font-mono"
+                    style={{
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.1em',
+                      color: 'var(--text-muted)',
+                    }}
+                  >
+                    // message ready to send
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSubmitted(false)
+                      setName('')
+                      setEmail('')
+                      setMessage('')
+                    }}
+                    className="font-mono"
+                    style={{
+                      marginTop: '0.5rem',
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.1em',
+                      color: 'var(--accent)',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                    }}
+                  >
+                    send another
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+
+                  {/* Name field */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <label
+                      htmlFor="contact-name"
+                      className="font-mono"
+                      style={{
+                        fontSize: '0.68rem',
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase',
+                        color: 'var(--text-muted)',
+                      }}
+                    >
+                      Name
+                    </label>
+                    <input
+                      id="contact-name"
+                      type="text"
+                      required
+                      autoComplete="name"
+                      value={name}
+                      onChange={e => { setName(e.target.value); if (errors.name) setErrors(p => ({ ...p, name: undefined })) }}
+                      placeholder="Your name"
+                      className="contact-input"
+                    />
+                    {errors.name && (
+                      <span className="font-mono contact-field-error">{errors.name}</span>
+                    )}
+                  </div>
+
+                  {/* Email field */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <label
+                      htmlFor="contact-email"
+                      className="font-mono"
+                      style={{
+                        fontSize: '0.68rem',
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase',
+                        color: 'var(--text-muted)',
+                      }}
+                    >
+                      Email
+                    </label>
+                    <input
+                      id="contact-email"
+                      type="email"
+                      required
+                      autoComplete="email"
+                      value={email}
+                      onChange={e => { setEmail(e.target.value); if (errors.email) setErrors(p => ({ ...p, email: undefined })) }}
+                      placeholder="you@example.com"
+                      className="contact-input"
+                    />
+                    {errors.email && (
+                      <span className="font-mono contact-field-error">{errors.email}</span>
+                    )}
+                  </div>
+
+                  {/* Message field */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <label
+                      htmlFor="contact-message"
+                      className="font-mono"
+                      style={{
+                        fontSize: '0.68rem',
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase',
+                        color: 'var(--text-muted)',
+                      }}
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      id="contact-message"
+                      required
+                      rows={5}
+                      value={message}
+                      onChange={e => { setMessage(e.target.value); if (errors.message) setErrors(p => ({ ...p, message: undefined })) }}
+                      placeholder="What's on your mind?"
+                      className="contact-input contact-textarea"
+                    />
+                    {errors.message && (
+                      <span className="font-mono contact-field-error">{errors.message}</span>
+                    )}
+                  </div>
+
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    className="contact-submit hover-lift font-geist-sans"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              )}
+            </div>
+          </FadeIn>
+
+        </div>
       </div>
 
       <style>{`
+        .contact-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 3rem;
+          align-items: start;
+        }
+        @media (min-width: 1024px) {
+          .contact-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
+        /* Email link */
         .contact-email-link {
-          font-size: clamp(1.25rem, 3vw, 1.75rem);
+          font-size: clamp(1.1rem, 2.5vw, 1.75rem);
           font-weight: 600;
           color: var(--text-primary);
           text-decoration: none;
@@ -162,6 +400,8 @@ export function Contact() {
         .contact-email-link:hover .contact-underline {
           width: 100%;
         }
+
+        /* Social icon buttons */
         .social-icon-btn {
           display: flex;
           align-items: center;
@@ -175,6 +415,61 @@ export function Contact() {
         }
         .social-icon-btn:hover {
           color: var(--accent);
+        }
+
+        /* Form inputs */
+        .contact-input {
+          background: var(--bg-surface);
+          border: 1px solid var(--border);
+          border-radius: 0.5rem;
+          padding: 0.75rem 1rem;
+          font-size: 0.9rem;
+          color: var(--text-primary);
+          font-family: var(--font-body), system-ui, sans-serif;
+          outline: none;
+          transition: border-color 0.25s ease, box-shadow 0.25s ease;
+          width: 100%;
+        }
+        .contact-input::placeholder {
+          color: var(--text-muted);
+        }
+        .contact-input:focus {
+          border-color: var(--accent);
+          box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
+        }
+        .contact-textarea {
+          resize: vertical;
+          min-height: 120px;
+        }
+
+        /* Field errors */
+        .contact-field-error {
+          font-size: 0.68rem;
+          letter-spacing: 0.05em;
+          color: #f87171;
+        }
+
+        /* Submit button */
+        .contact-submit {
+          width: 100%;
+          padding: 0.85rem 1.5rem;
+          border-radius: 9999px;
+          background: var(--accent);
+          color: #fff;
+          font-size: 0.95rem;
+          font-weight: 600;
+          letter-spacing: 0.01em;
+          border: none;
+          cursor: pointer;
+          transition: background 0.25s ease, transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease;
+        }
+        .contact-submit:hover {
+          background: var(--accent-bright);
+          box-shadow: 0 0 20px rgba(37,99,235,0.45);
+        }
+        .contact-submit:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 3px;
         }
       `}</style>
     </section>

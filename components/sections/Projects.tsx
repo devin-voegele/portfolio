@@ -11,6 +11,8 @@ interface Project {
   category: string
   year: string
   desc: string
+  framing?: string
+  role: string
   stack: string[]
   url?: string
   redacted?: boolean
@@ -22,6 +24,8 @@ const projects: Project[] = [
     category: 'WEB / MEDIA',
     year: '2024',
     desc: 'Motorsport media & marketing platform.',
+    framing: 'A media and marketing platform built for the motorsport world — content, branding, and reach.',
+    role: 'design & build',
     stack: ['Next.js', 'Framer Motion', 'Tailwind'],
   },
   {
@@ -29,6 +33,8 @@ const projects: Project[] = [
     category: 'WEB / FINTECH',
     year: '2025',
     desc: 'Personal finance visualization platform. Interactive data mapping and budget tracking.',
+    framing: 'Mapping money flows into something you can actually read.',
+    role: 'design & build',
     stack: ['Next.js', 'TypeScript', 'Tailwind'],
     url: 'https://getmoneymap.org',
   },
@@ -37,6 +43,7 @@ const projects: Project[] = [
     category: 'PLATFORM / SAAS',
     year: '2025',
     desc: 'Under wraps. Details unreleased.',
+    role: 'undisclosed',
     stack: ['TypeScript', 'Cloud', 'Docker'],
     redacted: true,
   },
@@ -205,28 +212,33 @@ function ProjectTextBlock({
   index: number
 }) {
   const accent = ACCENT_COLORS[index % ACCENT_COLORS.length]
+  const monoIndex = `// 0${index + 1}`
 
   return (
     <div
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '1.25rem',
+        gap: '1rem',
         padding: '0.5rem 0',
       }}
     >
-      {/* category + year */}
+      {/* mono META row: index · category · year */}
       <div
         className="font-mono"
         style={{
-          fontSize: '0.68rem',
-          letterSpacing: '0.18em',
+          fontSize: '0.65rem',
+          letterSpacing: '0.16em',
           color: 'var(--text-muted)',
           display: 'flex',
-          gap: '1.25rem',
+          gap: '0.85rem',
+          alignItems: 'center',
         }}
       >
+        <span style={{ color: accent.color, opacity: 0.8 }}>{monoIndex}</span>
+        <span style={{ opacity: 0.5 }}>·</span>
         <span>{project.category}</span>
+        <span style={{ opacity: 0.5 }}>·</span>
         <span>{project.year}</span>
       </div>
 
@@ -235,7 +247,7 @@ function ProjectTextBlock({
         className="font-geist-sans"
         style={{
           fontWeight: 800,
-          fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+          fontSize: 'clamp(1.65rem, 3.5vw, 2.1rem)',
           color: 'var(--text-primary)',
           letterSpacing: '-0.02em',
           lineHeight: 1.1,
@@ -258,7 +270,7 @@ function ProjectTextBlock({
       {/* description */}
       <p
         style={{
-          fontSize: '1rem',
+          fontSize: '0.9rem',
           color: 'var(--text-secondary)',
           lineHeight: 1.7,
           maxWidth: '32rem',
@@ -267,6 +279,38 @@ function ProjectTextBlock({
         {project.desc}
       </p>
 
+      {/* framing line (non-redacted only) */}
+      {project.framing && (
+        <p
+          style={{
+            fontSize: '0.85rem',
+            color: 'var(--text-muted)',
+            lineHeight: 1.65,
+            maxWidth: '30rem',
+            fontStyle: 'italic',
+          }}
+        >
+          {project.framing}
+        </p>
+      )}
+
+      {/* ROLE meta line */}
+      <div
+        className="font-mono"
+        style={{
+          fontSize: '0.65rem',
+          letterSpacing: '0.14em',
+          color: 'var(--text-muted)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+        }}
+      >
+        <span style={{ opacity: 0.5 }}>role</span>
+        <span style={{ opacity: 0.35 }}>//</span>
+        <span>{project.role}</span>
+      </div>
+
       {/* stack chips */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
         {project.stack.map((tech) => (
@@ -274,9 +318,9 @@ function ProjectTextBlock({
             key={tech}
             className="font-mono"
             style={{
-              fontSize: '0.68rem',
+              fontSize: '0.65rem',
               letterSpacing: '0.08em',
-              padding: '0.25rem 0.65rem',
+              padding: '0.22rem 0.6rem',
               border: '1px solid var(--border)',
               borderRadius: '0.375rem',
               color: 'var(--text-muted)',
@@ -289,45 +333,71 @@ function ProjectTextBlock({
       </div>
 
       {/* CTA */}
-      <div style={{ marginTop: '0.25rem' }}>
+      <div style={{ marginTop: '0.15rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
         {project.url ? (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              fontSize: '0.9rem',
-              color: accent.color,
-              textDecoration: 'none',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              fontWeight: 500,
-              transition: 'opacity 0.2s ease, gap 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.opacity = '0.75'
-              e.currentTarget.style.gap = '0.55rem'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '1'
-              e.currentTarget.style.gap = '0.35rem'
-            }}
-          >
-            View Project →
-          </a>
+          <>
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontSize: '0.88rem',
+                color: accent.color,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                fontWeight: 500,
+                transition: 'opacity 0.2s ease, gap 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = '0.75'
+                e.currentTarget.style.gap = '0.55rem'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = '1'
+                e.currentTarget.style.gap = '0.35rem'
+              }}
+            >
+              View Project →
+            </a>
+            <span
+              className="font-mono"
+              style={{
+                fontSize: '0.63rem',
+                letterSpacing: '0.12em',
+                color: 'var(--accent-2)',
+                opacity: 0.75,
+              }}
+            >
+              → live
+            </span>
+          </>
         ) : project.redacted ? (
           <span
             style={{
-              fontSize: '0.9rem',
+              fontSize: '0.88rem',
               color: 'var(--text-muted)',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.4rem',
+              gap: '0.75rem',
             }}
           >
-            <Lock size={14} aria-hidden />
-            Classified
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+              <Lock size={13} aria-hidden />
+              Classified
+            </span>
+            <span
+              className="font-mono"
+              style={{
+                fontSize: '0.63rem',
+                letterSpacing: '0.12em',
+                color: 'var(--text-muted)',
+                opacity: 0.6,
+              }}
+            >
+              lock // classified
+            </span>
           </span>
         ) : null}
       </div>

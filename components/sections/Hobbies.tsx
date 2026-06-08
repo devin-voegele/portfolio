@@ -9,16 +9,17 @@ import type { LucideIcon } from 'lucide-react'
 interface Hobby {
   name: string
   sub: string
+  context: string
   icon: LucideIcon
 }
 
 const hobbies: Hobby[] = [
-  { name: 'Motorsport Media',  sub: 'Content & Film',    icon: Clapperboard },
-  { name: 'Video Editing',     sub: 'Post-Production',   icon: Scissors      },
-  { name: 'Sim Racing',        sub: 'Virtual Circuit',   icon: Gamepad2      },
-  { name: 'Formula 1',         sub: 'Open Wheel',        icon: Gauge         },
-  { name: 'GT3',               sub: 'Endurance Class',   icon: Car           },
-  { name: 'Enduro MTB',        sub: 'Trail & Descent',   icon: Bike          },
+  { name: 'Motorsport Media',  sub: 'Content & Film',    context: 'Filming, editing & storytelling around racing.',       icon: Clapperboard },
+  { name: 'Video Editing',     sub: 'Post-Production',   context: 'Cutting, color & motion for short-form and film.',      icon: Scissors      },
+  { name: 'Sim Racing',        sub: 'Virtual Circuit',   context: 'Wheel-to-wheel racing on the sim rig.',                 icon: Gamepad2      },
+  { name: 'Formula 1',         sub: 'Open Wheel',        context: 'Following the championship — tech, strategy, drama.',   icon: Gauge         },
+  { name: 'GT3',               sub: 'Endurance Class',   context: 'GT3 machinery and endurance racing.',                   icon: Car           },
+  { name: 'Enduro MTB',        sub: 'Trail & Descent',   context: 'Trails, descents and backcountry riding.',              icon: Bike          },
 ]
 
 // Rotate blue → green → purple
@@ -90,7 +91,7 @@ export function Hobbies() {
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
-                      minHeight: '140px',
+                      minHeight: '172px',
                       height: '100%',
                       position: 'relative',
                       overflow: 'hidden',
@@ -152,13 +153,13 @@ export function Hobbies() {
                       </span>
                     </div>
 
-                    {/* Bottom row: name + sub */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                    {/* Bottom section: name + sub + context */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                       <span
                         className="font-geist-sans"
                         style={{
                           fontWeight: 600,
-                          fontSize: '1rem',
+                          fontSize: '0.95rem',
                           color: 'var(--text-primary)',
                           letterSpacing: '-0.01em',
                           lineHeight: 1.2,
@@ -170,13 +171,26 @@ export function Hobbies() {
                       <span
                         className="font-mono"
                         style={{
-                          fontSize: '0.7rem',
+                          fontSize: '0.67rem',
                           letterSpacing: '0.1em',
                           color: 'var(--text-muted)',
                         }}
                       >
                         {hobby.sub}
                       </span>
+
+                      {/* context line */}
+                      <p
+                        style={{
+                          fontSize: '0.75rem',
+                          color: 'var(--text-secondary)',
+                          lineHeight: 1.5,
+                          marginTop: '0.3rem',
+                          opacity: 0.8,
+                        }}
+                      >
+                        {hobby.context}
+                      </p>
                     </div>
                   </div>
                 </TiltCard>

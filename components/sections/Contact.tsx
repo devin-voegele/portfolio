@@ -175,6 +175,29 @@ export function Contact() {
               >
                 // open to work · based in switzerland
               </p>
+
+              {/* Thin divider + caption */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                <div
+                  aria-hidden
+                  style={{
+                    height: '1px',
+                    background: 'linear-gradient(90deg, var(--border), transparent)',
+                    opacity: 0.6,
+                  }}
+                />
+                <p
+                  className="font-mono"
+                  style={{
+                    fontSize: '0.68rem',
+                    letterSpacing: '0.12em',
+                    color: 'var(--text-muted)',
+                    opacity: 0.65,
+                  }}
+                >
+                  // drop a line — i read everything.
+                </p>
+              </div>
             </div>
           </FadeIn>
 

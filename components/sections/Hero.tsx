@@ -146,7 +146,7 @@ export function Hero() {
         {/* 6. Social icons */}
         <div
           className="flex justify-center reveal-load"
-          style={{ gap: '1.5rem', animationDelay: '0.52s' }}
+          style={{ gap: '1rem', animationDelay: '0.52s' }}
         >
           {/* GitHub */}
           <a
@@ -159,6 +159,9 @@ export function Hero() {
               transition: 'color 0.25s ease',
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
+              minWidth: '44px',
+              minHeight: '44px',
             }}
             onMouseEnter={(e) => {
               ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)'
@@ -184,6 +187,9 @@ export function Hero() {
               transition: 'color 0.25s ease',
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
+              minWidth: '44px',
+              minHeight: '44px',
             }}
             onMouseEnter={(e) => {
               ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)'
@@ -207,6 +213,9 @@ export function Hero() {
               transition: 'color 0.25s ease',
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
+              minWidth: '44px',
+              minHeight: '44px',
             }}
             onMouseEnter={(e) => {
               ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)'

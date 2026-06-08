@@ -138,7 +138,7 @@ export function LiveTerminal() {
         }}
       >
         <TitleBar />
-        <div style={{ padding: '16px', minHeight: 180 }}>
+        <div style={{ padding: '16px', minHeight: 180, overflowX: 'hidden', wordBreak: 'break-word' }}>
           {SEQUENCE.map((line, i) => (
             <LineRow key={i} line={line} displayText={line.text} done isActive={false} />
           ))}
@@ -155,14 +155,14 @@ export function LiveTerminal() {
         borderRadius: 12,
         maxWidth: '30rem',
         width: '100%',
-        fontSize: '0.85rem',
+        fontSize: 'clamp(0.72rem, 3vw, 0.85rem)',
         boxShadow: '0 8px 32px rgba(0,0,0,0.45)',
         overflow: 'hidden',
         margin: '0 auto',
       }}
     >
       <TitleBar />
-      <div style={{ padding: '16px', minHeight: 180 }}>
+      <div style={{ padding: '16px', minHeight: 180, overflowX: 'hidden', wordBreak: 'break-word' }}>
         {rendered.map((entry, i) => (
           <LineRow
             key={i}

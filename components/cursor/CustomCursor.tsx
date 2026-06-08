@@ -10,8 +10,10 @@ export function CustomCursor() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return
-    // Disable on touch
+    // Disable on touch / stylus / any device without a fine pointer
     if (window.matchMedia('(pointer: coarse)').matches) return
+    // Disable on devices that can't hover (phones, tablets)
+    if (window.matchMedia('(hover: none)').matches) return
     // Disable on reduced-motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 

@@ -167,7 +167,7 @@ h2 {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -175,12 +175,12 @@ h2 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
+  background: var(--border-hover);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--border-hover);
+  background: var(--accent);
 }
 
 /* Selection */
@@ -242,6 +242,32 @@ h2 {
 @keyframes reveal-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 .reveal-load { opacity: 0; animation: reveal-up 0.7s var(--ease-out-expo) forwards; }
 @media (prefers-reduced-motion: reduce) { .reveal-load { opacity: 1; animation: none; } }
+
+/* ─── Mobile responsiveness polish ─────────────────────────────── */
+
+/* Tighten section vertical padding on small screens */
+@media (max-width: 640px) {
+  section:not(#top) {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+}
+
+/* Prevent any child from blowing out horizontal layout */
+@media (max-width: 640px) {
+  /* Homelab terminal rows: allow names to truncate instead of overflow */
+  .homelab-terminal-row-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 9rem;
+  }
+  /* Stack chip wrapping already set inline; reinforce no-overflow on project rows */
+  .project-row {
+    width: 100%;
+    overflow: hidden;
+  }
+}
 
 /* ─── Aurora background ──────────────────────────────────────────── */
 .aurora-bg {

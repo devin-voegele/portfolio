@@ -241,6 +241,7 @@ export function Homelab() {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '0.1rem',
+                  overflowX: 'hidden',
                 }}
               >
                 {/* yaml header comment */}
@@ -263,9 +264,10 @@ export function Homelab() {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '0.75rem',
-                      fontSize: '0.8rem',
+                      gap: '0.5rem',
+                      fontSize: 'clamp(0.68rem, 2.2vw, 0.8rem)',
                       padding: '0.3rem 0',
+                      minWidth: 0,
                     }}
                   >
                     <span
@@ -277,19 +279,25 @@ export function Homelab() {
                       {row.marker}
                     </span>
                     <span
+                      className="homelab-terminal-row-name"
                       style={{
                         color: 'var(--text-secondary)',
                         flexGrow: 1,
-                        whiteSpace: 'pre',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        minWidth: 0,
                       }}
                     >
-                      {row.name}
+                      {row.name.trim()}
                     </span>
                     <span
                       style={{
                         color: 'rgba(16,185,129,0.5)',
-                        fontSize: '0.72rem',
+                        fontSize: 'clamp(0.6rem, 2vw, 0.72rem)',
                         letterSpacing: '0.04em',
+                        flexShrink: 0,
+                        whiteSpace: 'nowrap',
                       }}
                     >
                       {row.comment}

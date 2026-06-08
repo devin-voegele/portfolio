@@ -124,6 +124,7 @@ export function Footer() {
                 { label: 'Work', href: '#work' },
                 { label: 'Hobbies', href: '#hobbies' },
                 { label: 'Contact', href: '#contact' },
+                { label: 'Writing', href: '/blog' },
               ].map(({ label, href }) => (
                 <li key={href}>
                   <a

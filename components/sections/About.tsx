@@ -33,7 +33,7 @@ const focusAreas = [
 
 export function About() {
   return (
-    <section id="about" className="relative" style={{ padding: '7rem 0' }}>
+    <section id="about" className="relative" style={{ padding: '7rem 0', overflow: 'hidden' }}>
       {/* Radial glow */}
       <div
         aria-hidden

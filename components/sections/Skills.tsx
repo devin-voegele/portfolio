@@ -28,7 +28,7 @@ const categories = [
 
 export function Skills() {
   return (
-    <section id="skills" className="relative" style={{ padding: '7rem 0' }}>
+    <section id="skills" className="relative" style={{ padding: '7rem 0', overflow: 'hidden' }}>
       {/* Bg glow shifted right */}
       <div
         aria-hidden

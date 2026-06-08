@@ -452,19 +452,19 @@ export function Projects() {
                   className="project-row"
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: '1fr',
+                    gridTemplateColumns: 'minmax(0, 1fr)',
                     gap: '2rem',
                     alignItems: 'center',
                   }}
                   data-reverse={isEven ? 'false' : 'true'}
                 >
                   {/* visual — always first on mobile */}
-                  <div className={`project-visual${isEven ? '' : ' project-visual-right'}`}>
+                  <div className={`project-visual${isEven ? '' : ' project-visual-right'}`} style={{ minWidth: 0 }}>
                     <ProjectVisualPlate project={project} index={i} />
                   </div>
 
                   {/* text */}
-                  <div className={`project-text${isEven ? '' : ' project-text-left'}`}>
+                  <div className={`project-text${isEven ? '' : ' project-text-left'}`} style={{ minWidth: 0 }}>
                     <ProjectTextBlock project={project} index={i} />
                   </div>
                 </div>
@@ -477,7 +477,7 @@ export function Projects() {
       <style>{`
         @media (min-width: 1024px) {
           .project-row {
-            grid-template-columns: 1fr 1fr !important;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
             gap: 3rem !important;
           }
           /* even index: visual left, text right — default order */

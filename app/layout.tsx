@@ -7,7 +7,7 @@ import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { MountainBackdrop } from "@/components/effects/MountainBackdrop";
 
 export const viewport: Viewport = {
-  themeColor: '#080B14',
+  themeColor: '#0a0a0a',
 };
 
 export const metadata: Metadata = {
@@ -53,26 +53,35 @@ export const metadata: Metadata = {
     siteName: "Devin Vögele",
     title: "Devin Vögele — Developer & Creative Technologist",
     description: "Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Devin Vögele - Developer & Creative Technologist",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Devin Vögele — Developer & Creative Technologist",
     description: "Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.",
-    images: ["/og-image.png"],
     creator: "@devinvoegele",
   },
   alternates: {
     canonical: "https://devin-voegele.vercel.app",
   },
   category: "technology",
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Devin Vögele",
+  "jobTitle": "Developer & Creative Technologist",
+  "url": "https://devin-voegele.vercel.app",
+  "worksFor": { "@type": "Organization", "name": "PwC Switzerland" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Würenlos", "addressCountry": "CH" },
+  "sameAs": [
+    "https://github.com/devin-voegele/",
+    "https://www.linkedin.com/in/devin-voegele-2a5989293"
+  ],
+  "knowsAbout": [
+    "Web Development", "Next.js", "TypeScript", "Cloud", "DevOps",
+    "Kubernetes", "Identity & Access Management"
+  ]
 };
 
 export default function RootLayout({
@@ -83,6 +92,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${anton.variable} ${geistSans.variable} ${geistMono.variable} ${caveat.variable}`}>
       <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <ScrollProgress />
         {/* Mountain silhouette backdrop — fixed, behind all content, parallax-scrolled */}
         <MountainBackdrop />

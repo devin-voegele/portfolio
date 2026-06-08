@@ -77,11 +77,8 @@ export function Hobbies() {
         <SectionHeader
           index="06"
           eyebrow="Beyond Code"
-          title={
-            <>
-              Hobbies &amp; <span className="gradient-text">Interests</span>
-            </>
-          }
+          title="Hobbies &"
+          accent="Interests"
         />
 
         <FadeIn>

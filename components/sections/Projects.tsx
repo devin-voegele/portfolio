@@ -60,11 +60,8 @@ export function Projects() {
         <SectionHeader
           index="05"
           eyebrow="My Work"
-          title={
-            <>
-              Selected <span className="gradient-text">Projects</span>
-            </>
-          }
+          title="Selected"
+          accent="Projects"
         />
 
         <p

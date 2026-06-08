@@ -59,11 +59,8 @@ export function CloudDevOps() {
         <SectionHeader
           index="03"
           eyebrow="Infrastructure"
-          title={
-            <>
-              Cloud, DevOps &amp; <span className="gradient-text">Platform</span>
-            </>
-          }
+          title="Cloud, DevOps &"
+          accent="Platform"
         />
 
         <p className="text-center max-w-3xl mx-auto mb-16 leading-relaxed" style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>

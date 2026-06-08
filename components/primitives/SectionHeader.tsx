@@ -1,13 +1,14 @@
-import React from 'react'
+import { AnimatedText } from '@/components/primitives/AnimatedText'
 
 interface SectionHeaderProps {
   index?: string
   eyebrow: string
-  title: React.ReactNode
+  title: string
+  accent?: string
   className?: string
 }
 
-export function SectionHeader({ index, eyebrow, title, className }: SectionHeaderProps) {
+export function SectionHeader({ index, eyebrow, title, accent, className }: SectionHeaderProps) {
   return (
     <div className={`text-center mb-10 ${className ?? ''}`}>
       {index && (
@@ -34,7 +35,10 @@ export function SectionHeader({ index, eyebrow, title, className }: SectionHeade
         {eyebrow}
       </span>
 
-      <h2
+      <AnimatedText
+        as="h2"
+        text={title}
+        accent={accent}
         className="font-geist-sans"
         style={{
           fontWeight: 800,
@@ -44,9 +48,7 @@ export function SectionHeader({ index, eyebrow, title, className }: SectionHeade
           color: 'var(--text-primary)',
           marginTop: '1rem',
         }}
-      >
-        {title}
-      </h2>
+      />
 
       <div
         style={{

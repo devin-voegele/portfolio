@@ -77,11 +77,8 @@ export function Skills() {
         <SectionHeader
           index="02"
           eyebrow="My Expertise"
-          title={
-            <>
-              Skills &amp; <span className="gradient-text">Technologies</span>
-            </>
-          }
+          title="Skills &"
+          accent="Technologies"
           className="mb-16"
         />
 

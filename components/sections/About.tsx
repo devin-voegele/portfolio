@@ -34,11 +34,8 @@ export function About() {
         <SectionHeader
           index="01"
           eyebrow="About Me"
-          title={
-            <>
-              Get to <span className="gradient-text">Know Me</span>
-            </>
-          }
+          title="Get to"
+          accent="Know Me"
           className="mb-16"
         />
 

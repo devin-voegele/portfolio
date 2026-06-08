@@ -97,11 +97,8 @@ export function Contact() {
         <SectionHeader
           index="07"
           eyebrow="Contact Me"
-          title={
-            <>
-              Get in <span className="gradient-text">Touch</span>
-            </>
-          }
+          title="Get in"
+          accent="Touch"
         />
 
         <p

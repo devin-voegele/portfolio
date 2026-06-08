@@ -81,11 +81,8 @@ export function Homelab() {
         <SectionHeader
           index="04"
           eyebrow="Homelab"
-          title={
-            <>
-              Self-Hosted <span className="gradient-text">Lab</span>
-            </>
-          }
+          title="Self-Hosted"
+          accent="Lab"
         />
 
         {/* Status badge */}

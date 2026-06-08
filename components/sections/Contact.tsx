@@ -361,6 +361,42 @@ export function Contact() {
             </div>
           </div>
         </FadeIn>
+
+        {/* Signature sign-off */}
+        <div
+          className="mt-16 pt-8 text-center"
+          style={{
+            borderTop: '1px solid var(--border)',
+          }}
+        >
+          <p
+            className="text-base max-w-lg mx-auto"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Thanks for scrolling all the way down. Whether it&rsquo;s a project, a problem,
+            or just talking shop &mdash; I&rsquo;d love to hear from you.
+          </p>
+
+          <p
+            className="font-signature gradient-text mt-4"
+            style={{
+              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+              lineHeight: 1.1,
+              display: 'inline-block',
+              transform: 'rotate(-3deg)',
+              transformOrigin: 'center',
+            }}
+          >
+            Devin Vögele
+          </p>
+
+          <p
+            className="font-mono text-xs mt-3"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            // crafted in Würenlos, CH
+          </p>
+        </div>
       </div>
     </section>
   )

@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { anton, geistSans, geistMono } from "./fonts";
+import { anton, geistSans, geistMono, caveat } from "./fonts";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { PerfProvider } from "@/components/providers/PerfProvider";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
-import { CustomCursor } from "@/components/cursor/CustomCursor";
 import { MountainBackdrop } from "@/components/effects/MountainBackdrop";
 
 export const viewport: Viewport = {
@@ -82,10 +81,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${anton.variable} ${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`dark ${anton.variable} ${geistSans.variable} ${geistMono.variable} ${caveat.variable}`}>
       <body className="antialiased">
         <ScrollProgress />
-        <CustomCursor />
         {/* Mountain silhouette backdrop — fixed, behind all content, parallax-scrolled */}
         <MountainBackdrop />
         {/* Site-wide ambient radial glow — very faint, keeps sections from pure black */}

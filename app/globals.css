@@ -48,6 +48,10 @@ body {
   font-family: var(--font-mono), ui-monospace, monospace;
 }
 
+.font-signature {
+  font-family: var(--font-signature), cursive;
+}
+
 h1 {
   font-size: clamp(3rem, 9vw, 10rem);
   line-height: 0.9;

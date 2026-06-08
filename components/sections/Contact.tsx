@@ -378,10 +378,12 @@ export function Contact() {
             className="font-signature gradient-text mt-4"
             style={{
               fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              lineHeight: 1.1,
+              lineHeight: 1.25,
               display: 'inline-block',
               transform: 'rotate(-3deg)',
               transformOrigin: 'center',
+              padding: '0.08em 0.5em 0.18em 0.18em',
+              overflow: 'visible',
             }}
           >
             Devin Vögele

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 
 type Line =
   | { type: 'cmd'; text: string }
@@ -126,7 +126,7 @@ export function LiveTerminal() {
   if (prefersReduced) {
     return (
       <div
-        className="glass font-mono"
+        className="font-mono"
         style={{
           borderRadius: 12,
           maxWidth: '30rem',
@@ -135,6 +135,10 @@ export function LiveTerminal() {
           boxShadow: '0 8px 32px rgba(0,0,0,0.45)',
           overflow: 'hidden',
           margin: '0 auto',
+          // Solid translucent bg instead of backdrop-blur glass — avoids per-frame
+          // re-blur of the animated aurora behind it.
+          background: 'rgba(16,18,24,0.9)',
+          border: '1px solid var(--glass-border)',
         }}
       >
         <TitleBar />
@@ -150,7 +154,7 @@ export function LiveTerminal() {
 
   return (
     <div
-      className="glass font-mono"
+      className="font-mono"
       style={{
         borderRadius: 12,
         maxWidth: '30rem',
@@ -159,6 +163,10 @@ export function LiveTerminal() {
         boxShadow: '0 8px 32px rgba(0,0,0,0.45)',
         overflow: 'hidden',
         margin: '0 auto',
+        // Solid translucent bg instead of backdrop-blur glass — avoids per-frame
+        // re-blur of the animated aurora behind it (main hero perf win).
+        background: 'rgba(16,18,24,0.9)',
+        border: '1px solid var(--glass-border)',
       }}
     >
       <TitleBar />
@@ -205,7 +213,7 @@ function TitleBar() {
   )
 }
 
-function LineRow({
+const LineRow = memo(function LineRow({
   line,
   displayText,
   done,
@@ -231,7 +239,7 @@ function LineRow({
       {isActive && !done && <Caret />}
     </div>
   )
-}
+})
 
 function PromptLine({ showCaret }: { showCaret: boolean }) {
   return (

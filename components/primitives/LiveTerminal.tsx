@@ -20,7 +20,6 @@ const SEQUENCE: Line[] = [
 const CHAR_DELAY = 38    // ms per character when typing a cmd
 const OUT_DELAY  = 40    // ms per character for output lines
 const LINE_PAUSE = 320   // ms pause before next line starts
-const END_PAUSE  = 4800  // ms before loop restarts
 
 export function LiveTerminal() {
   // reducedMotion: render all lines statically
@@ -108,11 +107,8 @@ export function LiveTerminal() {
       offset = lineEnd + LINE_PAUSE
     })
 
-    // Loop
-    scheduleTimeout(() => {
-      clearTimers()
-      runSequence()
-    }, offset + END_PAUSE)
+    // Types once on load, then rests with the final blinking caret.
+    // (No perpetual re-render loop — that was a constant idle CPU cost.)
   }
 
   useEffect(() => {

@@ -99,10 +99,9 @@ export function Nav() {
             left: '50%',
             zIndex: 1000,
             transformOrigin: 'center',
-            // glass pill
-            background: 'var(--glass-bg)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
+            // Solid translucent pill — no backdrop-filter (that re-blurred the page
+            // behind the fixed nav every scroll frame, costly on weak GPUs).
+            background: 'rgba(17,18,22,0.92)',
             border: '1px solid var(--glass-border)',
             borderRadius: '9999px',
             padding: '0.45rem 1rem',

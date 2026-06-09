@@ -8,18 +8,18 @@ import { usePerfMode } from '@/components/providers/PerfProvider'
 
 const LAYERS = [
   {
-    // Back — tallest peaks, most blurred, darkest
+    // Back — tallest peaks, darkest
     d: 'M0,240 L0,160 C60,145 100,120 160,100 C220,80 260,90 320,110 C380,130 400,155 460,145 C520,135 560,90 620,70 C680,50 720,60 780,80 C840,100 880,130 940,125 C1000,120 1040,95 1100,75 C1160,55 1200,65 1260,85 C1320,105 1380,130 1440,120 L1440,240 Z',
     fill: '#0d1424',
     opacity: 0.85,
-    blur: '3px',
+    blur: '0px',
   },
   {
     // Mid — intermediate peaks
     d: 'M0,240 L0,175 C50,165 90,140 140,125 C190,110 230,115 290,135 C350,155 380,170 440,160 C500,150 540,120 600,105 C660,90 700,98 760,115 C820,132 860,155 920,150 C980,145 1020,120 1080,105 C1140,90 1180,98 1240,115 C1300,132 1380,158 1440,150 L1440,240 Z',
     fill: '#0b1020',
     opacity: 0.9,
-    blur: '1px',
+    blur: '0px',
   },
   {
     // Front — lowest silhouette, sharpest edges, electric-blue rim stroke
@@ -143,9 +143,6 @@ export function MountainBackdrop() {
               stroke="#2E6BFF"
               strokeWidth="1.5"
               strokeOpacity="0.30"
-              style={{
-                filter: 'drop-shadow(0 0 4px rgba(46,107,255,0.35))',
-              }}
             />
           )}
         </svg>

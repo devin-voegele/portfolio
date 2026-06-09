@@ -232,8 +232,11 @@ h2 {
 /* Glitch text — RGB split using blue + green channels */
 .glitch-text { position: relative; display: inline-block; }
 .glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; inset: 0; opacity: 0.85; pointer-events: none; }
-.glitch-text::before { color: var(--accent); animation: glitch-anim 0.85s cubic-bezier(0.25,0.46,0.45,0.94) both infinite; }
-.glitch-text::after { color: var(--accent-2); animation: glitch-anim 0.85s cubic-bezier(0.25,0.46,0.45,0.94) reverse both infinite; }
+.glitch-text::before { color: var(--accent); }
+.glitch-text::after { color: var(--accent-2); }
+/* Glitch only on hover — no perpetual jitter (was a constant cost on two text layers) */
+.glitch-text:hover::before { animation: glitch-anim 0.6s cubic-bezier(0.25,0.46,0.45,0.94) both infinite; }
+.glitch-text:hover::after { animation: glitch-anim 0.6s cubic-bezier(0.25,0.46,0.45,0.94) reverse both infinite; }
 @keyframes glitch-anim { 0%{transform:translate(0);} 20%{transform:translate(-1px,1px);} 40%{transform:translate(-1px,-1px);} 60%{transform:translate(1px,1px);} 80%{transform:translate(1px,-1px);} 100%{transform:translate(0);} }
 
 /* Blob glows */
@@ -295,19 +298,12 @@ section[id],
     radial-gradient(40% 40% at 28% 30%, rgba(37,99,235,0.28), transparent 60%),
     radial-gradient(38% 38% at 72% 58%, rgba(16,185,129,0.22), transparent 60%),
     radial-gradient(42% 42% at 52% 74%, rgba(139,92,246,0.20), transparent 60%);
-  filter: blur(46px);
+  filter: blur(38px);
   /* Soft elliptical mask so the glow dissolves on every edge — no hard clipped
      rectangle edge where the section's overflow:hidden cuts it. */
   -webkit-mask-image: radial-gradient(ellipse 88% 72% at 50% 34%, #000 28%, transparent 80%);
   mask-image: radial-gradient(ellipse 88% 72% at 50% 34%, #000 28%, transparent 80%);
-  /* Gentle translate/scale only — no rotate (rotating a large blurred+masked
-     layer forces costly re-rasterization each frame). */
-  animation: aurora-shift 24s ease-in-out infinite alternate;
-  will-change: transform;
-}
-@keyframes aurora-shift {
-  0%   { transform: translate3d(0,0,0) scale(1.02); }
-  50%  { transform: translate3d(1.5%, -1.5%, 0) scale(1.06); }
-  100% { transform: translate3d(-1.5%, 1.5%, 0) scale(1.03); }
+  /* STATIC — no continuous animation. Animating a large blurred+masked layer
+     was the main idle GPU cost on weak machines. Painted once, then free. */
 }
 @media (prefers-reduced-motion: reduce) { .aurora-bg { animation: none; } }

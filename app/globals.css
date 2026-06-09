@@ -254,6 +254,14 @@ h2 {
 .reveal-load { opacity: 0; animation: reveal-up 0.7s var(--ease-out-expo) forwards; }
 @media (prefers-reduced-motion: reduce) { .reveal-load { opacity: 1; animation: none; } }
 
+/* ─── Scroll anchor offset — fixed nav is ~3.5rem at top:1rem, total ~4.5rem ─── */
+/* Ensure section headings are not hidden under the nav bar when jumped to          */
+section[id],
+[id="about"], [id="skills"], [id="cloud"], [id="homelab"],
+[id="work"],  [id="hobbies"], [id="contact"] {
+  scroll-margin-top: 6rem;
+}
+
 /* ─── Mobile responsiveness polish ─────────────────────────────── */
 
 /* Tighten section vertical padding on small screens */

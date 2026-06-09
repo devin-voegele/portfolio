@@ -5,6 +5,7 @@ import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { PerfProvider } from "@/components/providers/PerfProvider";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { MountainBackdrop } from "@/components/effects/MountainBackdrop";
+import { Nav } from "@/components/sections/Nav";
 
 export const viewport: Viewport = {
   themeColor: '#0a0a0a',
@@ -97,6 +98,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <ScrollProgress />
+        <Nav />
         {/* Mountain silhouette backdrop — fixed, behind all content, parallax-scrolled */}
         <MountainBackdrop />
         {/* Site-wide ambient radial glow — very faint, keeps sections from pure black */}

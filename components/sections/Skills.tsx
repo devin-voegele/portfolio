@@ -4,6 +4,7 @@ import React from 'react'
 import { Code2, Cloud, ShieldCheck, Sparkles } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
+import { GlareField } from '@/components/primitives/GlareField'
 
 const categoryCards = [
   {
@@ -86,12 +87,11 @@ export function Skills() {
           <div className="flex flex-col md:flex-row gap-16 items-center">
             {/* LEFT — 2x2 category cards */}
             <div className="md:w-1/2 order-2 md:order-1 w-full">
-              <div className="grid grid-cols-2 gap-6">
+              <GlareField className="grid grid-cols-2 gap-6">
                 {categoryCards.map(({ title, subtitle, accentVar, accentRgba, accentRgbaHover, icon: Icon }) => (
                   <div
                     key={title}
-                    className="p-6 rounded-xl shadow-lg hover-lift group transition-all duration-300 text-center"
-                    style={{ background: 'var(--bg-surface)' }}
+                    className="lq lq-glare lq-hover p-6 group text-center"
                     onMouseEnter={(e) => {
                       const circle = e.currentTarget.querySelector<HTMLElement>('.icon-circle')
                       if (circle) circle.style.background = accentRgbaHover
@@ -118,7 +118,7 @@ export function Skills() {
                     </p>
                   </div>
                 ))}
-              </div>
+              </GlareField>
             </div>
 
             {/* RIGHT — heading, paragraph, skill tags */}

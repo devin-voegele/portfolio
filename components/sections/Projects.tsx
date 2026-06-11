@@ -4,6 +4,7 @@ import React from 'react'
 import { Lock, Check } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
+import { GlareField } from '@/components/primitives/GlareField'
 
 interface Project {
   title: string
@@ -72,13 +73,13 @@ export function Projects() {
         </p>
 
         <FadeIn>
-          <div className="flex flex-col md:flex-row gap-16 items-start">
+          <GlareField className="flex flex-col md:flex-row gap-16 items-start">
             {/* LEFT — project cards */}
             <div className="md:w-1/2 order-2 md:order-1 space-y-8 w-full">
               {projects.map(({ title, desc, tags, year, url, redacted }) => (
                 <div
                   key={title}
-                  className="p-6 bg-[var(--bg-surface)] rounded-xl shadow-lg hover-lift border border-[var(--border)] relative overflow-hidden"
+                  className="lq lq-glare lq-hover p-6 relative overflow-hidden"
                 >
                   {/* top gradient accent line */}
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)]" />
@@ -185,10 +186,7 @@ export function Projects() {
                 </div>
 
                 {/* Highlights card */}
-                <div
-                  className="p-6 rounded-xl border"
-                  style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}
-                >
+                <div className="lq lq-glare p-6">
                   <h4 className="font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
                     Highlights
                   </h4>
@@ -231,7 +229,7 @@ export function Projects() {
                 </div>
               </div>
             </div>
-          </div>
+          </GlareField>
         </FadeIn>
       </div>
     </section>

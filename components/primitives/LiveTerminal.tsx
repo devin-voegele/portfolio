@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 type Line =
   | { type: 'cmd'; text: string }
@@ -17,9 +17,16 @@ const SEQUENCE: Line[] = [
   { type: 'out', text: '● Available for work', color: 'var(--accent-2)' },
 ]
 
-const CHAR_DELAY = 38    // ms per character when typing a cmd
-const OUT_DELAY  = 40    // ms per character for output lines
-const LINE_PAUSE = 320   // ms pause before next line starts
+const CHAR_DELAY = 38   // ms per character when typing a cmd
+const OUT_DELAY = 40    // ms per character for output lines
+const LINE_PAUSE = 320  // ms pause before next line starts
+const START_DELAY = 350 // ms before the first keystroke
+
+interface Entry {
+  line: Line
+  displayText: string
+  done: boolean
+}
 
 export function LiveTerminal() {
   // reducedMotion: render all lines statically
@@ -28,158 +35,87 @@ export function LiveTerminal() {
       ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
       : false
 
-  // Each entry: { line: Line; displayText: string; done: boolean }
-  const [rendered, setRendered] = useState<
-    { line: Line; displayText: string; done: boolean }[]
-  >([])
-  // Index of the line currently being typed (null = done/pausing)
-  const [activeIdx, setActiveIdx] = useState<number | null>(null)
-  // Show the blinking caret
-  const [showCaret, setShowCaret] = useState(true)
+  const [rendered, setRendered] = useState<Entry[]>([])
+  const [finished, setFinished] = useState(false)
 
-  const timers = useRef<ReturnType<typeof setTimeout>[]>([])
-
-  function clearTimers() {
-    timers.current.forEach(clearTimeout)
-    timers.current = []
-  }
-
-  function scheduleTimeout(fn: () => void, delay: number) {
-    const id = setTimeout(fn, delay)
-    timers.current.push(id)
-    return id
-  }
-
-  function runSequence() {
-    setRendered([])
-    setActiveIdx(null)
-    setShowCaret(true)
-
-    let offset = 0
-
-    SEQUENCE.forEach((line, idx) => {
-      const charDelay = line.type === 'cmd' ? CHAR_DELAY : OUT_DELAY
-      const lineStart = offset
-
-      // Add blank skeleton for the line when it starts
-      scheduleTimeout(() => {
-        setRendered(prev => [
-          ...prev,
-          { line, displayText: '', done: false },
-        ])
-        setActiveIdx(idx)
-      }, lineStart)
-
-      // Type each character
-      const chars = [...line.text] // Unicode-safe split
-      chars.forEach((_, ci) => {
-        scheduleTimeout(() => {
-          setRendered(prev => {
-            const next = [...prev]
-            const entry = next[idx]
-            if (entry) {
-              next[idx] = {
-                ...entry,
-                displayText: chars.slice(0, ci + 1).join(''),
-              }
-            }
-            return next
-          })
-        }, lineStart + (ci + 1) * charDelay)
-      })
-
-      // Mark done + pause before next
-      const lineEnd = lineStart + chars.length * charDelay
-      scheduleTimeout(() => {
-        setRendered(prev => {
-          const next = [...prev]
-          if (next[idx]) next[idx] = { ...next[idx], done: true }
-          return next
-        })
-        if (idx < SEQUENCE.length - 1) {
-          setActiveIdx(null)
-        } else {
-          // last line: show final prompt caret
-          setActiveIdx(SEQUENCE.length) // sentinel: "after last"
-        }
-      }, lineEnd)
-
-      offset = lineEnd + LINE_PAUSE
-    })
-
-    // Types once on load, then rests with the final blinking caret.
-    // (No perpetual re-render loop — that was a constant idle CPU cost.)
-  }
-
+  // One self-scheduling timer walks through the sequence character by
+  // character — types once on load, then rests with the final caret.
+  // (No perpetual loop, and no pile of pre-scheduled timeouts.)
   useEffect(() => {
     if (prefersReduced) return
-    runSequence()
-    return () => clearTimers()
+
+    let lineIdx = 0
+    let charIdx = 0
+    let timer: ReturnType<typeof setTimeout>
+
+    const tick = () => {
+      const line = SEQUENCE[lineIdx]
+      if (!line) {
+        setFinished(true)
+        return
+      }
+      const chars = [...line.text] // Unicode-safe split
+
+      if (charIdx === 0) {
+        setRendered((prev) => [...prev, { line, displayText: '', done: false }])
+      }
+
+      charIdx++
+      // Freeze the slot index for the async state updater — lineIdx is
+      // mutated below before React applies it.
+      const idx = lineIdx
+      const text = chars.slice(0, charIdx).join('')
+      const lineDone = charIdx >= chars.length
+      setRendered((prev) => {
+        const next = [...prev]
+        next[idx] = { line, displayText: text, done: lineDone }
+        return next
+      })
+
+      if (lineDone) {
+        lineIdx++
+        charIdx = 0
+        timer = setTimeout(tick, LINE_PAUSE)
+      } else {
+        timer = setTimeout(tick, line.type === 'cmd' ? CHAR_DELAY : OUT_DELAY)
+      }
+    }
+
+    timer = setTimeout(tick, START_DELAY)
+    return () => clearTimeout(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Static reduced-motion render
-  if (prefersReduced) {
-    return (
-      <div
-        className="font-mono"
-        style={{
-          borderRadius: 12,
-          maxWidth: '30rem',
-          width: '100%',
-          fontSize: '0.85rem',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.45)',
-          overflow: 'hidden',
-          margin: '0 auto',
-          // Solid translucent bg instead of backdrop-blur glass — avoids per-frame
-          // re-blur of the animated aurora behind it.
-          background: 'rgba(16,18,24,0.9)',
-          border: '1px solid var(--glass-border)',
-        }}
-      >
-        <TitleBar />
-        <div style={{ padding: '16px', minHeight: 180, overflowX: 'hidden', wordBreak: 'break-word' }}>
-          {SEQUENCE.map((line, i) => (
-            <LineRow key={i} line={line} displayText={line.text} done isActive={false} />
-          ))}
-          <PromptLine showCaret={false} />
-        </div>
-      </div>
-    )
-  }
+  const entries: Entry[] = prefersReduced
+    ? SEQUENCE.map((line) => ({ line, displayText: line.text, done: true }))
+    : rendered
+  const activeIdx = prefersReduced ? -1 : entries.length - 1
 
   return (
     <div
-      className="font-mono"
+      className="font-mono lq lq-glare"
       style={{
-        borderRadius: 12,
         maxWidth: '30rem',
         width: '100%',
         fontSize: 'clamp(0.72rem, 3vw, 0.85rem)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.45)',
         overflow: 'hidden',
         margin: '0 auto',
-        // Solid translucent bg instead of backdrop-blur glass — avoids per-frame
-        // re-blur of the animated aurora behind it (main hero perf win).
-        background: 'rgba(16,18,24,0.9)',
-        border: '1px solid var(--glass-border)',
+        textAlign: 'left',
       }}
     >
       <TitleBar />
       <div style={{ padding: '16px', minHeight: 180, overflowX: 'hidden', wordBreak: 'break-word' }}>
-        {rendered.map((entry, i) => (
+        {entries.map((entry, i) => (
           <LineRow
             key={i}
             line={entry.line}
             displayText={entry.displayText}
             done={entry.done}
-            isActive={activeIdx === i}
+            isActive={!finished && i === activeIdx}
           />
         ))}
         {/* Final prompt line with caret after sequence completes */}
-        {activeIdx === SEQUENCE.length && (
-          <PromptLine showCaret={showCaret} />
-        )}
+        {(finished || prefersReduced) && <PromptLine showCaret={!prefersReduced} />}
       </div>
     </div>
   )
@@ -191,12 +127,13 @@ function TitleBar() {
   return (
     <div
       style={{
-        height: 32,
-        borderBottom: '1px solid var(--border)',
+        height: 34,
+        borderBottom: '1px solid var(--glass-border)',
         padding: '0 12px',
         display: 'flex',
         alignItems: 'center',
         gap: 8,
+        background: 'linear-gradient(to bottom, rgba(255,255,255,0.045), rgba(255,255,255,0.01))',
       }}
     >
       <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff5f56', display: 'inline-block', flexShrink: 0 }} />
@@ -204,6 +141,17 @@ function TitleBar() {
       <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#27c93f', display: 'inline-block', flexShrink: 0 }} />
       <span style={{ marginLeft: 8, color: 'var(--text-secondary)', fontSize: '0.75rem', userSelect: 'none' }}>
         devin@portfolio:~
+      </span>
+      <span
+        style={{
+          marginLeft: 'auto',
+          color: 'var(--text-muted)',
+          fontSize: '0.62rem',
+          letterSpacing: '0.14em',
+          userSelect: 'none',
+        }}
+      >
+        zsh
       </span>
     </div>
   )

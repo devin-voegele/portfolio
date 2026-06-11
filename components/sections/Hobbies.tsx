@@ -3,6 +3,7 @@
 import { Clapperboard, Scissors, Gamepad2, Gauge, Car, Bike } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
+import { GlareField } from '@/components/primitives/GlareField'
 import type { LucideIcon } from 'lucide-react'
 
 interface Hobby {
@@ -82,14 +83,13 @@ export function Hobbies() {
         />
 
         <FadeIn>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {hobbies.map((hobby, i) => {
+          <GlareField className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {hobbies.map((hobby) => {
               const Icon = hobby.icon
               return (
                 <div
                   key={hobby.name}
-                  className="p-6 bg-[var(--bg-surface)] rounded-xl shadow-lg hover-lift group text-center"
-                  style={{ transitionDelay: `${i * 60}ms` }}
+                  className="lq lq-glare lq-hover p-6 group text-center"
                 >
                   <div
                     className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center group-hover:opacity-90 transition-opacity"
@@ -112,7 +112,7 @@ export function Hobbies() {
                 </div>
               )
             })}
-          </div>
+          </GlareField>
         </FadeIn>
 
         <div className="mt-16 text-center max-w-2xl mx-auto">

@@ -8,6 +8,20 @@ export const usePerfMode = () => useContext(PerfContext)
 export function PerfProvider({ children }: { children: React.ReactNode }) {
   const [tier, setTier] = useState<PerfTier>('full')
 
+  // Mirror the tier onto <html data-perf> so CSS can gate expensive
+  // effects without prop-drilling. The liquid-glass backdrop blur is
+  // applied inline here: the CSS build pipeline (Lightning CSS) strips
+  // backdrop-filter declarations from stylesheets, and inline styles
+  // also let weak machines skip the cost entirely.
+  useEffect(() => {
+    document.documentElement.dataset.perf = tier
+    const blur = tier === 'full' ? 'blur(16px) saturate(1.5)' : ''
+    document.querySelectorAll<HTMLElement>('.lq').forEach((el) => {
+      el.style.backdropFilter = blur
+      el.style.setProperty('-webkit-backdrop-filter', blur)
+    })
+  }, [tier])
+
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setTier('off')

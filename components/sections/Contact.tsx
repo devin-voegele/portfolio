@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Mail, MapPin } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
+import { GlareField } from '@/components/primitives/GlareField'
 
 function GitHubIcon() {
   return (
@@ -110,12 +111,10 @@ export function Contact() {
         </p>
 
         <FadeIn>
-          <div className="flex flex-col md:flex-row gap-16 items-start">
+          <GlareField className="flex flex-col md:flex-row gap-16 items-start">
             {/* LEFT — Form */}
             <div className="md:w-1/2 order-2 md:order-1 w-full">
-              <div
-                className="bg-[var(--bg-surface)] p-8 rounded-xl shadow-lg border border-[var(--border)] hover-lift"
-              >
+              <div className="lq lq-glare p-8">
                 <h3
                   className="text-xl font-bold mb-6"
                   style={{ color: 'var(--accent)' }}
@@ -266,7 +265,7 @@ export function Contact() {
               <div className="space-y-8">
                 {/* Email card */}
                 <div
-                  className="flex items-start gap-4 p-5 bg-[var(--bg-surface)] rounded-xl border border-[var(--border)] hover-lift"
+                  className="lq lq-glare lq-hover flex items-start gap-4 p-5"
                 >
                   <div
                     className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
@@ -291,7 +290,7 @@ export function Contact() {
 
                 {/* Location card */}
                 <div
-                  className="flex items-start gap-4 p-5 bg-[var(--bg-surface)] rounded-xl border border-[var(--border)] hover-lift"
+                  className="lq lq-glare lq-hover flex items-start gap-4 p-5"
                 >
                   <div
                     className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
@@ -311,9 +310,7 @@ export function Contact() {
                 </div>
 
                 {/* Connect card */}
-                <div
-                  className="bg-[var(--bg-surface)] p-6 rounded-xl border border-[var(--border)] hover-lift"
-                >
+                <div className="lq lq-glare lq-hover p-6">
                   <h3
                     className="text-xl font-bold mb-5"
                     style={{ color: 'var(--accent)' }}
@@ -356,7 +353,7 @@ export function Contact() {
                 </div>
               </div>
             </div>
-          </div>
+          </GlareField>
         </FadeIn>
 
         {/* Signature sign-off */}

@@ -12,7 +12,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://devin-voegele.vercel.app"),
+  metadataBase: new URL("https://voegele.dev"),
   title: {
     default: "Devin Vögele — Developer & Creative Technologist",
     template: "%s | Devin Vögele"
@@ -24,16 +24,18 @@ export const metadata: Metadata = {
     "Developer",
     "Creative Technologist",
     "Platform Development",
+    "Platform Developer",
     "PwC Switzerland",
     "Web Developer",
     "Next.js Developer",
     "React Developer",
+    "Cloud",
+    "DevOps",
     "Zürich",
     "Switzerland",
-    "Formula 1",
     "Motorsport"
   ],
-  authors: [{ name: "Devin Vögele", url: "https://devin-voegele.vercel.app" }],
+  authors: [{ name: "Devin Vögele", url: "https://voegele.dev" }],
   creator: "Devin Vögele",
   publisher: "Devin Vögele",
   robots: {
@@ -48,12 +50,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    type: "website",
+    type: "profile",
     locale: "en_US",
-    url: "https://devin-voegele.vercel.app",
+    url: "https://voegele.dev",
     siteName: "Devin Vögele",
     title: "Devin Vögele — Developer & Creative Technologist",
     description: "Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.",
+    firstName: "Devin",
+    lastName: "Vögele",
   },
   twitter: {
     card: "summary_large_image",
@@ -62,26 +66,64 @@ export const metadata: Metadata = {
     creator: "@devinvoegele",
   },
   alternates: {
-    canonical: "https://devin-voegele.vercel.app",
+    canonical: "./",
   },
   category: "technology",
 };
 
-const personJsonLd = {
+// Person + WebSite entity graph. The Person node is the signal Google's
+// Knowledge Graph reconciles against — keep name, jobTitle, sameAs and
+// url consistent with LinkedIn/GitHub so the panel picks up "Developer",
+// not stale third-party labels.
+const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Devin Vögele",
-  "jobTitle": "Developer & Creative Technologist",
-  "url": "https://devin-voegele.vercel.app",
-  "worksFor": { "@type": "Organization", "name": "PwC Switzerland" },
-  "address": { "@type": "PostalAddress", "addressLocality": "Würenlos", "addressCountry": "CH" },
-  "sameAs": [
-    "https://github.com/devin-voegele/",
-    "https://www.linkedin.com/in/devin-voegele-2a5989293"
-  ],
-  "knowsAbout": [
-    "Web Development", "Next.js", "TypeScript", "Cloud", "DevOps",
-    "Kubernetes", "Identity & Access Management"
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://voegele.dev/#person",
+      "name": "Devin Vögele",
+      "alternateName": "Devin Voegele",
+      "givenName": "Devin",
+      "familyName": "Vögele",
+      "jobTitle": "Developer & Creative Technologist",
+      "description":
+        "Developer and creative technologist based in Switzerland, working in platform development at PwC Switzerland — web experiences, cloud, automation and identity.",
+      "url": "https://voegele.dev",
+      "image": "https://voegele.dev/opengraph-image",
+      "email": "mailto:devin.voegele@microsun.ch",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "PwC Switzerland",
+        "url": "https://www.pwc.ch"
+      },
+      "address": { "@type": "PostalAddress", "addressLocality": "Würenlos", "addressCountry": "CH" },
+      "nationality": { "@type": "Country", "name": "Switzerland" },
+      "sameAs": [
+        "https://github.com/devin-voegele/",
+        "https://www.linkedin.com/in/devin-voegele-2a5989293"
+      ],
+      "knowsAbout": [
+        "Web Development", "Next.js", "TypeScript", "React", "Cloud Computing",
+        "DevOps", "Kubernetes", "CI/CD", "Identity & Access Management",
+        "Motion Design", "Motorsport Media"
+      ],
+      "mainEntityOfPage": { "@id": "https://voegele.dev/#website" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://voegele.dev/#website",
+      "url": "https://voegele.dev",
+      "name": "Devin Vögele — Portfolio",
+      "publisher": { "@id": "https://voegele.dev/#person" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://voegele.dev/#profilepage",
+      "url": "https://voegele.dev",
+      "mainEntity": { "@id": "https://voegele.dev/#person" },
+      "isPartOf": { "@id": "https://voegele.dev/#website" }
+    }
   ]
 };
 
@@ -95,7 +137,7 @@ export default function RootLayout({
       <body className="antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <ScrollProgress />
         <Nav />

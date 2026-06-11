@@ -4,6 +4,7 @@ import React from 'react'
 import { Check } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
+import { GlareField } from '@/components/primitives/GlareField'
 
 interface PlannedRow {
   borderColor: string
@@ -111,12 +112,9 @@ export function Homelab() {
         </p>
 
         <FadeIn>
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <GlareField className="grid md:grid-cols-2 gap-12 items-start">
             {/* LEFT — Planned Architecture card */}
-            <div
-              className="rounded-xl p-6 border"
-              style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}
-            >
+            <div className="lq lq-glare p-6">
               <h3 className="text-xl font-bold mb-6" style={{ color: 'var(--accent)' }}>
                 Planned Architecture
               </h3>
@@ -144,10 +142,7 @@ export function Homelab() {
 
             {/* RIGHT — Goals card + stat row */}
             <div className="space-y-6">
-              <div
-                className="rounded-xl p-6 border"
-                style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}
-              >
+              <div className="lq lq-glare p-6">
                 <h3 className="text-xl font-bold mb-6" style={{ color: 'var(--accent)' }}>
                   What It&apos;s For
                 </h3>
@@ -174,8 +169,7 @@ export function Homelab() {
                 {statusStats.map(({ value, label }) => (
                   <div
                     key={label}
-                    className="text-center p-3 rounded-lg"
-                    style={{ background: 'rgba(37,99,235,0.08)' }}
+                    className="lq lq-glare text-center p-3"
                   >
                     <div className="text-lg font-bold mb-0.5" style={{ color: 'var(--accent)' }}>
                       {value}
@@ -187,7 +181,7 @@ export function Homelab() {
                 ))}
               </div>
             </div>
-          </div>
+          </GlareField>
         </FadeIn>
       </div>
     </section>

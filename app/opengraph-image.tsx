@@ -156,7 +156,7 @@ export default function OGImage() {
             letterSpacing: '0.05em',
           }}
         >
-          devin-voegele.vercel.app
+          voegele.dev
         </div>
       </div>
     ),

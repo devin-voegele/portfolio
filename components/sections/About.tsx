@@ -3,6 +3,7 @@
 import React from 'react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
+import { GlareField } from '@/components/primitives/GlareField'
 
 const focusTags = [
   'Web Experiences',
@@ -40,7 +41,7 @@ export function About() {
         />
 
         <FadeIn>
-          <div className="flex flex-col md:flex-row gap-12 items-center">
+          <GlareField className="flex flex-col md:flex-row gap-12 items-center">
             {/* LEFT — identity panel (no photo) */}
             <div className="md:w-2/5 relative">
               {/* Offset border frames matching reference structure */}
@@ -56,7 +57,7 @@ export function About() {
               {/* Front panel — premium identity visual */}
               {/* swap in a real photo here later */}
               <div
-                className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-xl hover-lift"
+                className="lq lq-glare lq-hover relative w-full aspect-square overflow-hidden"
                 style={{
                   background:
                     'radial-gradient(ellipse at 60% 30%, rgba(37,99,235,0.18) 0%, transparent 60%), radial-gradient(ellipse at 30% 80%, rgba(139,92,246,0.14) 0%, transparent 60%), linear-gradient(160deg, var(--bg-surface) 0%, var(--bg-secondary) 100%)',
@@ -254,7 +255,7 @@ export function About() {
                 </a>
               </div>
             </div>
-          </div>
+          </GlareField>
         </FadeIn>
       </div>
     </section>

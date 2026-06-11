@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://devin-voegele.vercel.app/sitemap.xml
+Sitemap: https://voegele.dev/sitemap.xml
 
 # Google
 User-agent: Googlebot

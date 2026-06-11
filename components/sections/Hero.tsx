@@ -1,8 +1,10 @@
 'use client'
 
 import { Aurora } from '@/components/effects/Aurora'
+import { SignalGrid } from '@/components/effects/SignalGrid'
 import { LiveTerminal } from '@/components/primitives/LiveTerminal'
 import { Magnetic } from '@/components/primitives/Magnetic'
+import { GlareField } from '@/components/primitives/GlareField'
 
 export function Hero() {
   return (
@@ -11,13 +13,16 @@ export function Hero() {
       className="relative overflow-hidden flex flex-col justify-center"
       style={{ minHeight: '100vh', padding: '5rem 1.5rem' }}
     >
-      {/* Aurora animated background — z0, behind everything */}
+      {/* Aurora static background — z0, behind everything */}
       <Aurora />
 
+      {/* Interactive liquid dot field — ripples under the cursor, sleeps when idle */}
+      <SignalGrid />
+
       {/* ── Centered single-column content ──────────────────────── */}
-      <div
+      <GlareField
         className="relative mx-auto w-full flex flex-col items-center text-center"
-        style={{ zIndex: 10, maxWidth: '48rem', gap: '0' }}
+        style={{ zIndex: 10, maxWidth: '48rem' }}
       >
         {/* 1. Badge pill */}
         <div className="reveal-load" style={{ marginBottom: '1.25rem', animationDelay: '0.05s' }}>
@@ -37,24 +42,44 @@ export function Hero() {
           </span>
         </div>
 
-        {/* 2. Glitch name */}
-        <h1
-          className="glitch-text reveal-load"
-          data-text="Devin Vögele"
-          style={{
-            fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-            fontWeight: 800,
-            fontFamily: 'var(--font-geist-sans)',
-            color: 'var(--text-primary)',
-            lineHeight: 1.1,
-            letterSpacing: '-0.02em',
-            marginBottom: '1rem',
-            textAlign: 'center',
-            animationDelay: '0.12s',
-          }}
-        >
-          Devin Vögele
-        </h1>
+        {/* 2. Glitch name + handwritten annotation */}
+        <div className="relative" style={{ marginBottom: '2rem' }}>
+          <h1
+            className="glitch-text reveal-load"
+            data-text="Devin Vögele"
+            style={{
+              fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+              fontWeight: 800,
+              fontFamily: 'var(--font-geist-sans)',
+              color: 'var(--text-primary)',
+              lineHeight: 1.1,
+              letterSpacing: '-0.02em',
+              textAlign: 'center',
+              animationDelay: '0.12s',
+            }}
+          >
+            Devin Vögele
+          </h1>
+          <span
+            className="font-signature reveal-load"
+            aria-hidden
+            style={{
+              position: 'absolute',
+              right: '-0.75rem',
+              bottom: '-1.05em',
+              fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)',
+              lineHeight: 1,
+              color: '#22d3ee',
+              transform: 'rotate(-6deg)',
+              whiteSpace: 'nowrap',
+              pointerEvents: 'none',
+              textShadow: '0 0 22px rgba(34,211,238,0.4)',
+              animationDelay: '1.1s',
+            }}
+          >
+            fast things, built carefully
+          </span>
+        </div>
 
         {/* 3. One-line subtitle */}
         <p
@@ -230,7 +255,7 @@ export function Hero() {
             </svg>
           </a>
         </div>
-      </div>
+      </GlareField>
 
       {/* ── Hero-bottom fade: aurora dissolves into page bg ──────────── */}
       <div

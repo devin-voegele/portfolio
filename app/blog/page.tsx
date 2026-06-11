@@ -5,16 +5,13 @@ import { Aurora } from '@/components/effects/Aurora'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
 import { Footer } from '@/components/sections/Footer'
+import { posts } from '@/lib/posts'
 
 export const metadata: Metadata = {
   title: 'Writing — Devin Vögele',
   description:
     'Notes on development, design, cloud, and the occasional lap. Long-form writing from Devin Vögele.',
 }
-
-// Typed post shape — drop entries here when you have real posts.
-// TODO: add app/blog/[slug]/page.tsx when posts exist
-const posts: { slug: string; title: string; date: string; excerpt: string }[] = []
 
 export default function BlogPage() {
   return (
@@ -67,8 +64,8 @@ export default function BlogPage() {
               fontSize: '1rem',
             }}
           >
-            Notes on development, design, cloud, and the occasional lap.
-            Nothing published yet — but it&apos;s coming.
+            Notes on development, design, cloud, and the occasional lap —
+            written while building, not after.
           </p>
         </FadeIn>
       </div>
@@ -122,29 +119,51 @@ export default function BlogPage() {
           </FadeIn>
         ) : (
           /* ── Post grid (future) ──────────────────────────────────── */
-          <div className="grid gap-4 max-w-2xl mx-auto mt-4">
-            {posts.map(({ slug, title, date, excerpt }) => (
+          <div className="grid gap-5 max-w-2xl mx-auto mt-4">
+            {posts.map(({ slug, title, date, excerpt, readingTime, tags }) => (
               <FadeIn key={slug}>
                 <Link
                   href={`/blog/${slug}`}
-                  className="glass hover-lift rounded-xl p-6 block"
+                  className="lq lq-hover p-7 block"
                   style={{ textDecoration: 'none' }}
                 >
                   <p
-                    className="font-mono text-xs mb-2"
-                    style={{ color: 'var(--text-muted)', letterSpacing: '0.1em' }}
+                    className="font-mono text-xs mb-3"
+                    style={{ color: 'var(--text-muted)', letterSpacing: '0.12em' }}
                   >
-                    {date}
+                    {date} · {readingTime} read
                   </p>
                   <h3
-                    className="text-base font-semibold mb-2 transition-colors hover:text-[var(--accent)]"
-                    style={{ color: 'var(--text-primary)' }}
+                    className="text-lg font-bold mb-2"
+                    style={{ color: 'var(--text-primary)', letterSpacing: '-0.01em' }}
                   >
                     {title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
                     {excerpt}
                   </p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {tags.map((t) => (
+                      <span
+                        key={t}
+                        className="font-mono"
+                        style={{
+                          fontSize: '0.62rem',
+                          letterSpacing: '0.12em',
+                          padding: '0.2rem 0.6rem',
+                          borderRadius: '9999px',
+                          border: '1px solid var(--border)',
+                          color: 'var(--text-secondary)',
+                        }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                    <span className="flex-1" />
+                    <span className="text-sm font-medium" style={{ color: 'var(--accent)' }}>
+                      Read →
+                    </span>
+                  </div>
                 </Link>
               </FadeIn>
             ))}

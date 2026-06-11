@@ -377,6 +377,44 @@ html[data-perf='full'] .lq {
   pointer-events: none;
 }
 
+/* ─── Article prose (blog posts / case studies) ───────────────────── */
+.prose-dv { color: var(--text-secondary); font-size: 1rem; line-height: 1.75; }
+.prose-dv p { margin-bottom: 1.25rem; }
+.prose-dv h2 {
+  font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em;
+  color: var(--text-primary); margin: 2.25rem 0 0.9rem; line-height: 1.3;
+}
+.prose-dv h3 {
+  font-size: 1.1rem; font-weight: 600; color: var(--text-primary);
+  margin: 1.75rem 0 0.75rem;
+}
+.prose-dv a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.prose-dv a:hover { color: var(--accent-bright, #3b82f6); }
+.prose-dv strong { color: var(--text-primary); font-weight: 600; }
+.prose-dv ul, .prose-dv ol { margin: 0 0 1.25rem 1.25rem; }
+.prose-dv li { margin-bottom: 0.45rem; }
+.prose-dv ul li { list-style: disc; }
+.prose-dv ol li { list-style: decimal; }
+.prose-dv code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.85em; color: var(--accent-2);
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  border-radius: 5px; padding: 0.1em 0.35em;
+}
+.prose-dv pre {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.8rem; line-height: 1.6; color: var(--text-secondary);
+  background: rgba(10,12,18,0.85); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.25rem; overflow-x: auto;
+  margin: 0 0 1.25rem;
+}
+.prose-dv pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+.prose-dv blockquote {
+  border-left: 3px solid var(--accent); padding-left: 1rem;
+  margin: 0 0 1.25rem; color: var(--text-muted); font-style: italic;
+}
+.prose-dv hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
 /* Hover lift tuned for glass — brighter rim ring + accent shadow */
 .lq-hover {
   transition: transform 0.45s var(--ease-out-expo), box-shadow 0.45s ease;

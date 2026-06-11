@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 import { Lock, Check } from 'lucide-react'
 import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
@@ -12,6 +13,7 @@ interface Project {
   tags: string[]
   year: string
   url?: string
+  caseHref?: string
   redacted?: boolean
 }
 
@@ -21,6 +23,7 @@ const projects: Project[] = [
     desc: 'Motorsport media & marketing platform — content, branding and reach for the racing world.',
     tags: ['Next.js', 'Framer Motion', 'Tailwind'],
     year: '2024',
+    caseHref: '/work/formulagod',
   },
   {
     title: 'GetMoneyMap',
@@ -28,6 +31,7 @@ const projects: Project[] = [
     tags: ['Next.js', 'TypeScript', 'Tailwind'],
     year: '2025',
     url: 'https://getmoneymap.org',
+    caseHref: '/work/getmoneymap',
   },
   {
     title: '[CLASSIFIED]',
@@ -76,7 +80,7 @@ export function Projects() {
           <GlareField className="flex flex-col md:flex-row gap-16 items-start">
             {/* LEFT — project cards */}
             <div className="md:w-1/2 order-2 md:order-1 space-y-8 w-full">
-              {projects.map(({ title, desc, tags, year, url, redacted }) => (
+              {projects.map(({ title, desc, tags, year, url, caseHref, redacted }) => (
                 <div
                   key={title}
                   className="lq lq-glare lq-hover p-6 relative overflow-hidden"
@@ -116,25 +120,37 @@ export function Projects() {
                   </div>
 
                   {/* CTA */}
-                  {url ? (
-                    <a
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm font-medium transition-opacity hover:opacity-75"
-                      style={{ color: 'var(--accent)' }}
-                    >
-                      View Project →
-                    </a>
-                  ) : redacted ? (
-                    <span
-                      className="inline-flex items-center gap-2 text-sm"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      <Lock size={14} aria-hidden />
-                      Classified
-                    </span>
-                  ) : null}
+                  <div className="flex flex-wrap items-center gap-4">
+                    {caseHref && (
+                      <Link
+                        href={caseHref}
+                        className="inline-flex items-center gap-1.5 text-sm font-medium transition-opacity hover:opacity-75"
+                        style={{ color: 'var(--accent)', textDecoration: 'none' }}
+                      >
+                        Case study →
+                      </Link>
+                    )}
+                    {url && (
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium transition-opacity hover:opacity-75"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        Visit ↗
+                      </a>
+                    )}
+                    {redacted && (
+                      <span
+                        className="inline-flex items-center gap-2 text-sm"
+                        style={{ color: 'var(--text-muted)' }}
+                      >
+                        <Lock size={14} aria-hidden />
+                        Classified
+                      </span>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

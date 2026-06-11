@@ -30,7 +30,7 @@ interface PitApi {
   wake: () => void
 }
 
-export function SignalPit() {
+export function SignalPit({ height = 'min(70vh, 660px)' }: { height?: string }) {
   const hostRef = useRef<HTMLDivElement>(null)
   const apiRef = useRef<PitApi | null>(null)
   const statusRef = useRef<HTMLSpanElement>(null)
@@ -81,16 +81,34 @@ export function SignalPit() {
       host.appendChild(renderer.domElement)
 
       const scene = new THREE.Scene()
-      scene.fog = new THREE.Fog(0x05070d, 18, 34)
+      const fog = new THREE.Fog(0x05070d, 18, 34)
+      scene.fog = fog
 
       const camera = new THREE.PerspectiveCamera(
         50,
         host.clientWidth / host.clientHeight,
         0.1,
-        60,
+        90,
       )
-      camera.position.set(0, 7.5, 12.5)
-      camera.lookAt(0, 1.2, 0)
+      // Fit the whole arena into view at any aspect (portrait phones would
+      // otherwise crop the sides) — pull the camera back until the arena
+      // width fits the horizontal fov, and scale the fog with the distance.
+      let camBaseY = 7.5
+      let camBaseZ = 12.5
+      const fitCamera = () => {
+        const aspect = host.clientWidth / Math.max(1, host.clientHeight)
+        camera.aspect = aspect
+        const vHalf = THREE.MathUtils.degToRad(camera.fov / 2)
+        const hHalf = Math.atan(Math.tan(vHalf) * aspect)
+        camBaseZ = Math.max(12.5, (ARENA.hx + 1.6) / Math.tan(hHalf))
+        camBaseY = 5 + camBaseZ * 0.2
+        fog.near = camBaseZ * 1.4
+        fog.far = camBaseZ * 2.7
+        camera.position.set(0, camBaseY, camBaseZ)
+        camera.lookAt(0, 1.2, 0)
+        camera.updateProjectionMatrix()
+      }
+      fitCamera()
 
       // ── Lights ──────────────────────────────────────────────────
       scene.add(new THREE.AmbientLight(0x8899bb, 0.55))
@@ -263,7 +281,7 @@ export function SignalPit() {
 
         // subtle camera parallax toward the pointer
         camera.position.x += (ndc.x * 1.6 - camera.position.x) * 0.04
-        camera.position.y += (7.5 + ndc.y * 0.8 - camera.position.y) * 0.04
+        camera.position.y += (camBaseY + ndc.y * 0.8 - camera.position.y) * 0.04
         camera.lookAt(0, 1.2, 0)
 
         renderer.render(scene, camera)
@@ -287,7 +305,7 @@ export function SignalPit() {
       }
 
       const wake = () => {
-        if (running || disposed) return
+        if (running || disposed || !inView) return
         running = true
         setStatus(true)
         frames = 0
@@ -326,12 +344,24 @@ export function SignalPit() {
       }
       document.addEventListener('visibilitychange', onVis)
 
+      // Hard-pause whenever the pit is scrolled out of view (matters when
+      // embedded on the homepage) — resume only if bodies are still moving.
+      let inView = true
+      const io = new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting
+        if (!inView) {
+          if (raf) cancelAnimationFrame(raf)
+          raf = 0
+          running = false
+        } else if (!bodies.every((b) => b.isSleeping())) {
+          wake()
+        }
+      })
+      io.observe(host)
+
       const ro = new ResizeObserver(() => {
-        const w = host.clientWidth
-        const h = host.clientHeight
-        renderer.setSize(w, h)
-        camera.aspect = w / h
-        camera.updateProjectionMatrix()
+        renderer.setSize(host.clientWidth, host.clientHeight)
+        fitCamera()
         if (!running) renderer.render(scene, camera)
       })
       ro.observe(host)
@@ -371,6 +401,7 @@ export function SignalPit() {
         renderer.domElement.removeEventListener('pointerdown', onDown)
         document.removeEventListener('visibilitychange', onVis)
         ro.disconnect()
+        io.disconnect()
         world.free()
         sphereGeo.dispose()
         boxGeo.dispose()
@@ -419,10 +450,12 @@ export function SignalPit() {
         ref={hostRef}
         style={{
           width: '100%',
-          height: 'min(70vh, 660px)',
+          height,
           minHeight: '420px',
           cursor: 'crosshair',
-          touchAction: 'none',
+          // pan-y: vertical swipes keep scrolling the page on touch —
+          // horizontal drags and taps go to the physics.
+          touchAction: 'pan-y',
         }}
       />
 

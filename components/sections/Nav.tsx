@@ -230,6 +230,42 @@ export function Nav() {
               }}
             />
 
+            {/* Lab — violet-tinted pill */}
+            <motion.div variants={itemVariants} style={{ flexShrink: 0, marginRight: '0.3rem' }}>
+              <Link
+                href="/lab"
+                style={{
+                  display: 'inline-block',
+                  padding: '0.2rem 0.65rem',
+                  fontFamily: 'var(--font-body), system-ui, sans-serif',
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.01em',
+                  color: '#a78bfa',
+                  textDecoration: 'none',
+                  borderRadius: '9999px',
+                  border: '1px solid rgba(139,92,246,0.35)',
+                  background: 'rgba(139,92,246,0.10)',
+                  whiteSpace: 'nowrap',
+                  transition: 'background 0.2s ease, border-color 0.2s ease, color 0.2s ease',
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.background = 'rgba(139,92,246,0.20)'
+                  el.style.borderColor = 'rgba(139,92,246,0.65)'
+                  el.style.color = '#fff'
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.background = 'rgba(139,92,246,0.10)'
+                  el.style.borderColor = 'rgba(139,92,246,0.35)'
+                  el.style.color = '#a78bfa'
+                }}
+              >
+                Lab
+              </Link>
+            </motion.div>
+
             {/* Blog — accent-tinted pill */}
             <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
               <Link

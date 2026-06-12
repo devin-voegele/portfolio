@@ -48,6 +48,50 @@ const highlights = [
   'Work across web, cloud, automation and identity',
 ]
 
+const MAX_TILT = 4.5
+
+/** 3D tilt wrapper — pointer-driven only, springs back on leave. */
+function Tilt({ children }: { children: React.ReactNode }) {
+  const ref = React.useRef<HTMLDivElement>(null)
+  const raf = React.useRef(0)
+  const pos = React.useRef({ x: 0.5, y: 0.5 })
+
+  const fine = () =>
+    !window.matchMedia('(pointer: coarse)').matches &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  const apply = () => {
+    raf.current = 0
+    const el = ref.current
+    if (!el) return
+    const rotY = (pos.current.x - 0.5) * 2 * MAX_TILT
+    const rotX = -(pos.current.y - 0.5) * 2 * MAX_TILT
+    el.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-3px)`
+  }
+
+  const onMove = (e: React.PointerEvent) => {
+    if (!fine()) return
+    const el = ref.current
+    if (!el) return
+    const r = el.getBoundingClientRect()
+    pos.current = { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height }
+    el.style.transition = 'transform 0.1s linear'
+    if (!raf.current) raf.current = requestAnimationFrame(apply)
+  }
+  const onLeave = () => {
+    const el = ref.current
+    if (!el) return
+    el.style.transition = 'transform 0.7s var(--ease-out-expo)'
+    el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)'
+  }
+
+  return (
+    <div ref={ref} onPointerMove={onMove} onPointerLeave={onLeave}>
+      {children}
+    </div>
+  )
+}
+
 const techTags = ['Next.js', 'TypeScript', 'React', 'Tailwind', 'Docker', 'AWS', 'Python']
 
 export function Projects() {
@@ -81,9 +125,9 @@ export function Projects() {
             {/* LEFT — project cards */}
             <div className="md:w-1/2 order-2 md:order-1 space-y-8 w-full">
               {projects.map(({ title, desc, tags, year, url, caseHref, redacted }) => (
+                <Tilt key={title}>
                 <div
-                  key={title}
-                  className="lq lq-glare lq-hover p-6 relative overflow-hidden"
+                  className="lq lq-glare p-6 relative overflow-hidden"
                 >
                   {/* top gradient accent line */}
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)]" />
@@ -152,6 +196,7 @@ export function Projects() {
                     )}
                   </div>
                 </div>
+                </Tilt>
               ))}
             </div>
 

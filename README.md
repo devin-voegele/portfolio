@@ -1,146 +1,68 @@
-# 🏎️ Devin's Portfolio - Motorsport Edition
+# voegele.dev
 
-A modern, high-performance portfolio website built with Next.js, featuring motorsport-inspired design, 3D effects, and smooth animations.
+Personal site of **Devin Vögele** — developer & creative technologist, Würenlos CH. Platform development at PwC Switzerland; motorsport flavor on top.
 
-## ✨ Features
+**Live:** [voegele.dev](https://voegele.dev)
 
-- **Modern Tech Stack**: Next.js 15, React 18, TypeScript
-- **Stunning Animations**: Framer Motion for smooth, professional transitions
-- **3D Effects**: Three.js particle system and interactive backgrounds
-- **Motorsport Theme**: Racing-inspired design with cyan, purple, and red accents
-- **Fully Responsive**: Mobile-first design that works on all devices
-- **Performance Optimized**: Fast loading times and smooth interactions
-- **Easter Egg**: Click the logo to see a drifting car animation! 🏎️
+## What it is
 
-## 🚀 Tech Stack
+A dark, liquid-glass portfolio with one rule that everything obeys: **nothing animates while nothing is happening.** Every effect is interaction- or scroll-driven and goes fully to sleep when idle — no perpetual loops, no battery tax for reading a page.
 
-- **Framework**: Next.js 15 (App Router)
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **3D Graphics**: Three.js with React Three Fiber
-- **Icons**: Lucide React
-- **Language**: TypeScript
+- **Signal grid hero** — a canvas dot-field that ripples away from the cursor and bursts on click; its rAF loop cancels itself once the field settles
+- **Liquid glass cards** — translucent surfaces with a gradient specular rim and a pointer-tracked shine that slides across card groups (`GlareField`)
+- **Signal Pit** (`/lab`, also embedded on the homepage) — a Three.js × Rapier physics sandbox: ~130 instanced rigid bodies, cursor as force field, click shockwaves, flippable gravity. Sleeps when every body sleeps
+- **Writing** (`/blog`) — engineering notes with `BlogPosting` JSON-LD
+- **Case studies** (`/work/*`) — FormulaGod, GetMoneyMap
 
-## 📦 Installation
+## Performance model
 
-1. Clone the repository:
-```bash
-git clone <your-repo-url>
-cd Portfolio
+`PerfProvider` benchmarks the machine on load (frame-rate sample + core count) and assigns a tier — `full` / `reduced` / `off` — mirrored to `<html data-perf>`:
+
+- `full` → backdrop-filter glass (applied inline via JS — Lightning CSS strips the declaration from stylesheets), denser canvas effects, shadows in the pit
+- `reduced` (mobile / weak hardware) → solid glassy fallbacks, sparser effects, the homepage pit becomes a CSS teaser linking to `/lab`
+- `off` (reduced motion) → static renders, content always visible
+
+The heavy three + rapier chunk (~1.5 MB) is dynamically imported inside the pit component, so it loads only on `/lab` or when the homepage embed actually approaches the viewport.
+
+## Stack
+
+Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS · GSAP + ScrollTrigger · Lenis · Framer Motion · Three.js · Rapier (`@dimforge/rapier3d-compat`) · simplex-noise
+
+Fonts: Geist Sans / Geist Mono · Anton (display) · Caveat (signature)
+
+## Structure
+
+```
+app/
+├── page.tsx               # Home: hero → marquee → sections → playground → contact
+├── lab/                   # Signal Pit (Experiment 01)
+├── blog/                  # Writing index + posts (static routes per post)
+├── work/                  # Case studies (formulagod, getmoneymap)
+├── layout.tsx             # Metadata, Person/WebSite JSON-LD graph, providers
+└── sitemap.ts / globals.css
+
+components/
+├── sections/              # Hero, About, Skills, CloudDevOps, Homelab,
+│                          # Projects, LabSection, Hobbies, Contact, Nav, Footer
+├── effects/               # SignalGrid, Aurora, MountainBackdrop…
+├── primitives/            # GlareField, LiveTerminal, Magnetic, FadeIn…
+├── lab/                   # SignalPit (three + rapier, self-contained)
+├── blog/ · work/          # PostLayout, CaseStudy shells
+└── providers/             # PerfProvider (tiering), SmoothScroll (Lenis)
+
+lib/                       # gsap registration, posts registry
 ```
 
-2. Install dependencies:
+## Develop
+
 ```bash
 npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build (static)
 ```
 
-3. Run the development server:
-```bash
-npm run dev
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## 🏗️ Build for Production
-
-```bash
-npm run build
-npm start
-```
-
-## 📁 Project Structure
-
-```
-Portfolio/
-├── app/
-│   ├── layout.tsx          # Root layout with navbar and scroll progress
-│   ├── page.tsx            # Home page
-│   └── globals.css         # Global styles and custom utilities
-├── components/
-│   ├── Navbar.tsx          # Animated navigation bar
-│   ├── ScrollProgress.tsx  # Racing-style scroll indicator
-│   ├── Hero.tsx            # Hero section with CTA
-│   ├── ParticleBackground.tsx  # Three.js particle system
-│   ├── About.tsx           # About section
-│   ├── Projects.tsx        # Projects showcase
-│   ├── Skills.tsx          # Skills with progress bars
-│   ├── Contact.tsx         # Contact form
-│   └── DriftingCar.tsx     # Easter egg animation
-├── public/                 # Static assets
-└── package.json
-```
-
-## 🎨 Customization
-
-### Colors
-Edit the color scheme in `tailwind.config.ts`:
-```typescript
-colors: {
-  'racing-cyan': '#00f5ff',
-  'racing-red': '#ff0040',
-  'racing-purple': '#b026ff',
-}
-```
-
-### Content
-Update personal information in the component files:
-- **Hero.tsx**: Name, role, tagline
-- **About.tsx**: Background, experience
-- **Projects.tsx**: Project details
-- **Skills.tsx**: Skills and proficiency levels
-- **Contact.tsx**: Contact information
-
-## 🎯 Features Breakdown
-
-### Hero Section
-- Animated particle background with Three.js
-- Gradient text effects
-- Smooth entrance animations
-- Social media links
-
-### About Section
-- Animated racing circuit SVG
-- Highlight cards with icons
-- Parallax effects
-
-### Projects Section
-- Project cards with hover effects
-- Tech stack badges
-- GitHub and demo links
-
-### Skills Section
-- Animated progress bars
-- Categorized skills
-- Icon representations
-
-### Contact Section
-- Functional contact form
-- Smooth validation animations
-- Contact information cards
-
-## 🏁 Performance
-
-- Lighthouse Score: 95+
-- First Contentful Paint: < 1.5s
-- Time to Interactive: < 3s
-- Optimized images and assets
-- Code splitting and lazy loading
-
-## 📝 License
-
-MIT License - feel free to use this template for your own portfolio!
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-
-## 👨‍💻 Author
-
-**Devin**
-- Platform Developer @ PwC Switzerland
-- Training at ZLI Zürich
-- Motorsport Enthusiast & Sim Racer
+Deployed on Vercel from `main`.
 
 ---
 
-Built with ❤️ and Next.js
+Personal site — content is mine; code is MIT if any of it is useful to you.

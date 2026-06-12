@@ -40,6 +40,27 @@ export function Nav() {
 
   // visible state: non-home pages start visible; home starts hidden
   const [visible, setVisible] = useState(!isHome)
+  // section currently in view (home only) — drives the active link accent
+  const [activeHash, setActiveHash] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!isHome) return
+    const els = SECTION_LINKS
+      .map(({ hash }) => document.getElementById(hash))
+      .filter((el): el is HTMLElement => !!el)
+    if (els.length === 0) return
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActiveHash(entry.target.id)
+        }
+      },
+      // a band around the viewport center decides the active section
+      { rootMargin: '-35% 0px -55% 0px', threshold: 0 },
+    )
+    els.forEach((el) => obs.observe(el))
+    return () => obs.disconnect()
+  }, [isHome])
 
   // IntersectionObserver on #top (hero) — only on home
   useEffect(() => {
@@ -184,38 +205,43 @@ export function Nav() {
             />
 
             {/* Section links */}
-            {SECTION_LINKS.map(({ label, hash }) => (
-              <motion.div key={hash} variants={itemVariants} style={{ flexShrink: 0 }}>
-                <a
-                  href={sectionHref(hash)}
-                  style={{
-                    display: 'inline-block',
-                    padding: '0.25rem 0.5rem',
-                    fontFamily: 'var(--font-body), system-ui, sans-serif',
-                    fontSize: '0.78rem',
-                    fontWeight: 500,
-                    letterSpacing: '0.01em',
-                    color: 'var(--text-secondary)',
-                    textDecoration: 'none',
-                    borderRadius: '6px',
-                    whiteSpace: 'nowrap',
-                    transition: 'color 0.2s ease, background 0.2s ease',
-                  }}
-                  onMouseEnter={e => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.color = 'var(--text-primary)'
-                    el.style.background = 'rgba(255,255,255,0.06)'
-                  }}
-                  onMouseLeave={e => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.color = 'var(--text-secondary)'
-                    el.style.background = 'transparent'
-                  }}
-                >
-                  {label}
-                </a>
-              </motion.div>
-            ))}
+            {SECTION_LINKS.map(({ label, hash }) => {
+              const isActive = activeHash === hash
+              return (
+                <motion.div key={hash} variants={itemVariants} style={{ flexShrink: 0 }}>
+                  <a
+                    href={sectionHref(hash)}
+                    aria-current={isActive ? 'true' : undefined}
+                    style={{
+                      display: 'inline-block',
+                      padding: '0.25rem 0.5rem',
+                      fontFamily: 'var(--font-body), system-ui, sans-serif',
+                      fontSize: '0.78rem',
+                      fontWeight: isActive ? 600 : 500,
+                      letterSpacing: '0.01em',
+                      color: isActive ? 'var(--accent-bright)' : 'var(--text-secondary)',
+                      background: isActive ? 'rgba(59,130,246,0.10)' : 'transparent',
+                      textDecoration: 'none',
+                      borderRadius: '6px',
+                      whiteSpace: 'nowrap',
+                      transition: 'color 0.2s ease, background 0.2s ease',
+                    }}
+                    onMouseEnter={e => {
+                      const el = e.currentTarget as HTMLElement
+                      el.style.color = isActive ? 'var(--accent-bright)' : 'var(--text-primary)'
+                      el.style.background = isActive ? 'rgba(59,130,246,0.14)' : 'rgba(255,255,255,0.06)'
+                    }}
+                    onMouseLeave={e => {
+                      const el = e.currentTarget as HTMLElement
+                      el.style.color = isActive ? 'var(--accent-bright)' : 'var(--text-secondary)'
+                      el.style.background = isActive ? 'rgba(59,130,246,0.10)' : 'transparent'
+                    }}
+                  >
+                    {label}
+                  </a>
+                </motion.div>
+              )
+            })}
 
             {/* Thin divider before Blog */}
             <motion.div

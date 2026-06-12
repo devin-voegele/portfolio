@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
+import { gsap } from '@/lib/gsap'
 import { Aurora } from '@/components/effects/Aurora'
 import { SignalGrid } from '@/components/effects/SignalGrid'
 import { LiveTerminal } from '@/components/primitives/LiveTerminal'
@@ -7,8 +9,32 @@ import { Magnetic } from '@/components/primitives/Magnetic'
 import { GlareField } from '@/components/primitives/GlareField'
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  // Content drifts up + fades as you scroll past — scrubbed, no idle cost
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const ctx = gsap.context(() => {
+      gsap.to('.hero-drift', {
+        yPercent: 14,
+        autoAlpha: 0.25,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: 'bottom 30%',
+          scrub: true,
+        },
+      })
+    }, section)
+    return () => ctx.revert()
+  }, [])
+
   return (
     <section
+      ref={sectionRef}
       id="top"
       className="relative overflow-hidden flex flex-col justify-center"
       style={{ minHeight: '100vh', padding: '5rem 1.5rem' }}
@@ -21,7 +47,7 @@ export function Hero() {
 
       {/* ── Centered single-column content ──────────────────────── */}
       <GlareField
-        className="relative mx-auto w-full flex flex-col items-center text-center"
+        className="hero-drift relative mx-auto w-full flex flex-col items-center text-center"
         style={{ zIndex: 10, maxWidth: '48rem' }}
       >
         {/* 1. Badge pill */}

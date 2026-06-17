@@ -327,6 +327,42 @@ export function Nav() {
                 Writing
               </Link>
             </motion.div>
+
+            {/* Docs — cyan-tinted pill */}
+            <motion.div variants={itemVariants} style={{ flexShrink: 0, marginLeft: '0.3rem' }}>
+              <Link
+                href="/docs"
+                style={{
+                  display: 'inline-block',
+                  padding: '0.2rem 0.65rem',
+                  fontFamily: 'var(--font-body), system-ui, sans-serif',
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.01em',
+                  color: '#22d3ee',
+                  textDecoration: 'none',
+                  borderRadius: '9999px',
+                  border: '1px solid rgba(34,211,238,0.35)',
+                  background: 'rgba(34,211,238,0.10)',
+                  whiteSpace: 'nowrap',
+                  transition: 'background 0.2s ease, border-color 0.2s ease, color 0.2s ease',
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.background = 'rgba(34,211,238,0.20)'
+                  el.style.borderColor = 'rgba(34,211,238,0.65)'
+                  el.style.color = '#fff'
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.background = 'rgba(34,211,238,0.10)'
+                  el.style.borderColor = 'rgba(34,211,238,0.35)'
+                  el.style.color = '#22d3ee'
+                }}
+              >
+                Docs
+              </Link>
+            </motion.div>
           </motion.div>
         </motion.nav>
       )}

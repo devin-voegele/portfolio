@@ -12,7 +12,7 @@ const SEQUENCE: Line[] = [
   { type: 'cmd', text: 'cat stack.txt' },
   { type: 'out', text: 'Next.js · TypeScript · React · Docker · AWS · Python' },
   { type: 'cmd', text: 'location' },
-  { type: 'out', text: 'Würenlos, Switzerland · 47.4373° N' },
+  { type: 'out', text: 'Switzerland' },
   { type: 'cmd', text: 'status' },
   { type: 'out', text: '● Available for work', color: 'var(--accent-2)' },
 ]

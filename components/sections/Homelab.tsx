@@ -47,13 +47,6 @@ const goals = [
   'A safe place to break things and learn',
 ]
 
-const statusStats = [
-  { value: 'Soon', label: 'Status' },
-  { value: 'k8s', label: 'Core' },
-  { value: 'CI/CD', label: 'Pipelines' },
-  { value: 'Self-host', label: 'Services' },
-]
-
 export function Homelab() {
   return (
     <section id="homelab" className="py-24 px-4 relative">
@@ -115,7 +108,7 @@ export function Homelab() {
           <GlareField className="grid md:grid-cols-2 gap-12 items-start">
             {/* LEFT — Planned Architecture card */}
             <div className="lq lq-glare p-6">
-              <h3 className="text-xl font-bold mb-6" style={{ color: 'var(--accent)' }}>
+              <h3 className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
                 Planned Architecture
               </h3>
 
@@ -143,7 +136,7 @@ export function Homelab() {
             {/* RIGHT — Goals card + stat row */}
             <div className="space-y-6">
               <div className="lq lq-glare p-6">
-                <h3 className="text-xl font-bold mb-6" style={{ color: 'var(--accent)' }}>
+                <h3 className="text-xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
                   What It&apos;s For
                 </h3>
 
@@ -164,22 +157,6 @@ export function Homelab() {
                 </ul>
               </div>
 
-              {/* Honest placeholder stats */}
-              <div className="grid grid-cols-2 gap-4">
-                {statusStats.map(({ value, label }) => (
-                  <div
-                    key={label}
-                    className="lq lq-glare text-center p-3"
-                  >
-                    <div className="text-lg font-bold mb-0.5" style={{ color: 'var(--accent)' }}>
-                      {value}
-                    </div>
-                    <div className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                      {label}
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
           </GlareField>
         </FadeIn>

@@ -96,7 +96,7 @@ export function Contact() {
 
       <div className="container mx-auto max-w-5xl relative z-10">
         <SectionHeader
-          index="07"
+          index="06"
           eyebrow="Contact Me"
           title="Get in"
           accent="Touch"
@@ -117,7 +117,7 @@ export function Contact() {
               <div className="lq lq-glare p-8">
                 <h3
                   className="text-xl font-bold mb-6"
-                  style={{ color: 'var(--accent)' }}
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   Send a Message
                 </h3>
@@ -313,7 +313,7 @@ export function Contact() {
                 <div className="lq lq-glare lq-hover p-6">
                   <h3
                     className="text-xl font-bold mb-5"
-                    style={{ color: 'var(--accent)' }}
+                    style={{ color: 'var(--text-primary)' }}
                   >
                     Connect With Me
                   </h3>

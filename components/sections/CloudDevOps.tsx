@@ -119,7 +119,7 @@ export function CloudDevOps() {
             <div className="lg:w-1/2 order-1 lg:order-2 w-full">
               <div className="sticky top-24 space-y-8">
                 <div>
-                  <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--accent)' }}>
+                  <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
                     What I Work On
                   </h3>
                   <p className="leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>

@@ -109,7 +109,7 @@ export function Skills() {
                     </div>
                     <h3
                       className="text-lg font-bold mb-1"
-                      style={{ color: accentVar }}
+                      style={{ color: 'var(--text-primary)' }}
                     >
                       {title}
                     </h3>
@@ -125,7 +125,7 @@ export function Skills() {
             <div className="md:w-1/2 order-1 md:order-2">
               <h3
                 className="text-2xl md:text-3xl font-bold mb-6"
-                style={{ color: 'var(--accent)' }}
+                style={{ color: 'var(--text-primary)' }}
               >
                 Technical Proficiency
               </h3>

@@ -256,7 +256,7 @@ export function Nav() {
               }}
             />
 
-            {/* Lab — violet-tinted pill */}
+            {/* Lab — pill */}
             <motion.div variants={itemVariants} style={{ flexShrink: 0, marginRight: '0.3rem' }}>
               <Link
                 href="/lab"
@@ -267,32 +267,32 @@ export function Nav() {
                   fontSize: '0.78rem',
                   fontWeight: 600,
                   letterSpacing: '0.01em',
-                  color: '#a78bfa',
+                  color: 'var(--text-secondary)',
                   textDecoration: 'none',
                   borderRadius: '9999px',
-                  border: '1px solid rgba(139,92,246,0.35)',
-                  background: 'rgba(139,92,246,0.10)',
+                  border: '1px solid var(--glass-border)',
+                  background: 'transparent',
                   whiteSpace: 'nowrap',
                   transition: 'background 0.2s ease, border-color 0.2s ease, color 0.2s ease',
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.background = 'rgba(139,92,246,0.20)'
-                  el.style.borderColor = 'rgba(139,92,246,0.65)'
+                  el.style.background = 'rgba(255,255,255,0.06)'
+                  el.style.borderColor = 'rgba(255,255,255,0.28)'
                   el.style.color = '#fff'
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.background = 'rgba(139,92,246,0.10)'
-                  el.style.borderColor = 'rgba(139,92,246,0.35)'
-                  el.style.color = '#a78bfa'
+                  el.style.background = 'transparent'
+                  el.style.borderColor = 'var(--glass-border)'
+                  el.style.color = 'var(--text-secondary)'
                 }}
               >
                 Lab
               </Link>
             </motion.div>
 
-            {/* Blog — accent-tinted pill */}
+            {/* Blog — pill */}
             <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
               <Link
                 href="/blog"
@@ -303,32 +303,32 @@ export function Nav() {
                   fontSize: '0.78rem',
                   fontWeight: 600,
                   letterSpacing: '0.01em',
-                  color: 'var(--accent-bright)',
+                  color: 'var(--text-secondary)',
                   textDecoration: 'none',
                   borderRadius: '9999px',
-                  border: '1px solid rgba(37,99,235,0.35)',
-                  background: 'rgba(37,99,235,0.10)',
+                  border: '1px solid var(--glass-border)',
+                  background: 'transparent',
                   whiteSpace: 'nowrap',
                   transition: 'background 0.2s ease, border-color 0.2s ease, color 0.2s ease',
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.background = 'rgba(37,99,235,0.20)'
-                  el.style.borderColor = 'rgba(37,99,235,0.65)'
+                  el.style.background = 'rgba(255,255,255,0.06)'
+                  el.style.borderColor = 'rgba(255,255,255,0.28)'
                   el.style.color = '#fff'
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.background = 'rgba(37,99,235,0.10)'
-                  el.style.borderColor = 'rgba(37,99,235,0.35)'
-                  el.style.color = 'var(--accent-bright)'
+                  el.style.background = 'transparent'
+                  el.style.borderColor = 'var(--glass-border)'
+                  el.style.color = 'var(--text-secondary)'
                 }}
               >
                 Writing
               </Link>
             </motion.div>
 
-            {/* Docs — cyan-tinted pill */}
+            {/* Docs — pill */}
             <motion.div variants={itemVariants} style={{ flexShrink: 0, marginLeft: '0.3rem' }}>
               <Link
                 href="/docs"
@@ -339,25 +339,25 @@ export function Nav() {
                   fontSize: '0.78rem',
                   fontWeight: 600,
                   letterSpacing: '0.01em',
-                  color: '#22d3ee',
+                  color: 'var(--text-secondary)',
                   textDecoration: 'none',
                   borderRadius: '9999px',
-                  border: '1px solid rgba(34,211,238,0.35)',
-                  background: 'rgba(34,211,238,0.10)',
+                  border: '1px solid var(--glass-border)',
+                  background: 'transparent',
                   whiteSpace: 'nowrap',
                   transition: 'background 0.2s ease, border-color 0.2s ease, color 0.2s ease',
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.background = 'rgba(34,211,238,0.20)'
-                  el.style.borderColor = 'rgba(34,211,238,0.65)'
+                  el.style.background = 'rgba(255,255,255,0.06)'
+                  el.style.borderColor = 'rgba(255,255,255,0.28)'
                   el.style.color = '#fff'
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.background = 'rgba(34,211,238,0.10)'
-                  el.style.borderColor = 'rgba(34,211,238,0.35)'
-                  el.style.color = '#22d3ee'
+                  el.style.background = 'transparent'
+                  el.style.borderColor = 'var(--glass-border)'
+                  el.style.color = 'var(--text-secondary)'
                 }}
               >
                 Docs

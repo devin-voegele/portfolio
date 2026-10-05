@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://voegele.dev"),
   title: {
-    default: "Devin Vögele — Developer & Creative Technologist",
+    default: "Devin Vögele - Developer & Creative Technologist",
     template: "%s | Devin Vögele"
   },
   description: "Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.",
@@ -51,14 +51,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://voegele.dev",
     siteName: "Devin Vögele",
-    title: "Devin Vögele — Developer & Creative Technologist",
+    title: "Devin Vögele - Developer & Creative Technologist",
     description: "Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.",
     firstName: "Devin",
     lastName: "Vögele",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Devin Vögele — Developer & Creative Technologist",
+    title: "Devin Vögele - Developer & Creative Technologist",
     description: "Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.",
     creator: "@devinvoegele",
   },
@@ -111,7 +111,7 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": "https://voegele.dev/#website",
       "url": "https://voegele.dev",
-      "name": "Devin Vögele — Portfolio",
+      "name": "Devin Vögele - Portfolio",
       "publisher": { "@id": "https://voegele.dev/#person" },
       "inLanguage": "en"
     },

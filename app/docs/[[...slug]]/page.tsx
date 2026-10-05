@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     openGraph: {
       type: 'article',
       url: docsCanonical(s),
-      siteName: 'Devin Vögele — Docs',
+      siteName: 'Devin Vögele - Docs',
       locale: 'en_US',
       title,
       description: doc.description,

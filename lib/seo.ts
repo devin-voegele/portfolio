@@ -16,7 +16,7 @@ export const DEFAULT_OG = {
   url: '/opengraph-image',
   width: 1200,
   height: 630,
-  alt: 'Devin Vögele — Developer & Creative Technologist',
+  alt: 'Devin Vögele - Developer & Creative Technologist',
 }
 
 /**

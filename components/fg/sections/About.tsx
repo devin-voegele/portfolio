@@ -43,7 +43,7 @@ export function About() {
           <div className="mt-8 flex items-center gap-3">
             <div className="h-px w-8 bg-zinc-500" />
             <span className="text-xs uppercase tracking-widest text-zinc-500 font-sans">
-              Devin Vögele — Developer &amp; Creative Technologist
+              Devin Vögele - Developer &amp; Creative Technologist
             </span>
           </div>
         </motion.div>

@@ -85,7 +85,7 @@ export function Nav() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
-          aria-label="Devin Vögele — home"
+          aria-label="Devin Vögele - home"
           className="relative z-[70] text-white hover:text-zinc-300 transition-colors duration-300"
         >
           <Logo size={38} />

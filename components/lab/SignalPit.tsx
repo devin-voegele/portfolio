@@ -17,7 +17,7 @@ import type { World, RigidBody } from '@dimforge/rapier3d-compat'
  * ~1.5 MB physics/3D chunk only ever loads on /lab.
  */
 
-const PALETTE = ['#3b82f6', '#22d3ee', '#8b5cf6', '#10b981', '#60a5fa']
+const PALETTE = ['#ffffff', '#a78bfa', '#a1a1aa', '#7043ec', '#71717a']
 const ARENA = { hx: 6.5, hz: 4.5, wallH: 11 }
 const POINTER_RADIUS = 3.4
 const POINTER_FORCE = 5.5
@@ -81,7 +81,7 @@ export function SignalPit({ height = 'min(70vh, 660px)' }: { height?: string }) 
       host.appendChild(renderer.domElement)
 
       const scene = new THREE.Scene()
-      const fog = new THREE.Fog(0x05070d, 18, 34)
+      const fog = new THREE.Fog(0x000000, 18, 34)
       scene.fog = fog
 
       const camera = new THREE.PerspectiveCamera(
@@ -111,8 +111,8 @@ export function SignalPit({ height = 'min(70vh, 660px)' }: { height?: string }) 
       fitCamera()
 
       // ── Lights ──────────────────────────────────────────────────
-      scene.add(new THREE.AmbientLight(0x8899bb, 0.55))
-      const key = new THREE.DirectionalLight(0xdde6ff, 1.6)
+      scene.add(new THREE.AmbientLight(0xb4b4bc, 0.55))
+      const key = new THREE.DirectionalLight(0xffffff, 1.6)
       key.position.set(6, 12, 5)
       if (full) {
         key.castShadow = true
@@ -124,18 +124,18 @@ export function SignalPit({ height = 'min(70vh, 660px)' }: { height?: string }) 
         key.shadow.camera.far = 30
       }
       scene.add(key)
-      const rim = new THREE.DirectionalLight(0x3b82f6, 0.7)
+      const rim = new THREE.DirectionalLight(0x7043ec, 0.7)
       rim.position.set(-7, 6, -6)
       scene.add(rim)
 
       // ── Arena visuals ───────────────────────────────────────────
-      const floorMat = new THREE.MeshStandardMaterial({ color: 0x0a0e18, roughness: 0.92, metalness: 0.18 })
+      const floorMat = new THREE.MeshStandardMaterial({ color: 0x0a0a0a, roughness: 0.92, metalness: 0.18 })
       const floor = new THREE.Mesh(new THREE.BoxGeometry(ARENA.hx * 2, 0.5, ARENA.hz * 2), floorMat)
       floor.position.y = -0.25
       floor.receiveShadow = full
       scene.add(floor)
 
-      const grid = new THREE.GridHelper(ARENA.hx * 2, 13, 0x2a3550, 0x141b2c)
+      const grid = new THREE.GridHelper(ARENA.hx * 2, 13, 0x2a2a2e, 0x161618)
       grid.position.y = 0.012
       ;(grid.material as InstanceType<typeof THREE.Material>).transparent = true
       ;(grid.material as InstanceType<typeof THREE.Material>).opacity = 0.5
@@ -143,7 +143,7 @@ export function SignalPit({ height = 'min(70vh, 660px)' }: { height?: string }) 
 
       const cage = new THREE.LineSegments(
         new THREE.EdgesGeometry(new THREE.BoxGeometry(ARENA.hx * 2, ARENA.wallH, ARENA.hz * 2)),
-        new THREE.LineBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.16 }),
+        new THREE.LineBasicMaterial({ color: 0x7043ec, transparent: true, opacity: 0.16 }),
       )
       cage.position.y = ARENA.wallH / 2
       scene.add(cage)
@@ -245,7 +245,7 @@ export function SignalPit({ height = 'min(70vh, 660px)' }: { height?: string }) 
 
       const setStatus = (live: boolean) => {
         if (statusRef.current) statusRef.current.textContent = live ? '● LIVE' : '○ IDLE'
-        if (statusRef.current) statusRef.current.style.color = live ? '#10b981' : '#6b7184'
+        if (statusRef.current) statusRef.current.style.color = live ? '#4ade80' : '#7384ab'
         if (!live && fpsRef.current) fpsRef.current.textContent = '—'
       }
 
@@ -471,7 +471,7 @@ export function SignalPit({ height = 'min(70vh, 660px)' }: { height?: string }) 
       </div>
       <div className="absolute top-3 right-3 flex gap-2">
         <span className="lq font-mono" style={chipStyle}>
-          <span ref={statusRef} style={{ color: '#10b981' }}>● LIVE</span>
+          <span ref={statusRef} style={{ color: '#4ade80' }}>● LIVE</span>
         </span>
         <span className="lq font-mono" style={{ ...chipStyle, minWidth: '4.6rem', justifyContent: 'center' }}>
           <span ref={fpsRef}>—</span>
@@ -495,7 +495,7 @@ export function SignalPit({ height = 'min(70vh, 660px)' }: { height?: string }) 
         <button
           type="button"
           className="lq font-mono"
-          style={{ ...btnStyle, color: flipped ? '#22d3ee' : 'var(--text-primary)' }}
+          style={{ ...btnStyle, color: flipped ? '#a78bfa' : 'var(--text-primary)' }}
           disabled={!ready}
           onClick={() => setFlipped(apiRef.current?.flipGravity() ?? false)}
           onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)')}

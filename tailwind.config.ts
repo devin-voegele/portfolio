@@ -7,6 +7,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-calsans)", "var(--font-geist-sans)", "sans-serif"],
+      },
       colors: {
         background: "var(--bg-primary)",
         foreground: "var(--text-primary)",
@@ -45,6 +49,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 export default config;

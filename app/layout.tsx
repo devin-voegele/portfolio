@@ -1,14 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { anton, geistSans, geistMono, caveat } from "./fonts";
+import { geistSans, geistMono, calSans } from "./fonts";
 import "./globals.css";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { PerfProvider } from "@/components/providers/PerfProvider";
-import { ScrollProgress } from "@/components/effects/ScrollProgress";
-import { MountainBackdrop } from "@/components/effects/MountainBackdrop";
-import { Nav } from "@/components/sections/Nav";
+import { Nav } from "@/components/fg/Nav";
 
 export const viewport: Viewport = {
-  themeColor: '#0a0a0a',
+  themeColor: "#000000",
 };
 
 export const metadata: Metadata = {
@@ -134,33 +131,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${anton.variable} ${geistSans.variable} ${geistMono.variable} ${caveat.variable}`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${calSans.variable}`}>
       <body className="antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
-        <ScrollProgress />
         <Nav />
-        {/* Mountain silhouette backdrop — fixed, behind all content, parallax-scrolled */}
-        <MountainBackdrop />
-        {/* Site-wide ambient radial glow — very faint, keeps sections from pure black */}
-        <div
-          aria-hidden
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: -1,
-            pointerEvents: 'none',
-            background:
-              'radial-gradient(ellipse 80% 50% at 15% 20%, rgba(37,99,235,0.05) 0%, transparent 60%),' +
-              'radial-gradient(ellipse 70% 50% at 85% 80%, rgba(16,185,129,0.04) 0%, transparent 60%),' +
-              'radial-gradient(ellipse 60% 40% at 50% 55%, rgba(139,92,246,0.04) 0%, transparent 60%)',
-          }}
-        />
-        <PerfProvider>
-          <SmoothScroll>{children}</SmoothScroll>
-        </PerfProvider>
+        <PerfProvider>{children}</PerfProvider>
       </body>
     </html>
   );

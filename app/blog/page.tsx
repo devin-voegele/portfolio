@@ -50,7 +50,6 @@ export default function BlogPage() {
       {/* ── Header ───────────────────────────────────────────────────── */}
       <div className="relative z-10 pt-24 pb-12 px-4">
         <SectionHeader
-          index="//"
           eyebrow="Journal"
           title="Writing"
           accent="& Notes"

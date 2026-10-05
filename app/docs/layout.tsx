@@ -12,7 +12,7 @@ export default async function DocsLayout({ children }: { children: React.ReactNo
     <DocsBaseProvider basePath={basePath}>
       {/* Docs have their own chrome — hide the global floating site nav
           here (also keeps its section links off the docs subdomain). */}
-      <style>{`nav[aria-label="Primary"]{display:none!important}`}</style>
+      <style>{`[data-site-header]{display:none!important}`}</style>
       <main className="min-h-screen relative">
         {/* Ambient wash */}
         <div

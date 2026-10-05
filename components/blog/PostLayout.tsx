@@ -93,7 +93,7 @@ export function PostLayout({ meta, children }: { meta: PostMeta; children: React
         <div className="pt-8" style={{ borderTop: '1px solid var(--border)' }}>
           <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
             Written by <strong style={{ color: 'var(--text-primary)' }}>Devin Vögele</strong> — developer &amp;
-            creative technologist, Würenlos CH.
+            creative technologist, Switzerland.
           </p>
           <p className="mt-3">
             <Link

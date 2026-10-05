@@ -136,7 +136,7 @@ export default function OGImage() {
                 fontWeight: 500,
               }}
             >
-              Würenlos, Switzerland
+              Switzerland
             </div>
             <div style={{ color: '#4b5563', fontSize: '16px' }}>·</div>
             <div style={{ fontSize: '16px', color: '#71717a' }}>

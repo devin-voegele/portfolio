@@ -1,7 +1,6 @@
 /**
- * Logo: a heavy V with an umlaut — the "ö" in Vögele. The two violet dots are
- * the same node language as the hero network. Strokes use `currentColor`, so
- * the V follows the surrounding text colour.
+ * Logo: a V made of two slanted blades — one follows the text colour, the other
+ * is the violet accent. Reads as a V, a speed mark and a pair of nodes in one.
  */
 export function Logo({ size = 40, className }: { size?: number; className?: string }) {
   return (
@@ -13,9 +12,8 @@ export function Logo({ size = 40, className }: { size?: number; className?: stri
       aria-label="Devin Vögele"
       className={className}
     >
-      <path fill="currentColor" d="M5 15.5h10.8L24 34.8l8.2-19.3H43L29.6 44H18.4z" />
-      <circle cx="16.5" cy="6.8" r="4" fill="#7043EC" />
-      <circle cx="31.5" cy="6.8" r="4" fill="#7043EC" />
+      <path fill="currentColor" d="M3 6h11l9 27-6 9z" />
+      <path fill="#7043EC" d="M45 6H34l-9 27 6 9z" />
     </svg>
   )
 }

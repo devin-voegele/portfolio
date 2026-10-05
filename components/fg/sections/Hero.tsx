@@ -19,7 +19,7 @@ export function Hero() {
       <div
         aria-hidden
         className="absolute inset-0 z-10 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 50%, rgba(0,0,0,0.72), rgba(0,0,0,0.2) 70%, transparent)' }}
+        style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 50%, rgba(0,0,0,0.55), rgba(0,0,0,0.08) 70%, transparent)' }}
       />
 
       <div className="relative z-20 flex flex-col items-center gap-8 px-6 text-center">
@@ -47,6 +47,7 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.55 }}
           className="text-zinc-400 text-sm md:text-base max-w-xl leading-relaxed font-sans -mt-2"
+          style={{ textShadow: '0 0 14px #000, 0 0 5px #000' }}
         >
           Platform developer at PwC Switzerland. I build fast, considered interfaces — and the cloud, identity and
           automation underneath them.

@@ -40,9 +40,9 @@ const NODE_VERT = /* glsl */ `
     gl_Position = clip;
     float n = nearPointer(clip);
     float pulse = 0.6 + 0.4 * sin(uTime * 1.2 + aSeed * 6.2831);
-    vA = (0.22 + 0.78 * depthFade(mv.z)) * (0.55 + 0.45 * pulse) + n * 0.6;
+    vA = (0.45 + 0.55 * depthFade(mv.z)) * (0.7 + 0.3 * pulse) + n * 0.6;
     vN = n;
-    gl_PointSize = uPx * (2.0 + 2.2 * pulse + 6.0 * n) * (7.0 / -mv.z);
+    gl_PointSize = uPx * (2.8 + 2.4 * pulse + 6.0 * n) * (7.0 / -mv.z);
   }
 `
 const NODE_FRAG = /* glsl */ `
@@ -65,12 +65,12 @@ const LINE_VERT = /* glsl */ `
     vec4 mv = modelViewMatrix * vec4(position, 1.0);
     vec4 clip = projectionMatrix * mv;
     gl_Position = clip;
-    vA = 0.09 + 0.28 * depthFade(mv.z) + nearPointer(clip) * 0.55;
+    vA = 0.18 + 0.42 * depthFade(mv.z) + nearPointer(clip) * 0.6;
   }
 `
 const LINE_FRAG = /* glsl */ `
   varying float vA;
-  void main() { gl_FragColor = vec4(0.5, 0.5, 0.66, vA); }
+  void main() { gl_FragColor = vec4(0.66, 0.66, 0.86, vA); }
 `
 
 const PACKET_VERT = /* glsl */ `
@@ -86,7 +86,7 @@ const PACKET_VERT = /* glsl */ `
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
     float edge = sin(3.14159 * t);
-    vA = edge * (0.35 + 0.65 * depthFade(mv.z));
+    vA = edge * (0.6 + 0.4 * depthFade(mv.z));
     gl_PointSize = uPx * (3.2 + 2.4 * edge) * (7.0 / -mv.z);
   }
 `

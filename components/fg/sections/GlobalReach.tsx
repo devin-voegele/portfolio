@@ -48,8 +48,8 @@ export function GlobalReach() {
   }, [])
 
   return (
-    <section className="py-24 px-6 bg-black">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="pt-16 pb-2 md:py-24 px-6 bg-black">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -32 }}
           whileInView={{ opacity: 1, x: 0 }}

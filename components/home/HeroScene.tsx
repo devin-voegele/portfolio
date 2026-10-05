@@ -40,7 +40,7 @@ const NODE_VERT = /* glsl */ `
     gl_Position = clip;
     float n = nearPointer(clip);
     float pulse = 0.6 + 0.4 * sin(uTime * 1.2 + aSeed * 6.2831);
-    vA = (0.45 + 0.55 * depthFade(mv.z)) * (0.7 + 0.3 * pulse) + n * 0.6;
+    vA = (0.34 + 0.5 * depthFade(mv.z)) * (0.65 + 0.35 * pulse) + n * 0.6;
     vN = n;
     gl_PointSize = uPx * (2.8 + 2.4 * pulse + 6.0 * n) * (7.0 / -mv.z);
   }
@@ -65,12 +65,12 @@ const LINE_VERT = /* glsl */ `
     vec4 mv = modelViewMatrix * vec4(position, 1.0);
     vec4 clip = projectionMatrix * mv;
     gl_Position = clip;
-    vA = 0.18 + 0.42 * depthFade(mv.z) + nearPointer(clip) * 0.6;
+    vA = 0.13 + 0.32 * depthFade(mv.z) + nearPointer(clip) * 0.55;
   }
 `
 const LINE_FRAG = /* glsl */ `
   varying float vA;
-  void main() { gl_FragColor = vec4(0.66, 0.66, 0.86, vA); }
+  void main() { gl_FragColor = vec4(0.6, 0.6, 0.8, vA); }
 `
 
 const PACKET_VERT = /* glsl */ `
@@ -86,7 +86,7 @@ const PACKET_VERT = /* glsl */ `
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
     float edge = sin(3.14159 * t);
-    vA = edge * (0.6 + 0.4 * depthFade(mv.z));
+    vA = edge * (0.5 + 0.4 * depthFade(mv.z));
     gl_PointSize = uPx * (3.2 + 2.4 * edge) * (7.0 / -mv.z);
   }
 `
@@ -267,6 +267,9 @@ function Network({ tier }: { tier: PerfTier }) {
     angle.current += d * 0.07
     g.rotation.y += (angle.current + p.x * 0.45 - g.rotation.y) * k
     g.rotation.x += (0.28 - p.y * 0.22 - g.rotation.x) * k
+    // smaller on phones so it frames the title instead of swamping it
+    const sc = state.size.width < 640 ? 0.72 : 1
+    g.scale.setScalar(g.scale.x + (sc - g.scale.x) * k)
   })
 
   return (
@@ -321,8 +324,8 @@ export default function HeroScene() {
     >
       <SceneBoundary>
         <Canvas
-          dpr={full ? [1, 1.75] : 1}
-          gl={{ antialias: full, alpha: true, powerPreference: 'high-performance' }}
+          dpr={[1, 2]}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
           camera={{ position: [0, 0, 6.4], fov: 45 }}
           frameloop={onScreen && tabVisible ? 'always' : 'never'}
           onCreated={() => setReady(true)}

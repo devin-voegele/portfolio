@@ -37,8 +37,9 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
         >
-          <h1 className="font-hero text-[clamp(2.1rem,9.4vw,8.25rem)] leading-[0.98] tracking-tight text-center text-white uppercase">
-            Devin <Cover className="text-white">Vögele</Cover>
+          <h1 className="font-hero hero-title tracking-tight text-center text-white uppercase">
+            Devin <br className="hero-br" />
+            <Cover className="text-white">Vögele</Cover>
           </h1>
         </motion.div>
 

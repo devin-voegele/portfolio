@@ -292,3 +292,16 @@ section[id] { scroll-margin-top: 5rem; }
 
 /* hero name: Archivo's width axis pushed wide, heaviest weight */
 .font-hero { font-weight: 900; font-stretch: 125%; font-synthesis: none; letter-spacing: -0.02em; }
+
+/* hero title: stacked + big on phones, one line on wider screens */
+.hero-title { font-size: 14.5vw; line-height: 1; }
+.hero-br { display: block; }
+@media (min-width: 640px) {
+  .hero-title { font-size: clamp(2.1rem, 9.4vw, 8.25rem); line-height: 0.98; }
+  .hero-br { display: none; }
+}
+
+/* lamp: narrower beam on phones so it keeps a margin on both sides */
+@media (max-width: 639px) {
+  .lamp-stage { transform: scale(0.62, 1.25); }
+}

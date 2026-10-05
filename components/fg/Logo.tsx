@@ -1,8 +1,7 @@
 /**
- * DV monogram: a solid D with a V cut out of its bowl and a violet node at the
- * V's vertex (the same node language as the hero network). Strokes inherit
- * `currentColor`, so it works on any background; the cut-out is true negative
- * space (evenodd), not a painted colour.
+ * Logo: a heavy V with an umlaut — the "ö" in Vögele. The two violet dots are
+ * the same node language as the hero network. Strokes use `currentColor`, so
+ * the V follows the surrounding text colour.
  */
 export function Logo({ size = 40, className }: { size?: number; className?: string }) {
   return (
@@ -14,12 +13,9 @@ export function Logo({ size = 40, className }: { size?: number; className?: stri
       aria-label="Devin Vögele"
       className={className}
     >
-      <path
-        fillRule="evenodd"
-        fill="currentColor"
-        d="M5 5h17c11.6 0 21 8.4 21 19s-9.4 19-21 19H5zM12.5 14h8.8l2.7 9 2.7-9h8.8l-8 21h-7z"
-      />
-      <circle cx="24" cy="35" r="3.4" fill="#7043EC" />
+      <path fill="currentColor" d="M5 15.5h10.8L24 34.8l8.2-19.3H43L29.6 44H18.4z" />
+      <circle cx="16.5" cy="6.8" r="4" fill="#7043EC" />
+      <circle cx="31.5" cy="6.8" r="4" fill="#7043EC" />
     </svg>
   )
 }

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { geistSans, geistMono, calSans } from "./fonts";
+import { geistSans, geistMono, calSans, heroFont } from "./fonts";
 import "./globals.css";
 import { PerfProvider } from "@/components/providers/PerfProvider";
 import { Nav } from "@/components/fg/Nav";
@@ -131,7 +131,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${calSans.variable}`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${calSans.variable} ${heroFont.variable}`}>
       <body className="antialiased">
         <script
           type="application/ld+json"

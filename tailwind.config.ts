@@ -9,6 +9,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+        hero: ["var(--font-hero)", "var(--font-calsans)", "sans-serif"],
         display: ["var(--font-calsans)", "var(--font-geist-sans)", "sans-serif"],
       },
       colors: {

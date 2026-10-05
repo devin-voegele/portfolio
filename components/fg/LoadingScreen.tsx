@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { Logo } from '@/components/fg/Logo'
 
 /**
  * FormulaGod's intro: black screen, mark, hairline progress bar. Shown once
@@ -47,14 +48,14 @@ export function LoadingScreen() {
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black"
           aria-hidden
         >
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="font-display text-5xl text-white tracking-wider mb-8"
+            className="text-white mb-8"
           >
-            DV
-          </motion.p>
+            <Logo size={72} />
+          </motion.div>
           <div className="w-32 h-px bg-zinc-800 overflow-hidden">
             <div className="h-full bg-white" style={{ width: `${progress}%` }} />
           </div>

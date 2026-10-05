@@ -20,7 +20,7 @@ const GLOBE_CONFIG: COBEOptions = {
   mapSamples: 16000,
   mapBrightness: 6,
   baseColor: [0.18, 0.18, 0.18],
-  markerColor: [200, 0, 0],
+  markerColor: [0.66, 0.5, 1],
   glowColor: [0.4, 0.4, 0.4],
   markers: [
     // Bahrain GP

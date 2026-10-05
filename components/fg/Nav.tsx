@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion } from 'motion/react'
 import { Menu, X } from 'lucide-react'
+import { Logo } from '@/components/fg/Logo'
 
 type NavItem = { name: string; href: string; section?: string }
 
@@ -67,9 +68,10 @@ export function Nav() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="font-display text-xl text-white tracking-wider hover:text-zinc-300 transition-colors duration-300"
+          aria-label="Devin Vögele — home"
+          className="text-white hover:text-zinc-300 transition-colors duration-300"
         >
-          DEVIN<span className="text-zinc-300">VÖGELE</span>
+          <Logo size={38} />
         </Link>
 
         <nav aria-label="Primary" className="hidden md:flex items-center gap-8">

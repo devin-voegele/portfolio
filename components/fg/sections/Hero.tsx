@@ -3,6 +3,7 @@
 import { motion } from 'motion/react'
 import { ChevronDown } from 'lucide-react'
 import { Cover } from '@/components/fg/ui/cover'
+import { Logo } from '@/components/fg/Logo'
 import { HeroBackdrop } from '@/components/home/HeroBackdrop'
 
 /**
@@ -22,22 +23,21 @@ export function Hero() {
       />
 
       <div className="relative z-20 flex flex-col items-center gap-8 px-6 text-center">
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="font-display text-5xl text-white tracking-wider"
-          aria-hidden
+          className="text-white"
         >
-          DV
-        </motion.p>
+          <Logo size={72} />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
         >
-          <h1 className="text-4xl sm:text-6xl md:text-8xl tracking-tight text-center text-white uppercase">
+          <h1 className="font-hero text-5xl sm:text-7xl md:text-[8.5rem] leading-[0.95] tracking-tight text-center text-white uppercase">
             Devin <Cover className="text-white">Vögele</Cover>
           </h1>
         </motion.div>

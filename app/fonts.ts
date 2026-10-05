@@ -11,3 +11,11 @@ export const calSans = localFont({
   variable: '--font-calsans',
   display: 'swap',
 })
+
+// Heavy grotesk for the hero name (sans, not serif).
+export const heroFont = localFont({
+  src: '../public/fonts/CabinetGrotesk-Extrabold.woff2',
+  weight: '800',
+  variable: '--font-hero',
+  display: 'swap',
+})

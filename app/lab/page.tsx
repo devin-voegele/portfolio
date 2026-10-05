@@ -2,12 +2,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Aurora } from '@/components/effects/Aurora'
 import { SignalPit } from '@/components/lab/SignalPit'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Lab',
   description:
     'Interactive experiments — Signal Pit: a Three.js × Rapier physics toy. The cursor is a force field, a click is a shockwave, and gravity is a suggestion.',
-}
+  path: '/lab',
+})
 
 export default function LabPage() {
   return (

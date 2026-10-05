@@ -6,12 +6,14 @@ import { SectionHeader } from '@/components/primitives/SectionHeader'
 import { FadeIn } from '@/components/primitives/FadeIn'
 import { Footer } from '@/components/sections/Footer'
 import { posts } from '@/lib/posts'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Writing — Devin Vögele',
+export const metadata: Metadata = pageMetadata({
+  title: 'Writing',
   description:
     'Notes on development, design, cloud, and the occasional lap. Long-form writing from Devin Vögele.',
-}
+  path: '/blog',
+})
 
 export default function BlogPage() {
   return (
@@ -52,6 +54,7 @@ export default function BlogPage() {
           eyebrow="Journal"
           title="Writing"
           accent="& Notes"
+          as="h1"
           className="mb-0"
         />
         <FadeIn>

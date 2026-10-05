@@ -90,7 +90,7 @@ const jsonLd = {
         "Developer and creative technologist based in Switzerland, working in platform development at PwC Switzerland — web experiences, cloud, automation and identity.",
       "url": "https://voegele.dev",
       "image": "https://voegele.dev/opengraph-image",
-      "email": "mailto:devin.voegele@microsun.ch",
+      "email": "devin.voegele@microsun.ch",
       "worksFor": {
         "@type": "Organization",
         "name": "PwC Switzerland",
@@ -100,14 +100,15 @@ const jsonLd = {
       "nationality": { "@type": "Country", "name": "Switzerland" },
       "sameAs": [
         "https://github.com/devin-voegele/",
-        "https://www.linkedin.com/in/devin-voegele-2a5989293"
+        "https://www.linkedin.com/in/devin-voegele-2a5989293",
+        "https://www.wikidata.org/wiki/Q137946248"
       ],
       "knowsAbout": [
         "Web Development", "Next.js", "TypeScript", "React", "Cloud Computing",
         "DevOps", "Kubernetes", "CI/CD", "Identity & Access Management",
         "Motion Design", "Motorsport Media"
       ],
-      "mainEntityOfPage": { "@id": "https://voegele.dev/#website" }
+      "mainEntityOfPage": { "@id": "https://voegele.dev/#profilepage" }
     },
     {
       "@type": "WebSite",
@@ -137,7 +138,7 @@ export default function RootLayout({
       <body className="antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
         <ScrollProgress />
         <Nav />

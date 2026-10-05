@@ -1,13 +1,18 @@
 import type { Metadata } from 'next'
 import { PostLayout } from '@/components/blog/PostLayout'
 import { getPost } from '@/lib/posts'
+import { pageMetadata } from '@/lib/seo'
 
 const meta = getPost('turbopack-ate-my-backdrop-filter')!
 
-export const metadata: Metadata = {
-  title: meta.title,
+export const metadata: Metadata = pageMetadata({
+  title: meta.seoTitle ?? meta.title,
   description: meta.excerpt,
-}
+  path: `/blog/${meta.slug}`,
+  type: 'article',
+  publishedTime: meta.date,
+  tags: meta.tags,
+})
 
 export default function Post() {
   return (

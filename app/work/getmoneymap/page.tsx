@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { CaseStudy, type CaseStudyData } from '@/components/work/CaseStudy'
+import { pageMetadata } from '@/lib/seo'
 
 const data: CaseStudyData = {
   slug: 'getmoneymap',
@@ -39,10 +40,11 @@ const data: CaseStudyData = {
   ],
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'GetMoneyMap — Case Study',
   description: data.summary,
-}
+  path: `/work/${data.slug}`,
+})
 
 export default function Page() {
   return <CaseStudy data={data} />

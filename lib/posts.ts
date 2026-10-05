@@ -1,6 +1,8 @@
 export interface PostMeta {
   slug: string
   title: string
+  /** Short <title> (≤ ~44 chars, template adds the brand); defaults to title. */
+  seoTitle?: string
   date: string // ISO yyyy-mm-dd
   excerpt: string
   readingTime: string
@@ -24,6 +26,7 @@ export const posts: PostMeta[] = [
   {
     slug: 'signal-pit',
     title: 'Signal Pit: real physics on a portfolio that refuses to waste your battery',
+    seoTitle: 'Signal Pit: real physics, zero idle CPU',
     date: '2026-06-12',
     excerpt:
       'A Three.js × Rapier sandbox where the cursor is a force field — and how it costs zero CPU the moment everything falls asleep.',

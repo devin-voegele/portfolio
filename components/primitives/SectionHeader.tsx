@@ -5,10 +5,12 @@ interface SectionHeaderProps {
   eyebrow: string
   title: string
   accent?: string
+  /** Heading level; sections on the homepage keep h2 (the hero owns the h1). */
+  as?: 'h1' | 'h2'
   className?: string
 }
 
-export function SectionHeader({ index, eyebrow, title, accent, className }: SectionHeaderProps) {
+export function SectionHeader({ index, eyebrow, title, accent, as = 'h2', className }: SectionHeaderProps) {
   return (
     <div className={`text-center mb-10 ${className ?? ''}`}>
       {index && (
@@ -36,7 +38,7 @@ export function SectionHeader({ index, eyebrow, title, accent, className }: Sect
       </span>
 
       <AnimatedText
-        as="h2"
+        as={as}
         text={title}
         accent={accent}
         className="font-geist-sans"

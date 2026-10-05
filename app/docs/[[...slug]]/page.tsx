@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getDoc, slugFromParam, flatDocs } from '@/lib/docs'
 import { getDocsHostInfo, docsCanonical } from '@/lib/docs-host'
+import { DEFAULT_OG } from '@/lib/seo'
 import { docContent } from '@/components/docs/content'
 import { DocPager } from '@/components/docs/DocPager'
 
@@ -13,10 +14,21 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const doc = getDoc(s)
   if (!doc) return {}
   const { isSubdomain } = await getDocsHostInfo()
+  const title = doc.slug === '' ? 'Docs' : `${doc.title} — Docs`
   return {
-    title: doc.slug === '' ? 'Docs' : `${doc.title} — Docs`,
+    title,
     description: doc.description,
     alternates: { canonical: docsCanonical(s) },
+    openGraph: {
+      type: 'article',
+      url: docsCanonical(s),
+      siteName: 'Devin Vögele — Docs',
+      locale: 'en_US',
+      title,
+      description: doc.description,
+      images: [DEFAULT_OG],
+    },
+    twitter: { card: 'summary_large_image', title, description: doc.description, images: [DEFAULT_OG.url] },
     // Only the subdomain is indexed; the apex /docs mirror is canonical'd here.
     robots: isSubdomain ? undefined : { index: false, follow: true },
   }

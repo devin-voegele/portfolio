@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { motion } from 'motion/react'
-import { Menu, X } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
 import { Logo } from '@/components/fg/Logo'
 
 type NavItem = { name: string; href: string; section?: string }
@@ -53,23 +52,41 @@ export function Nav() {
     return () => obs.forEach((o) => o.disconnect())
   }, [home])
 
+  // close on route change, Esc, or when the viewport grows past the mobile layout
+  useEffect(() => setMenuOpen(false), [pathname])
+  useEffect(() => {
+    if (!menuOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false)
+    const mq = window.matchMedia('(min-width: 768px)')
+    const onMq = () => mq.matches && setMenuOpen(false)
+    window.addEventListener('keydown', onKey)
+    mq.addEventListener('change', onMq)
+    return () => {
+      document.body.style.overflow = prev
+      window.removeEventListener('keydown', onKey)
+      mq.removeEventListener('change', onMq)
+    }
+  }, [menuOpen])
+
   const isActive = (i: NavItem) =>
     i.section ? home && activeSection === i.section : pathname === i.href || pathname.startsWith(i.href + '/')
 
-  const solid = scrolled || !home || menuOpen
+  const solid = scrolled || !home
 
   return (
     <header
       data-site-header
-      className={`${home ? 'fixed' : 'sticky'} inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid ? 'bg-black/90 border-b border-zinc-900' : 'bg-transparent'
+      className={`${home ? 'fixed' : 'sticky'} inset-x-0 top-0 z-[65] transition-colors duration-300 ${
+        menuOpen ? 'bg-black border-b border-zinc-900' : solid ? 'bg-black/90 border-b border-zinc-900' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
           aria-label="Devin Vögele — home"
-          className="text-white hover:text-zinc-300 transition-colors duration-300"
+          className="relative z-[70] text-white hover:text-zinc-300 transition-colors duration-300"
         >
           <Logo size={38} />
         </Link>
@@ -111,29 +128,90 @@ export function Nav() {
         </nav>
 
         <button
-          className="md:hidden text-zinc-400 hover:text-white transition-colors"
+          className="md:hidden relative z-[70] flex h-10 w-10 items-center justify-center rounded-full border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-600 transition-colors"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
-          {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          <span className="relative block h-3.5 w-5" aria-hidden>
+            <span
+              className={`absolute left-0 h-px w-5 bg-current transition-all duration-300 ${
+                menuOpen ? 'top-1.5 rotate-45' : 'top-0'
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-1.5 h-px w-5 bg-current transition-opacity duration-200 ${
+                menuOpen ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+            <span
+              className={`absolute left-0 h-px w-5 bg-current transition-all duration-300 ${
+                menuOpen ? 'top-1.5 -rotate-45' : 'top-3'
+              }`}
+            />
+          </span>
         </button>
       </div>
 
-      {menuOpen && (
-        <div className="md:hidden bg-black border-t border-zinc-800 px-6 py-6 flex flex-col gap-5">
-          {items.map((l) => (
-            <Link
-              key={l.name}
-              href={l.href}
-              onClick={() => setMenuOpen(false)}
-              className="text-sm uppercase tracking-widest text-zinc-400 hover:text-white transition-colors font-sans"
-            >
-              {l.name}
-            </Link>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="menu"
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden fixed inset-0 z-[60] flex flex-col bg-black px-6 pb-8 pt-24"
+          >
+            <nav aria-label="Mobile" className="flex flex-col">
+              {items.map((l, i) => (
+                <motion.div
+                  key={l.name}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.05 + i * 0.045, duration: 0.35, ease: 'easeOut' }}
+                >
+                  <Link
+                    href={l.href}
+                    onClick={() => setMenuOpen(false)}
+                    aria-current={isActive(l) ? 'page' : undefined}
+                    className="group flex items-baseline gap-4 border-b border-zinc-900 py-4"
+                  >
+                    <span className="w-6 text-xs font-sans text-zinc-600 group-hover:text-violet-400 transition-colors">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span
+                      className={`font-display text-4xl transition-colors ${
+                        isActive(l) ? 'text-white' : 'text-zinc-400 group-hover:text-white'
+                      }`}
+                    >
+                      {l.name}
+                    </span>
+                    {isActive(l) && <span className="ml-auto h-2 w-2 rounded-full bg-violet-500" aria-hidden />}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+
+            <div className="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-8 text-xs uppercase tracking-widest text-zinc-500 font-sans">
+              <a href="https://github.com/devin-voegele/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                GitHub ↗
+              </a>
+              <a href="https://www.linkedin.com/in/devin-voegele-2a5989293" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                LinkedIn ↗
+              </a>
+              <a href="mailto:devin.voegele@microsun.ch" className="hover:text-white transition-colors">
+                Email ↗
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

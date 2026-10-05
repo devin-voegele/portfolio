@@ -289,3 +289,6 @@ section[id] { scroll-margin-top: 5rem; }
 
 /* fixed top bar offset helper for inner pages */
 .fg-scroll-margin { scroll-margin-top: 5rem; }
+
+/* hero name: Archivo's width axis pushed wide, heaviest weight */
+.font-hero { font-weight: 900; font-stretch: 125%; font-synthesis: none; letter-spacing: -0.02em; }

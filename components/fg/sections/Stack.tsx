@@ -1,78 +1,131 @@
 'use client'
 
-import { useState } from 'react'
-import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from 'motion/react'
-import { Atom, Boxes, Braces, Box, Cloud, CloudCog, Code2, Container, GitBranch, ShieldCheck, Terminal, Wind } from 'lucide-react'
+import { motion } from 'motion/react'
+import {
+  Atom,
+  Box,
+  Boxes,
+  Braces,
+  Cloud,
+  CloudCog,
+  Code2,
+  Container,
+  GitBranch,
+  ShieldCheck,
+  Sparkles,
+  Terminal,
+  Wind,
+  Workflow,
+} from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { SectionHeading } from './SectionHeading'
-import { stack, type StackItem } from '@/components/fg/data'
+import { GlowingEffect } from '@/components/fg/ui/glowing-effect'
 
-const ICONS: Record<string, LucideIcon> = {
-  'Next.js': Code2,
-  React: Atom,
-  TypeScript: Braces,
-  Tailwind: Wind,
-  'Three.js': Box,
-  Docker: Container,
-  Kubernetes: Boxes,
-  AWS: Cloud,
-  Azure: CloudCog,
-  'Entra ID': ShieldCheck,
-  'CI/CD': GitBranch,
-  Python: Terminal,
+interface Tech {
+  name: string
+  icon: LucideIcon
+}
+interface Group {
+  title: string
+  tag: string
+  blurb: string
+  icon: LucideIcon
+  items: Tech[]
 }
 
-/** FormulaGod's "Famous Faces" tile: ringed circle + springy cursor-following tooltip. */
-function StackCard({ item, index }: { item: StackItem; index: number }) {
-  const [hovered, setHovered] = useState(false)
-  const spring = { stiffness: 100, damping: 5 }
-  const x = useMotionValue(0)
-  const rotate = useSpring(useTransform(x, [-100, 100], [-20, 20]), spring)
-  const translateX = useSpring(useTransform(x, [-100, 100], [-20, 20]), spring)
-  const Icon = ICONS[item.name] ?? Code2
+// Grouped the way I actually work; every item here is something I use.
+const groups: Group[] = [
+  {
+    title: 'Frontend',
+    tag: '01',
+    blurb: 'Polished, motion-driven interfaces that stay fast.',
+    icon: Code2,
+    items: [
+      { name: 'Next.js', icon: Code2 },
+      { name: 'React', icon: Atom },
+      { name: 'TypeScript', icon: Braces },
+      { name: 'Tailwind', icon: Wind },
+    ],
+  },
+  {
+    title: 'Cloud & DevOps',
+    tag: '02',
+    blurb: 'Reproducible environments and automated build, test and deploy.',
+    icon: Cloud,
+    items: [
+      { name: 'Docker', icon: Container },
+      { name: 'Kubernetes', icon: Boxes },
+      { name: 'CI/CD', icon: GitBranch },
+      { name: 'AWS', icon: Cloud },
+      { name: 'Azure', icon: CloudCog },
+    ],
+  },
+  {
+    title: 'Platform & Identity',
+    tag: '03',
+    blurb: 'Identity, platform management and business-process automation.',
+    icon: ShieldCheck,
+    items: [
+      { name: 'Entra ID', icon: ShieldCheck },
+      { name: 'Python', icon: Terminal },
+      { name: 'BPMN', icon: Workflow },
+    ],
+  },
+  {
+    title: 'Creative',
+    tag: '04',
+    blurb: 'Interaction and visuals, where they earn their place.',
+    icon: Sparkles,
+    items: [
+      { name: 'Three.js', icon: Box },
+      { name: 'WebGL', icon: Sparkles },
+    ],
+  },
+]
 
+function GroupCard({ g, i }: { g: Group; i: number }) {
+  const Icon = g.icon
   return (
-    <motion.div
+    <motion.li
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.06, duration: 0.5 }}
-      className="flex flex-col items-center gap-3 group"
+      transition={{ delay: i * 0.08, duration: 0.5 }}
+      className="relative list-none"
     >
-      <div
-        className="relative"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => {
-          setHovered(false)
-          x.set(0)
-        }}
-        onMouseMove={(e) => x.set(e.nativeEvent.offsetX - e.currentTarget.offsetWidth / 2)}
-      >
-        <AnimatePresence mode="wait">
-          {hovered && (
-            <motion.div
-              initial={{ opacity: 0, y: 16, scale: 0.7 }}
-              animate={{ opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 10 } }}
-              exit={{ opacity: 0, y: 16, scale: 0.7 }}
-              style={{ translateX, rotate, whiteSpace: 'nowrap' }}
-              className="absolute -top-20 left-1/2 z-50 flex flex-col items-center rounded-xl bg-zinc-900 border border-zinc-700 shadow-2xl px-4 py-2.5 pointer-events-none"
-            >
-              <p className="font-bold text-white text-sm">{item.name}</p>
-              <p className="text-zinc-400 text-xs mt-0.5">{item.note}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <div className="relative h-full rounded-2xl border border-zinc-800 p-2">
+        <GlowingEffect spread={40} glow disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
+        <div className="relative flex h-full flex-col justify-between gap-8 overflow-hidden rounded-xl bg-[#101010] p-6">
+          {/* huge faint index, like the comet cards' watermark */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -right-2 -top-4 select-none font-display text-8xl text-white/[0.04]"
+          >
+            {g.tag}
+          </span>
 
-        <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center bg-zinc-900 ring-2 ring-zinc-700 ring-offset-2 ring-offset-black text-zinc-300 transition-all duration-500 group-hover:ring-zinc-400 group-hover:text-white">
-          <Icon className="w-9 h-9 transition-transform duration-700 group-hover:scale-110" aria-hidden />
+          <div className="relative">
+            <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-200">
+              <Icon className="h-5 w-5" aria-hidden />
+            </span>
+            <h3 className="font-display text-2xl text-white">{g.title}</h3>
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-zinc-400 font-sans">{g.blurb}</p>
+          </div>
+
+          <ul className="relative flex flex-wrap gap-2">
+            {g.items.map(({ name, icon: ItemIcon }) => (
+              <li
+                key={name}
+                className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/70 px-3.5 py-1.5 text-xs font-sans text-zinc-300 transition-colors hover:border-violet-500/60 hover:text-white"
+              >
+                <ItemIcon className="h-3.5 w-3.5 text-violet-400" aria-hidden />
+                {name}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-
-      <div className="text-center">
-        <p className="text-sm font-display text-white uppercase tracking-wider">{item.name}</p>
-        <p className="text-xs text-zinc-500 font-sans mt-0.5">{item.group}</p>
-      </div>
-    </motion.div>
+    </motion.li>
   )
 }
 
@@ -86,11 +139,11 @@ export function Stack() {
           title="What I Work With"
           blurb="Interfaces, infrastructure and identity — the tools I reach for every day."
         />
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-12 justify-items-center">
-          {stack.map((item, i) => (
-            <StackCard key={item.name} item={item} index={i} />
+        <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {groups.map((g, i) => (
+            <GroupCard key={g.title} g={g} i={i} />
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   )

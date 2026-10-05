@@ -1,4 +1,5 @@
 import localFont from 'next/font/local'
+import { Archivo } from 'next/font/google'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 
@@ -12,10 +13,11 @@ export const calSans = localFont({
   display: 'swap',
 })
 
-// Heavy grotesk for the hero name (sans, not serif).
-export const heroFont = localFont({
-  src: '../public/fonts/CabinetGrotesk-Extrabold.woff2',
-  weight: '800',
+// Hero name: heavy, wide, true italic — a forward-leaning "speed" voice (sans).
+export const heroFont = Archivo({
+  subsets: ['latin'],
+  style: 'italic',
+  axes: ['wdth'],
   variable: '--font-hero',
   display: 'swap',
 })

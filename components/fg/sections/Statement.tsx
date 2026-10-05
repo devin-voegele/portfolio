@@ -6,7 +6,7 @@ import { LampContainer } from '@/components/fg/ui/lamp'
 /** FormulaGod's lamp effect as a full-width statement between About and Find. */
 export function Statement() {
   return (
-    <section aria-label="Approach" className="bg-black">
+    <section aria-label="Approach" className="bg-black" style={{ marginBottom: "calc(-1 * clamp(9rem, 20vw, 15rem))" }}>
       <LampContainer>
         <motion.h2
           initial={{ opacity: 0.5, y: 100 }}

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Hero } from '@/components/fg/sections/Hero'
 import { Numbers } from '@/components/fg/sections/Numbers'
 import { GlobalReach } from '@/components/fg/sections/GlobalReach'
@@ -13,6 +14,18 @@ import { Contact } from '@/components/fg/sections/Contact'
 import { Footer } from '@/components/sections/Footer'
 import { SocialDock } from '@/components/fg/SocialDock'
 import { LoadingScreen } from '@/components/fg/LoadingScreen'
+
+export const metadata: Metadata = {
+  openGraph: {
+    type: 'profile',
+    url: '/',
+    title: 'Devin Vögele - Developer & Creative Technologist',
+    description: 'Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.',
+    siteName: 'Devin Vögele',
+    locale: 'en_US',
+    images: ['/opengraph-image'],
+  },
+}
 
 export default function Home() {
   return (

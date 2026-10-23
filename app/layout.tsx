@@ -99,6 +99,7 @@ const jsonLd = {
       "sameAs": [
         "https://github.com/devin-voegele/",
         "https://www.linkedin.com/in/devin-voegele-2a5989293",
+        "https://www.instagram.com/devinvoe/",
         "https://www.wikidata.org/wiki/Q137946248"
       ],
       "knowsAbout": [

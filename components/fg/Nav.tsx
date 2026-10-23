@@ -12,6 +12,7 @@ const items: NavItem[] = [
   { name: 'About', href: '/#about', section: 'about' },
   { name: 'Stack', href: '/#stack', section: 'stack' },
   { name: 'Work', href: '/#work', section: 'work' },
+  { name: 'SEO', href: '/seo' },
   { name: 'Lab', href: '/lab' },
   { name: 'Writing', href: '/blog' },
   { name: 'Docs', href: '/docs' },

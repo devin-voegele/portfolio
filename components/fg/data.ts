@@ -13,6 +13,14 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: 'Metafix',
+    desc: 'Technical SEO fixes delivered as pull requests: audits a live Next.js site and opens a PR with the fixes.',
+    stack: ['Next.js', 'TypeScript', 'ts-morph'],
+    year: '2026',
+    href: '/work/metafix',
+    live: 'https://www.metafix.dev',
+  },
+  {
     title: 'FormulaGod',
     desc: 'Motorsport media & marketing platform — content, branding and reach for the racing world.',
     stack: ['Next.js', 'Framer Motion', 'Tailwind'],

@@ -82,6 +82,7 @@ const jsonLd = {
       "alternateName": "Devin Voegele",
       "givenName": "Devin",
       "familyName": "Vögele",
+      "birthDate": "2008-12-01",
       "jobTitle": "Developer & Creative Technologist",
       "description":
         "Developer and creative technologist based in Switzerland, working in platform development at PwC Switzerland — web experiences, cloud, automation and identity.",

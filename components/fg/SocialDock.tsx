@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { BookOpen, Mail, PenLine } from 'lucide-react'
+import { BookOpen, Mail, PenLine, Search } from 'lucide-react'
 import { Dock, DockIcon } from '@/components/fg/ui/dock'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/fg/ui/tooltip'
 
@@ -16,10 +16,20 @@ const LinkedIn = (
   </svg>
 )
 
+const Instagram = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-5" aria-hidden>
+    <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
+    <circle cx="12" cy="12" r="4.25" />
+    <circle cx="17.6" cy="6.4" r="1" fill="currentColor" stroke="none" />
+  </svg>
+)
+
 const socials = [
   { label: 'GitHub', href: 'https://github.com/devin-voegele/', icon: GitHub, external: true },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/devin-voegele-2a5989293', icon: LinkedIn, external: true },
+  { label: 'Instagram', href: 'https://www.instagram.com/devinvoe/', icon: Instagram, external: true },
   { label: 'Email', href: 'mailto:devin.voegele@microsun.ch', icon: <Mail className="size-5" aria-hidden />, external: false },
+  { label: 'SEO Services', href: '/seo', icon: <Search className="size-5" aria-hidden />, external: false },
   { label: 'Writing', href: '/blog', icon: <PenLine className="size-5" aria-hidden />, external: false },
   { label: 'Docs', href: '/docs', icon: <BookOpen className="size-5" aria-hidden />, external: false },
 ]
@@ -43,7 +53,7 @@ export function SocialDock() {
                     href={s.href}
                     {...(s.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     aria-label={s.label}
-                    className="flex items-center justify-center w-full h-full text-zinc-700 hover:text-black transition-colors"
+                    className="flex items-center justify-center w-full h-full rounded-full text-zinc-700 hover:text-black transition-colors"
                   >
                     {s.icon}
                   </Link>

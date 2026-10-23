@@ -5,19 +5,18 @@ import { Footer } from '@/components/sections/Footer'
 import { SocialDock } from '@/components/fg/SocialDock'
 
 const description =
-  'Technical SEO for businesses and individuals in Switzerland: audits, metadata, structured data, Search Console, Google Business Profile and knowledge panel work. In German or English.'
+  'Technical SEO for businesses and individuals in Switzerland: audits, structured data, Search Console and knowledge panels. In German or English.'
 
 export const metadata: Metadata = pageMetadata({
-  title: 'SEO Services',
+  title: 'SEO Services in Switzerland',
   description,
   path: '/seo',
 })
 
-const jsonLd = {
-  '@context': 'https://schema.org',
+const service = {
   '@type': 'Service',
   '@id': 'https://www.voegele.dev/seo#service',
-  name: 'SEO Services',
+  name: 'SEO Services in Switzerland',
   serviceType: 'Search engine optimization',
   description,
   url: 'https://www.voegele.dev/seo',
@@ -29,6 +28,16 @@ const jsonLd = {
     { '@type': 'PeopleAudience', name: 'Individuals' },
   ],
 }
+
+const breadcrumbs = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Devin Vögele', item: 'https://www.voegele.dev' },
+    { '@type': 'ListItem', position: 2, name: 'SEO Services', item: 'https://www.voegele.dev/seo' },
+  ],
+}
+
+const jsonLd = { '@context': 'https://schema.org', '@graph': [service, breadcrumbs] }
 
 export default function SeoPage() {
   return (

@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export function Footer() {
   return (
     <footer className="border-t border-zinc-900 py-10 px-6 bg-black">
@@ -8,12 +10,17 @@ export function Footer() {
         <p className="text-xs text-zinc-600 font-sans">
           © {new Date().getFullYear()}{" "}Devin Vögele · Developer &amp; Creative Technologist
         </p>
-        <a
-          href="mailto:devin.voegele@microsun.ch"
-          className="text-xs text-zinc-500 hover:text-white transition-colors font-sans"
-        >
-          devin.voegele@microsun.ch
-        </a>
+        <div className="flex items-center gap-5">
+          <Link href="/seo" className="text-xs text-zinc-500 hover:text-white transition-colors font-sans">
+            SEO Services
+          </Link>
+          <a
+            href="mailto:devin.voegele@microsun.ch"
+            className="text-xs text-zinc-500 hover:text-white transition-colors font-sans"
+          >
+            devin.voegele@microsun.ch
+          </a>
+        </div>
       </div>
     </footer>
   )

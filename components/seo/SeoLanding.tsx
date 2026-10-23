@@ -132,24 +132,27 @@ function Hero() {
 
       <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-16 px-6 lg:grid-cols-[1.15fr_1fr]">
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-          <motion.p
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-4 py-1.5 text-[11px] uppercase tracking-[0.25em] text-zinc-300 font-sans"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-violet-400" /> SEO Services
-          </motion.p>
+          {/* The pill is part of the h1 so the heading carries the search terms, not just "Get Found." */}
+          <h1 className="flex flex-col items-center lg:items-start">
+            <motion.span
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-4 py-1.5 text-[11px] uppercase tracking-[0.25em] text-zinc-300 font-sans"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" /> SEO Services in Switzerland
+            </motion.span>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
-            className="font-hero uppercase tracking-tight text-white leading-[0.95] text-[clamp(3rem,9vw,7.5rem)]"
-          >
-            Get <br />
-            <Cover className="text-white">Found.</Cover>
-          </motion.h1>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
+              className="block font-hero uppercase tracking-tight text-white leading-[0.95] text-[clamp(3rem,9vw,7.5rem)]"
+            >
+              Get <br />
+              <Cover className="text-white">Found.</Cover>
+            </motion.span>
+          </h1>
 
           <motion.p
             initial={{ opacity: 0 }}

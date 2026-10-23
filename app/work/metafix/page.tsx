@@ -8,7 +8,7 @@ const data: CaseStudyData = {
   year: '2026',
   role: 'Design & development',
   summary:
-    'Technical SEO fixes delivered as pull requests. Metafix crawls a live Next.js site, finds what is broken, maps each issue to the file that causes it and opens a PR with the fix.',
+    'Technical SEO fixes delivered as pull requests: Metafix crawls a live Next.js site, finds what is broken and opens a PR with the fix.',
   stack: ['Next.js', 'TypeScript', 'ts-morph', 'Postgres', 'Drizzle', 'Cheerio'],
   status: 'Live',
   url: 'https://www.metafix.dev',

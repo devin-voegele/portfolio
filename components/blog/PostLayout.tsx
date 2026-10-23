@@ -13,11 +13,11 @@ export function PostLayout({ meta, children }: { meta: PostMeta; children: React
     description: meta.excerpt,
     datePublished: meta.date,
     dateModified: meta.date,
-    url: `https://voegele.dev/blog/${meta.slug}`,
-    mainEntityOfPage: `https://voegele.dev/blog/${meta.slug}`,
+    url: `https://www.voegele.dev/blog/${meta.slug}`,
+    mainEntityOfPage: `https://www.voegele.dev/blog/${meta.slug}`,
     inLanguage: 'en',
-    author: { '@id': 'https://voegele.dev/#person' },
-    publisher: { '@id': 'https://voegele.dev/#person' },
+    author: { '@id': 'https://www.voegele.dev/#person' },
+    publisher: { '@id': 'https://www.voegele.dev/#person' },
   }
 
   return (

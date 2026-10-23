@@ -6,7 +6,7 @@ import { DocsSidebar } from '@/components/docs/DocsSidebar'
 export default async function DocsLayout({ children }: { children: React.ReactNode }) {
   const { basePath } = await getDocsHostInfo()
   const isSub = basePath === ''
-  const homeHref = isSub ? 'https://voegele.dev' : '/'
+  const homeHref = isSub ? 'https://www.voegele.dev' : '/'
 
   return (
     <DocsBaseProvider basePath={basePath}>

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { posts } from '@/lib/posts';
 
-const baseUrl = 'https://voegele.dev';
+const baseUrl = 'https://www.voegele.dev';
 
 // Only real, crawlable routes — Google ignores #fragment URLs. Google also
 // ignores priority/changefreq and distrusts a lastmod that changes on every

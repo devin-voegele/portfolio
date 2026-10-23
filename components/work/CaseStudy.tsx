@@ -24,8 +24,8 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
     name: data.title,
     description: data.summary,
     dateCreated: data.year,
-    url: `https://voegele.dev/work/${data.slug}`,
-    author: { '@id': 'https://voegele.dev/#person' },
+    url: `https://www.voegele.dev/work/${data.slug}`,
+    author: { '@id': 'https://www.voegele.dev/#person' },
     keywords: data.stack.join(', '),
   }
 

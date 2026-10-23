@@ -2,7 +2,7 @@
 
 Personal site of **Devin Vögele** — developer & creative technologist, Würenlos CH. Platform development at PwC Switzerland; motorsport flavor on top.
 
-**Live:** [voegele.dev](https://voegele.dev)
+**Live:** [voegele.dev](https://www.voegele.dev)
 
 ## What it is
 

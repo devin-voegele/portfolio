@@ -73,7 +73,7 @@ export function DocsSidebar() {
         style={{ background: 'rgba(5,6,12,0.85)', backdropFilter: 'blur(8px)', borderBottom: '1px solid var(--border)' }}
       >
         <Link
-          href={base === '' ? 'https://voegele.dev' : '/'}
+          href={base === '' ? 'https://www.voegele.dev' : '/'}
           className="font-mono transition-colors hover:text-[var(--accent)]"
           style={{ fontSize: '0.72rem', letterSpacing: '0.08em', color: 'var(--text-muted)', textDecoration: 'none' }}
         >

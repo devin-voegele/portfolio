@@ -9,7 +9,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://voegele.dev"),
+  metadataBase: new URL("https://www.voegele.dev"),
   title: {
     default: "Devin Vögele - Developer & Creative Technologist",
     template: "%s | Devin Vögele"
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     "Switzerland",
     "Motorsport"
   ],
-  authors: [{ name: "Devin Vögele", url: "https://voegele.dev" }],
+  authors: [{ name: "Devin Vögele", url: "https://www.voegele.dev" }],
   creator: "Devin Vögele",
   publisher: "Devin Vögele",
   robots: {
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     locale: "en_US",
-    url: "https://voegele.dev",
+    url: "https://www.voegele.dev",
     siteName: "Devin Vögele",
     title: "Devin Vögele - Developer & Creative Technologist",
     description: "Developer and creative technologist based in Switzerland, building premium web experiences, motorsport media platforms, and interactive tools.",
@@ -77,7 +77,7 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://voegele.dev/#person",
+      "@id": "https://www.voegele.dev/#person",
       "name": "Devin Vögele",
       "alternateName": "Devin Voegele",
       "givenName": "Devin",
@@ -85,8 +85,8 @@ const jsonLd = {
       "jobTitle": "Developer & Creative Technologist",
       "description":
         "Developer and creative technologist based in Switzerland, working in platform development at PwC Switzerland — web experiences, cloud, automation and identity.",
-      "url": "https://voegele.dev",
-      "image": "https://voegele.dev/opengraph-image",
+      "url": "https://www.voegele.dev",
+      "image": "https://www.voegele.dev/opengraph-image",
       "email": "devin.voegele@microsun.ch",
       "worksFor": {
         "@type": "Organization",
@@ -105,22 +105,22 @@ const jsonLd = {
         "DevOps", "Kubernetes", "CI/CD", "Identity & Access Management",
         "Motion Design", "Motorsport Media"
       ],
-      "mainEntityOfPage": { "@id": "https://voegele.dev/#profilepage" }
+      "mainEntityOfPage": { "@id": "https://www.voegele.dev/#profilepage" }
     },
     {
       "@type": "WebSite",
-      "@id": "https://voegele.dev/#website",
-      "url": "https://voegele.dev",
+      "@id": "https://www.voegele.dev/#website",
+      "url": "https://www.voegele.dev",
       "name": "Devin Vögele - Portfolio",
-      "publisher": { "@id": "https://voegele.dev/#person" },
+      "publisher": { "@id": "https://www.voegele.dev/#person" },
       "inLanguage": "en"
     },
     {
       "@type": "ProfilePage",
-      "@id": "https://voegele.dev/#profilepage",
-      "url": "https://voegele.dev",
-      "mainEntity": { "@id": "https://voegele.dev/#person" },
-      "isPartOf": { "@id": "https://voegele.dev/#website" }
+      "@id": "https://www.voegele.dev/#profilepage",
+      "url": "https://www.voegele.dev",
+      "mainEntity": { "@id": "https://www.voegele.dev/#person" },
+      "isPartOf": { "@id": "https://www.voegele.dev/#website" }
     }
   ]
 };

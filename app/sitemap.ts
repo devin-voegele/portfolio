@@ -13,7 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: baseUrl },
     { url: `${baseUrl}/blog`, ...(latestPost && { lastModified: new Date(latestPost) }) },
     ...posts.map((p) => ({ url: `${baseUrl}/blog/${p.slug}`, lastModified: new Date(p.date) })),
-    { url: `${baseUrl}/seo` },
+    ...['/seo', '/de/seo'].map((path) => ({
+      url: `${baseUrl}${path}`,
+      alternates: { languages: { en: `${baseUrl}/seo`, de: `${baseUrl}/de/seo` } },
+    })),
     { url: `${baseUrl}/work/metafix` },
     { url: `${baseUrl}/work/formulagod` },
     { url: `${baseUrl}/work/getmoneymap` },

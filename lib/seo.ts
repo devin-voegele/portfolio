@@ -9,6 +9,10 @@ type PageSeo = {
   type?: 'website' | 'article'
   publishedTime?: string
   tags?: string[]
+  /** OpenGraph locale, e.g. 'de_CH'. Defaults to en_US. */
+  locale?: string
+  /** hreflang alternates: { en: '/seo', de: '/de/seo', 'x-default': '/seo' }. */
+  languages?: Record<string, string>
 }
 
 /** Root app/opengraph-image.tsx — must be re-attached, or pages with their own openGraph ship no image. */
@@ -28,12 +32,12 @@ export function pageMetadata(p: PageSeo): Metadata {
   return {
     title: p.title,
     description: p.description,
-    alternates: { canonical: p.path },
+    alternates: { canonical: p.path, ...(p.languages && { languages: p.languages }) },
     openGraph: {
       type: p.type ?? 'website',
       url: p.path,
       siteName: 'Devin Vögele',
-      locale: 'en_US',
+      locale: p.locale ?? 'en_US',
       title: p.title,
       description: p.description,
       images: [DEFAULT_OG],

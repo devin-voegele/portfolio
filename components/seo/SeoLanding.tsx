@@ -9,6 +9,7 @@ import {
   Building2,
   Check,
   ChevronDown,
+  Languages,
   LineChart,
   ScanSearch,
   Search,
@@ -21,17 +22,22 @@ import { GlowingEffect } from '@/components/fg/ui/glowing-effect'
 import { LampContainer } from '@/components/fg/ui/lamp'
 import { BackgroundBeamsWithCollision } from '@/components/fg/ui/beams-collision'
 import { SectionHeading } from '@/components/fg/sections/SectionHeading'
+import { de, en, type Lang, type SeoCopy } from './copy'
 
-const MAILTO = `mailto:devin.voegele@microsun.ch?subject=${encodeURIComponent('SEO enquiry')}`
+const EMAIL = 'devin.voegele@microsun.ch'
 
 const pillPrimary =
   'w-full sm:w-auto px-8 py-3 bg-white hover:bg-zinc-100 text-black text-xs uppercase tracking-widest font-sans rounded-full transition-all duration-300 hover:shadow-[0_0_28px_rgba(255,255,255,0.2)] text-center'
 const pillGhost =
   'w-full sm:w-auto px-8 py-3 border border-zinc-700 hover:border-zinc-400 text-zinc-400 hover:text-white text-xs uppercase tracking-widest font-sans rounded-full transition-all duration-300 text-center'
 
+// Icons by position; the text for each lives in copy.ts.
+const trackIcons: LucideIcon[] = [Building2, UserRound]
+const stepIcons: LucideIcon[] = [ScanSearch, Wrench, BadgeCheck, LineChart]
+
 /* ── Hero visual: a search result page that fixes itself ─────────────── */
 
-function SerpMock() {
+function SerpMock({ c }: { c: SeoCopy['serp'] }) {
   // The panel label flips from the wrong job to the right one, which is the
   // whole pitch in one gesture (and what actually happened to my own panel).
   const [fixed, setFixed] = useState(false)
@@ -52,13 +58,13 @@ function SerpMock() {
       <div className="relative rounded-2xl border border-zinc-800 bg-[#0c0c0e] p-5 shadow-2xl shadow-black/60">
         <div className="flex items-center gap-3 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-2.5">
           <Search className="h-4 w-4 text-zinc-500" />
-          <span className="text-sm text-zinc-200 font-sans">your name</span>
+          <span className="text-sm text-zinc-200 font-sans">{c.query}</span>
           <span className="ml-auto h-4 w-px animate-pulse bg-violet-400" />
         </div>
 
         {/* knowledge panel */}
         <div className="mt-5 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4">
-          <p className="font-display text-2xl text-white">Your Name</p>
+          <p className="font-display text-2xl text-white">{c.name}</p>
           <div className="relative mt-1 h-5 overflow-hidden text-sm font-sans">
             <AnimatePresence mode="wait" initial={false}>
               {fixed ? (
@@ -68,7 +74,7 @@ function SerpMock() {
                   animate={{ y: 0, opacity: 1 }}
                   className="absolute inset-0 flex items-center gap-1.5 text-violet-300"
                 >
-                  <BadgeCheck className="h-3.5 w-3.5" /> Software developer
+                  <BadgeCheck className="h-3.5 w-3.5" /> {c.right}
                 </motion.span>
               ) : (
                 <motion.span
@@ -76,7 +82,7 @@ function SerpMock() {
                   exit={{ y: -16, opacity: 0 }}
                   className="absolute inset-0 text-zinc-500 line-through decoration-zinc-600"
                 >
-                  Graphic designer
+                  {c.wrong}
                 </motion.span>
               )}
             </AnimatePresence>
@@ -98,8 +104,8 @@ function SerpMock() {
 
         {/* first organic result */}
         <div className="mt-5 space-y-1.5">
-          <p className="text-[11px] text-zinc-500 font-sans">https://www.yoursite.com</p>
-          <p className="text-[15px] text-violet-300 font-sans">Your Name — What You Actually Do</p>
+          <p className="text-[11px] text-zinc-500 font-sans">{c.url}</p>
+          <p className="text-[15px] text-violet-300 font-sans">{c.title}</p>
           <div className="h-2 w-11/12 rounded bg-zinc-800" />
           <div className="h-2 w-8/12 rounded bg-zinc-800" />
         </div>
@@ -113,7 +119,7 @@ function SerpMock() {
   )
 }
 
-function Hero() {
+function Hero({ c, serp, mailto, lang }: { c: SeoCopy['hero']; serp: SeoCopy['serp']; mailto: string; lang: Lang }) {
   return (
     <section className="relative w-full min-h-screen overflow-hidden flex items-center pt-24 pb-16">
       {/* faint grid, faded out toward the edges */}
@@ -140,17 +146,17 @@ function Hero() {
               transition={{ duration: 0.6 }}
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-4 py-1.5 text-[11px] uppercase tracking-[0.25em] text-zinc-300 font-sans"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" /> SEO Services in Switzerland
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" /> {c.pill}
             </motion.span>
 
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
-              className="block font-hero uppercase tracking-tight text-white leading-[0.95] text-[clamp(3rem,9vw,7.5rem)]"
+              className={`block font-hero uppercase tracking-tight text-white leading-[0.95] ${c.titleClass}`}
             >
-              Get <br />
-              <Cover className="text-white">Found.</Cover>
+              {c.titleTop} <br />
+              <Cover className="text-white">{c.titleCover}</Cover>
             </motion.span>
           </h1>
 
@@ -160,8 +166,7 @@ function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-6 max-w-lg text-zinc-400 text-sm md:text-base leading-relaxed font-sans"
           >
-            Technical SEO for businesses and for people. I fix what keeps Google from understanding your site,
-            and I make sure your name leads to you. Based in Switzerland, working in German and English.
+            {c.tagline}
           </motion.p>
 
           <motion.div
@@ -170,17 +175,27 @@ function Hero() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mt-9 flex w-full flex-col sm:w-auto sm:flex-row items-center gap-3 sm:gap-4"
           >
-            <a href={MAILTO} className={pillPrimary}>
-              Get Found
+            <a href={mailto} className={pillPrimary}>
+              {c.primary}
             </a>
             <a href="#services" className={pillGhost}>
-              What&apos;s Included
+              {c.secondary}
             </a>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.8 }}>
+            <Link
+              href={c.switchHref}
+              hrefLang={lang === 'en' ? 'de' : 'en'}
+              className="mt-6 inline-flex items-center gap-2 text-xs text-zinc-500 hover:text-white transition-colors font-sans"
+            >
+              <Languages className="h-3.5 w-3.5" aria-hidden /> {c.switchLabel}
+            </Link>
           </motion.div>
         </div>
 
         <div className="flex justify-center lg:justify-end">
-          <SerpMock />
+          <SerpMock c={serp} />
         </div>
       </div>
 
@@ -189,10 +204,10 @@ function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.6 }}
-        aria-label="Scroll down"
+        aria-label={c.scroll}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2 text-zinc-500 hover:text-zinc-300 transition-colors"
       >
-        <span className="text-[10px] uppercase tracking-widest font-sans">Scroll</span>
+        <span className="text-[10px] uppercase tracking-widest font-sans">{c.scroll}</span>
         <ChevronDown className="w-4 h-4 animate-bounce" />
       </motion.a>
     </section>
@@ -201,49 +216,10 @@ function Hero() {
 
 /* ── Two tracks ──────────────────────────────────────────────────────── */
 
-interface Track {
-  tag: string
-  label: string
-  title: string
-  intro: string
-  icon: LucideIcon
-  items: string[]
-}
-
-const tracks: Track[] = [
-  {
-    tag: '01',
-    label: 'For businesses',
-    title: 'Get your company found',
-    intro: 'Shops, studios, agencies and startups whose site exists but does not show up when people search for what they offer.',
-    icon: Building2,
-    items: [
-      'Technical audit: titles, descriptions, canonicals, indexing, broken links, images',
-      'Structured data for your company, local business or product',
-      'Sitemap, robots.txt and clean link previews for WhatsApp, LinkedIn and X',
-      'Google Search Console and Bing Webmaster Tools, set up and verified',
-      'Google Business Profile, with the same name, address and phone everywhere',
-      'Fixes as code (pull requests on Next.js) or a clear list for your developer',
-    ],
-  },
-  {
-    tag: '02',
-    label: 'For individuals',
-    title: 'Own your name on Google',
-    intro: 'Freelancers, founders, creatives and anyone who wants the first result for their name to be something they control.',
-    icon: UserRound,
-    items: [
-      'A personal site or page that ranks for your name',
-      'Person schema tying your site, LinkedIn, GitHub and Instagram into one identity',
-      'Consistent bios and links, so Google sees one person, not five',
-      'Knowledge panel groundwork: Wikidata where you qualify, claiming, fixing wrong labels',
-      'Cleaning up old pages and profiles that describe you the wrong way',
-    ],
-  },
-]
+type Track = SeoCopy['tracks']['items'][number]
 
 function TrackCard({ t, i }: { t: Track; i: number }) {
-  const Icon = t.icon
+  const Icon = trackIcons[i]
   return (
     <motion.li
       initial={{ opacity: 0, y: 24 }}
@@ -259,7 +235,7 @@ function TrackCard({ t, i }: { t: Track; i: number }) {
             aria-hidden
             className="pointer-events-none absolute -right-2 -top-4 select-none font-display text-8xl text-white/[0.04]"
           >
-            {t.tag}
+            0{i + 1}
           </span>
           <div className="relative">
             <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-200">
@@ -285,19 +261,15 @@ function TrackCard({ t, i }: { t: Track; i: number }) {
   )
 }
 
-function Tracks() {
+function Tracks({ c }: { c: SeoCopy['tracks'] }) {
   return (
     <section id="services" className="w-full py-24 px-6 relative overflow-hidden scroll-mt-16">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black pointer-events-none" />
       <div className="relative max-w-5xl mx-auto">
-        <SectionHeading
-          eyebrow="Who It's For"
-          title="Two Ways In"
-          blurb="Whether it's a company that should rank or a person who should be recognised, the groundwork is the same: make the facts clear and consistent."
-        />
+        <SectionHeading eyebrow={c.eyebrow} title={c.title} blurb={c.blurb} />
         <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {tracks.map((t, i) => (
-            <TrackCard key={t.tag} t={t} i={i} />
+          {c.items.map((t, i) => (
+            <TrackCard key={t.label} t={t} i={i} />
           ))}
         </ul>
       </div>
@@ -307,23 +279,16 @@ function Tracks() {
 
 /* ── Process ─────────────────────────────────────────────────────────── */
 
-const steps: { title: string; text: string; icon: LucideIcon }[] = [
-  { title: 'Audit', icon: ScanSearch, text: 'I crawl the site against a fixed rule set. You get a plain report: what is broken, why it matters, what it takes.' },
-  { title: 'Fix', icon: Wrench, text: 'Metadata, structured data, sitemap, canonicals, previews. On Next.js the fixes arrive as pull requests.' },
-  { title: 'Verify', icon: BadgeCheck, text: 'I re-check the live site, submit it in Search Console and request indexing for the pages that matter.' },
-  { title: 'Follow up', icon: LineChart, text: 'Google takes weeks, not days. I check back and read what Search Console reports.' },
-]
-
-function Process() {
+function Process({ c }: { c: SeoCopy['process'] }) {
   return (
     <section className="w-full py-24 px-6 relative">
       <div className="relative max-w-6xl mx-auto">
-        <SectionHeading eyebrow="How It Works" title="Audit. Fix. Verify." />
+        <SectionHeading eyebrow={c.eyebrow} title={c.title} />
         <ol className="relative grid gap-10 md:grid-cols-4 md:gap-6">
           {/* the line the steps hang off (desktop) */}
           <div aria-hidden className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent md:block" />
-          {steps.map((s, i) => {
-            const Icon = s.icon
+          {c.steps.map((s, i) => {
+            const Icon = stepIcons[i]
             return (
               <motion.li
                 key={s.title}
@@ -336,7 +301,9 @@ function Process() {
                 <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-700 bg-black text-violet-300 shadow-[0_0_24px_rgba(139,92,246,0.25)]">
                   <Icon className="h-5 w-5" aria-hidden />
                 </span>
-                <p className="mt-5 text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-sans">Step 0{i + 1}</p>
+                <p className="mt-5 text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-sans">
+                  {c.step} 0{i + 1}
+                </p>
                 <h3 className="mt-1 font-display text-2xl text-white">{s.title}</h3>
                 <p className="mt-2 max-w-[16rem] text-sm leading-relaxed text-zinc-400 font-sans">{s.text}</p>
               </motion.li>
@@ -350,9 +317,9 @@ function Process() {
 
 /* ── Statement ───────────────────────────────────────────────────────── */
 
-function Honesty() {
+function Honesty({ c }: { c: SeoCopy['honesty'] }) {
   return (
-    <section aria-label="Approach" className="bg-black">
+    <section aria-label={c.label} className="bg-black">
       <LampContainer>
         <motion.h2
           initial={{ opacity: 0.5, y: 100 }}
@@ -361,9 +328,9 @@ function Honesty() {
           transition={{ delay: 0.3, duration: 0.8, ease: 'easeInOut' }}
           className="mt-8 bg-gradient-to-br from-white to-zinc-500 py-4 bg-clip-text text-center text-4xl font-display tracking-tight text-transparent md:text-7xl"
         >
-          No guesswork.
+          {c.line1}
           <br />
-          No fake promises.
+          {c.line2}
         </motion.h2>
       </LampContainer>
       {/* outside the lamp: extra height inside it pushes the heading under the lamp's mask.
@@ -376,8 +343,7 @@ function Honesty() {
         className="relative z-50 mx-auto max-w-xl px-6 text-center text-sm md:text-base leading-relaxed text-zinc-400 font-sans"
         style={{ marginTop: 'calc(-1 * clamp(9rem, 20vw, 15rem))' }}
       >
-        Nobody can guarantee first place or a knowledge panel, and anyone who does is guessing. I remove
-        everything on your side that holds you back, so your content gets the ranking it earns.
+        {c.text}
       </motion.p>
     </section>
   )
@@ -385,33 +351,14 @@ function Honesty() {
 
 /* ── Proof ───────────────────────────────────────────────────────────── */
 
-const proof: { kicker: string; title: string; text: string; href?: string }[] = [
-  {
-    kicker: 'Knowledge panel',
-    title: 'My own name',
-    text: 'Google labelled me "Graphic designer". After fixing my schema, Wikidata and profiles, the panel reads "Software developer".',
-  },
-  {
-    kicker: 'Tooling',
-    title: 'Metafix',
-    text: 'My SEO tool audits a live site with 31 deterministic rules and opens pull requests with the fixes. It fixed a real issue on this site.',
-    href: '/work/metafix',
-  },
-  {
-    kicker: 'Reference build',
-    title: 'voegele.dev',
-    text: 'This site ships the full setup: entity graph, per-page metadata, sitemap and generated link previews.',
-  },
-]
-
-function Proof() {
+function Proof({ c }: { c: SeoCopy['proof'] }) {
   return (
     <section className="w-full py-24 px-6 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950/60 to-black pointer-events-none" />
       <div className="relative max-w-6xl mx-auto">
-        <SectionHeading eyebrow="Proof" title="Done It On Myself First" />
+        <SectionHeading eyebrow={c.eyebrow} title={c.title} />
         <ul className="grid gap-4 md:grid-cols-3">
-          {proof.map((p, i) => {
+          {c.items.map((p, i) => {
             const inner = (
               <div className="relative flex h-full flex-col rounded-xl bg-[#101010] p-6">
                 <p className="text-[11px] uppercase tracking-[0.25em] text-violet-400 font-sans">{p.kicker}</p>
@@ -419,7 +366,7 @@ function Proof() {
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-zinc-400 font-sans">{p.text}</p>
                 {p.href && (
                   <span className="mt-5 inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-white font-sans">
-                    Case study <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                    {c.caseStudy} <ArrowRight className="h-3.5 w-3.5" aria-hidden />
                   </span>
                 )}
               </div>
@@ -452,22 +399,19 @@ function Proof() {
 
 /* ── Closing CTA ─────────────────────────────────────────────────────── */
 
-function Closing() {
+function Closing({ c, mailto }: { c: SeoCopy['closing']; mailto: string }) {
   return (
-    <section aria-label="Get in touch" className="bg-black">
+    <section aria-label={c.label} className="bg-black">
       <BackgroundBeamsWithCollision className="h-[30rem] md:h-[36rem]">
         <div className="relative z-20 px-6 text-center flex flex-col items-center gap-6">
           <h2 className="font-hero text-4xl md:text-7xl uppercase tracking-tight text-white leading-[1.02]">
-            Ready to be
+            {c.line1}
             <br />
-            <span className="text-violet-400">found?</span>
+            <span className="text-violet-400">{c.line2}</span>
           </h2>
-          <p className="max-w-md text-sm leading-relaxed text-zinc-400 font-sans">
-            Every project is different, so pricing is per project. Tell me about your site or your name and
-            I&apos;ll come back with what I&apos;d do and what it costs.
-          </p>
-          <a href={MAILTO} className={pillPrimary}>
-            Start a conversation
+          <p className="max-w-md text-sm leading-relaxed text-zinc-400 font-sans">{c.text}</p>
+          <a href={mailto} className={pillPrimary}>
+            {c.cta}
           </a>
         </div>
       </BackgroundBeamsWithCollision>
@@ -475,15 +419,17 @@ function Closing() {
   )
 }
 
-export function SeoLanding() {
+export function SeoLanding({ lang = 'en' }: { lang?: Lang }) {
+  const c = lang === 'de' ? de : en
+  const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent(c.mailSubject)}`
   return (
     <>
-      <Hero />
-      <Tracks />
-      <Process />
-      <Honesty />
-      <Proof />
-      <Closing />
+      <Hero c={c.hero} serp={c.serp} mailto={mailto} lang={lang} />
+      <Tracks c={c.tracks} />
+      <Process c={c.process} />
+      <Honesty c={c.honesty} />
+      <Proof c={c.proof} />
+      <Closing c={c.closing} mailto={mailto} />
     </>
   )
 }

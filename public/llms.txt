@@ -1,0 +1,26 @@
+# Devin Vögele
+
+> Software developer in Switzerland. Platform developer (apprentice) at PwC Switzerland, working on web interfaces, cloud, identity and automation. Offers technical SEO services for businesses and individuals, in German and English, and builds Metafix, a tool that fixes SEO issues on Next.js sites through pull requests.
+
+Contact: devin.voegele@microsun.ch
+Profiles: [GitHub](https://github.com/devin-voegele/), [LinkedIn](https://www.linkedin.com/in/devin-voegele-2a5989293), [Instagram](https://www.instagram.com/devinvoe/), [Wikidata](https://www.wikidata.org/wiki/Q137946248)
+
+## Services
+
+- [SEO Services in Switzerland](https://www.voegele.dev/seo): technical SEO audits, structured data, Search Console, Google Business Profile, knowledge panel work. Pricing per project.
+- [SEO-Dienstleistungen in der Schweiz](https://www.voegele.dev/de/seo): the same page in German.
+
+## Work
+
+- [Metafix](https://www.voegele.dev/work/metafix): audits a live Next.js site with 31 deterministic rules and opens pull requests with the fixes. Live at https://www.metafix.dev
+- [GetMoneyMap](https://www.voegele.dev/work/getmoneymap): personal finance visualization and budget tracking. Live at https://getmoneymap.org
+- [FormulaGod](https://www.voegele.dev/work/formulagod): motorsport media and marketing platform.
+
+## Writing
+
+- [Blog](https://www.voegele.dev/blog): notes on Next.js, performance and building this site.
+- [Docs](https://docs.voegele.dev): handbook and project documentation.
+
+## Optional
+
+- [Lab](https://www.voegele.dev/lab): interactive experiments (Three.js physics).

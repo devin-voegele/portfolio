@@ -30,7 +30,12 @@ function useCountUp(target: number, duration: number, start: boolean) {
 function StatCard({ value, label, suffix = '' }: Stat) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
+  // Server HTML carries the real number (crawlers and AI bots don't run JS);
+  // once mounted it drops to 0 and counts up. The card is still at opacity 0 then, so the reset never shows.
+  const [mounted, setMounted] = useState(false)
   const count = useCountUp(value, 1800, visible)
+
+  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
     const o = new IntersectionObserver(([e]) => e.isIntersecting && setVisible(true), { threshold: 0.3 })
@@ -49,7 +54,7 @@ function StatCard({ value, label, suffix = '' }: Stat) {
     >
       <div className="relative">
         <span className="text-5xl md:text-6xl font-display text-white tracking-tight">
-          {visible ? count : 0}
+          {!mounted ? value : visible ? count : 0}
           <span className="text-zinc-300">{suffix}</span>
         </span>
         <div className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

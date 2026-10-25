@@ -108,8 +108,9 @@ export default function Post() {
 
       <h2>What happened next</h2>
       <p>
-        About two days later, the panel was back with the right label: &quot;Software developer&quot;, plus
-        my date of birth. I can&apos;t prove which change did it, because Google doesn&apos;t tell you. Part
+        Less than 17 hours after the last fix, the panel was back with the right label: &quot;Software developer&quot;, plus
+        my date of birth. That&apos;s fast, but Google wasn&apos;t building anything new: it already knew who I
+        was and only had to correct the facts, and it reads Wikidata often. I can&apos;t prove which change did it, because Google doesn&apos;t tell you. Part
         of my panic was also self-inflicted: the panel looks quite different on mobile, and I compared a
         phone screenshot with an old desktop one. But the label changed because the sources changed, and
         that part isn&apos;t luck.

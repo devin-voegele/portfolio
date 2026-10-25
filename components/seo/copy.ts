@@ -197,7 +197,7 @@ export const de: SeoCopy = {
     pill: 'SEO-Dienstleistungen in der Schweiz',
     titleTop: 'Gefunden',
     titleCover: 'werden.',
-    titleClass: 'text-[clamp(2.6rem,6.4vw,5.5rem)]',
+    titleClass: 'text-[clamp(2.1rem,11vw,2.6rem)] sm:text-[clamp(2.6rem,6.4vw,5.5rem)]',
     tagline:
       'Technisches SEO für Unternehmen und Privatpersonen. Ich behebe, was Google daran hindert, Ihre Website zu verstehen, und sorge dafür, dass Ihr Name zu Ihnen führt. Aus der Schweiz, auf Deutsch und Englisch.',
     primary: 'Anfrage senden',

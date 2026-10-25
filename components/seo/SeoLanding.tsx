@@ -55,8 +55,8 @@ function SerpMock({ c }: { c: SeoCopy['serp'] }) {
       className="relative w-full max-w-md"
       aria-hidden
     >
-      <div className="absolute -inset-8 rounded-[2rem] bg-violet-600/20 blur-3xl" />
-      <div className="relative rounded-2xl border border-zinc-800 bg-[#0c0c0e] p-5 shadow-2xl shadow-black/60">
+      <div className="absolute -inset-4 sm:-inset-8 rounded-[2rem] bg-violet-600/20 blur-3xl" />
+      <div className="relative rounded-2xl border border-zinc-800 bg-[#0c0c0e] p-4 sm:p-5 shadow-2xl shadow-black/60">
         <div className="flex items-center gap-3 rounded-full border border-zinc-800 bg-zinc-900/80 px-4 py-2.5">
           <Search className="h-4 w-4 text-zinc-500" />
           <span className="text-sm text-zinc-200 font-sans">{c.query}</span>
@@ -88,14 +88,14 @@ function SerpMock({ c }: { c: SeoCopy['serp'] }) {
               )}
             </AnimatePresence>
           </div>
-          <div className="mt-4 flex gap-2">
+          <div className="mt-4 grid grid-cols-2 gap-2 sm:flex">
             {['Website', 'LinkedIn', 'GitHub', 'Instagram'].map((p, i) => (
               <motion.span
                 key={p}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={fixed ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.15 * i + 0.2 }}
-                className="rounded-full border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-[10px] text-zinc-300 font-sans"
+                className="rounded-full border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-center text-[10px] text-zinc-300 font-sans"
               >
                 {p}
               </motion.span>
@@ -137,8 +137,9 @@ function Hero({ c, serp, mailto, lang }: { c: SeoCopy['hero']; serp: SeoCopy['se
       />
       <div aria-hidden className="absolute -top-40 left-1/2 -translate-x-1/2 h-[30rem] w-[60rem] rounded-full bg-violet-700/15 blur-[120px]" />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-16 px-6 lg:grid-cols-[1.15fr_1fr]">
-        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+      {/* grid-cols-1 + min-w-0: a single auto column grows to its widest child, which pushed the hero past the screen on small phones */}
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-[1.15fr_1fr]">
+        <div className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
           {/* The pill is part of the h1 so the heading carries the search terms, not just "Get Found." */}
           <h1 className="flex flex-col items-center lg:items-start">
             <motion.span
@@ -195,7 +196,7 @@ function Hero({ c, serp, mailto, lang }: { c: SeoCopy['hero']; serp: SeoCopy['se
           </motion.div>
         </div>
 
-        <div className="flex justify-center lg:justify-end">
+        <div className="flex min-w-0 justify-center lg:justify-end">
           <SerpMock c={serp} />
         </div>
       </div>

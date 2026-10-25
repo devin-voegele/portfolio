@@ -7,7 +7,7 @@ Profiles: [GitHub](https://github.com/devin-voegele/), [LinkedIn](https://www.li
 
 ## Services
 
-- [SEO Services in Switzerland](https://www.voegele.dev/seo): technical SEO audits, structured data, Search Console, Google Business Profile, knowledge panel work. Pricing per project.
+- [SEO Services in Switzerland](https://www.voegele.dev/seo): technical SEO audits, structured data, Search Console, Google Business Profile, knowledge panel work. Pricing per project. Includes an FAQ.
 - [SEO-Dienstleistungen in der Schweiz](https://www.voegele.dev/de/seo): the same page in German.
 
 ## Work
@@ -19,6 +19,7 @@ Profiles: [GitHub](https://github.com/devin-voegele/), [LinkedIn](https://www.li
 ## Writing
 
 - [Blog](https://www.voegele.dev/blog): notes on Next.js, performance and building this site.
+- [How I got my Google knowledge panel back](https://www.voegele.dev/blog/knowledge-panel-back): fixing a knowledge panel by making the site, schema and Wikidata agree.
 - [Docs](https://docs.voegele.dev): handbook and project documentation.
 
 ## Optional

@@ -1,4 +1,4 @@
-import type { Lang } from './copy'
+import { de, en, type Lang } from './copy'
 
 const ORIGIN = 'https://www.voegele.dev'
 
@@ -26,7 +26,7 @@ export const seoMeta = {
   },
 } satisfies Record<Lang, unknown>
 
-/** Service + BreadcrumbList for one language version, tied to the site-wide Person. */
+/** Service, FAQPage and BreadcrumbList for one language version, tied to the site-wide Person. */
 export function seoJsonLd(lang: Lang) {
   const m = seoMeta[lang]
   const url = `${ORIGIN}${m.path}`
@@ -48,6 +48,16 @@ export function seoJsonLd(lang: Lang) {
           { '@type': 'BusinessAudience', name: lang === 'de' ? 'Unternehmen' : 'Businesses' },
           { '@type': 'PeopleAudience', name: lang === 'de' ? 'Privatpersonen' : 'Individuals' },
         ],
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${url}#faq`,
+        inLanguage: lang === 'de' ? 'de-CH' : 'en',
+        mainEntity: (lang === 'de' ? de : en).faq.items.map(({ q, a }) => ({
+          '@type': 'Question',
+          name: q,
+          acceptedAnswer: { '@type': 'Answer', text: a },
+        })),
       },
       {
         '@type': 'BreadcrumbList',

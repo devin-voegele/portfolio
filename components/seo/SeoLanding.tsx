@@ -11,6 +11,7 @@ import {
   ChevronDown,
   Languages,
   LineChart,
+  Plus,
   ScanSearch,
   Search,
   UserRound,
@@ -144,9 +145,9 @@ function Hero({ c, serp, mailto, lang }: { c: SeoCopy['hero']; serp: SeoCopy['se
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-4 py-1.5 text-[11px] uppercase tracking-[0.25em] text-zinc-300 font-sans"
+              className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-4 py-1.5 text-[10px] sm:text-[11px] uppercase tracking-[0.12em] sm:tracking-[0.25em] text-zinc-300 font-sans"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" /> {c.pill}
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-violet-400" /> {c.pill}
             </motion.span>
 
             <motion.span
@@ -284,8 +285,9 @@ function Process({ c }: { c: SeoCopy['process'] }) {
     <section className="w-full py-24 px-6 relative">
       <div className="relative max-w-6xl mx-auto">
         <SectionHeading eyebrow={c.eyebrow} title={c.title} />
-        <ol className="relative grid gap-10 md:grid-cols-4 md:gap-6">
-          {/* the line the steps hang off (desktop) */}
+        <ol className="relative mx-auto grid max-w-md gap-8 md:max-w-none md:grid-cols-4 md:gap-6">
+          {/* the line the steps hang off: down the left on phones, across on desktop */}
+          <div aria-hidden className="absolute bottom-6 left-6 top-6 w-px bg-gradient-to-b from-zinc-700 via-zinc-700 to-transparent md:hidden" />
           <div aria-hidden className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent md:block" />
           {c.steps.map((s, i) => {
             const Icon = stepIcons[i]
@@ -296,16 +298,18 @@ function Process({ c }: { c: SeoCopy['process'] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.12, duration: 0.5 }}
-                className="relative flex flex-col items-center text-center"
+                className="relative flex items-start gap-5 text-left md:flex-col md:items-center md:gap-0 md:text-center"
               >
-                <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-700 bg-black text-violet-300 shadow-[0_0_24px_rgba(139,92,246,0.25)]">
+                <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-zinc-700 bg-black text-violet-300 shadow-[0_0_24px_rgba(139,92,246,0.25)]">
                   <Icon className="h-5 w-5" aria-hidden />
                 </span>
-                <p className="mt-5 text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-sans">
-                  {c.step} 0{i + 1}
-                </p>
-                <h3 className="mt-1 font-display text-2xl text-white">{s.title}</h3>
-                <p className="mt-2 max-w-[16rem] text-sm leading-relaxed text-zinc-400 font-sans">{s.text}</p>
+                <div>
+                  <p className="mt-1 md:mt-5 text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-sans">
+                    {c.step} 0{i + 1}
+                  </p>
+                  <h3 className="mt-1 font-display text-2xl text-white">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-400 font-sans md:mx-auto md:max-w-[16rem]">{s.text}</p>
+                </div>
               </motion.li>
             )
           })}
@@ -334,14 +338,14 @@ function Honesty({ c }: { c: SeoCopy['honesty'] }) {
         </motion.h2>
       </LampContainer>
       {/* outside the lamp: extra height inside it pushes the heading under the lamp's mask.
-          The negative margin pulls it up into the lamp's empty lower half, like the homepage Statement. */}
+          The negative margin pulls it up into the lamp's empty lower half, like the homepage Statement.
+          The lamp keeps its height on phones while the heading shrinks, so the pull is bigger there. */}
       <motion.p
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.6, duration: 0.8 }}
-        className="relative z-50 mx-auto max-w-xl px-6 text-center text-sm md:text-base leading-relaxed text-zinc-400 font-sans"
-        style={{ marginTop: 'calc(-1 * clamp(9rem, 20vw, 15rem))' }}
+        className="relative z-50 mx-auto -mt-[19rem] max-w-xl px-6 pb-8 text-center text-sm md:-mt-[clamp(9rem,20vw,15rem)] md:pb-0 md:text-base leading-relaxed text-zinc-400 font-sans"
       >
         {c.text}
       </motion.p>
@@ -397,6 +401,33 @@ function Proof({ c }: { c: SeoCopy['proof'] }) {
   )
 }
 
+/* ── FAQ ─────────────────────────────────────────────────────────────── */
+
+// Native <details>: the answers are in the server HTML for crawlers and AI
+// answer engines, and it opens without JavaScript. Same text as the FAQPage schema.
+function Faq({ c }: { c: SeoCopy['faq'] }) {
+  return (
+    <section id="faq" className="w-full py-24 px-6 relative scroll-mt-16">
+      <div className="relative max-w-3xl mx-auto">
+        <SectionHeading eyebrow={c.eyebrow} title={c.title} className="mb-12" />
+        <div className="divide-y divide-zinc-900 border-y border-zinc-900">
+          {c.items.map((f) => (
+            <details key={f.q} className="group">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left [&::-webkit-details-marker]:hidden">
+                <h3 className="font-display text-lg md:text-xl text-white">{f.q}</h3>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-zinc-800 text-zinc-400 transition-all duration-300 group-open:rotate-45 group-open:border-violet-500/50 group-open:text-violet-300">
+                  <Plus className="h-4 w-4" aria-hidden />
+                </span>
+              </summary>
+              <p className="pb-6 pr-12 text-sm md:text-base leading-relaxed text-zinc-400 font-sans">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ── Closing CTA ─────────────────────────────────────────────────────── */
 
 function Closing({ c, mailto }: { c: SeoCopy['closing']; mailto: string }) {
@@ -429,6 +460,7 @@ export function SeoLanding({ lang = 'en' }: { lang?: Lang }) {
       <Process c={c.process} />
       <Honesty c={c.honesty} />
       <Proof c={c.proof} />
+      <Faq c={c.faq} />
       <Closing c={c.closing} mailto={mailto} />
     </>
   )

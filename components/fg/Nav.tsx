@@ -167,7 +167,8 @@ export function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden fixed inset-0 z-[60] flex flex-col bg-black px-6 pb-8 pt-24"
+            // scrolls on its own: 8 links don't fit a short phone, and the page behind is locked
+            className="md:hidden fixed inset-x-0 bottom-0 top-[4.5rem] z-[60] flex flex-col overflow-y-auto overscroll-contain bg-black px-6 pb-8 pt-6"
           >
             <nav aria-label="Mobile" className="flex flex-col">
               {items.map((l, i) => (
@@ -181,13 +182,13 @@ export function Nav() {
                     href={l.href}
                     onClick={() => setMenuOpen(false)}
                     aria-current={isActive(l) ? 'page' : undefined}
-                    className="group flex items-baseline gap-4 border-b border-zinc-900 py-4"
+                    className="group flex items-baseline gap-4 border-b border-zinc-900 py-3 [@media(min-height:740px)]:py-4"
                   >
                     <span className="w-6 text-xs font-sans text-zinc-600 group-hover:text-violet-400 transition-colors">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span
-                      className={`font-display text-4xl transition-colors ${
+                      className={`font-display text-3xl [@media(min-height:740px)]:text-4xl transition-colors ${
                         isActive(l) ? 'text-white' : 'text-zinc-400 group-hover:text-white'
                       }`}
                     >

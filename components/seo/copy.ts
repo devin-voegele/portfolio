@@ -35,6 +35,8 @@ export interface SeoCopy {
     caseStudy: string
     items: { kicker: string; title: string; text: string; href?: string }[]
   }
+  /** Rendered as visible Q&A and as FAQPage schema, so the two always match. */
+  faq: { eyebrow: string; title: string; items: { q: string; a: string }[] }
   closing: { label: string; line1: string; line2: string; text: string; cta: string }
 }
 
@@ -134,6 +136,40 @@ export const en: SeoCopy = {
         kicker: 'Reference build',
         title: 'voegele.dev',
         text: 'This site ships the full setup: entity graph, per-page metadata, sitemap and generated link previews.',
+      },
+    ],
+  },
+  faq: {
+    eyebrow: 'FAQ',
+    title: 'Common Questions',
+    items: [
+      {
+        q: 'What does SEO cost?',
+        a: 'It depends on the size of the site and on what needs fixing. After a first look I send a quote for the whole project, so you know the price before any work starts.',
+      },
+      {
+        q: 'How long until I see results?',
+        a: 'Technical fixes are live as soon as they are deployed. Google then has to crawl the pages again, which usually takes days to a few weeks. Changes to rankings or a knowledge panel can take weeks to months.',
+      },
+      {
+        q: 'Can you guarantee first place on Google?',
+        a: 'No, and nobody honestly can. Google decides the ranking. I remove the technical problems that hold a site back, so the content gets the position it earns.',
+      },
+      {
+        q: 'Can you get me a Google knowledge panel?',
+        a: 'Nobody can create one directly; Google builds it when it is confident about who you are. I make the facts clear and consistent across your site, structured data, profiles and Wikidata where you meet its criteria. If you already have a panel, I help you claim it and correct wrong details.',
+      },
+      {
+        q: 'Do you only work with Next.js sites?',
+        a: 'No. The audit works on any public website, whether it runs on WordPress, Wix, Shopify or custom code. On Next.js I can deliver the fixes as pull requests; on other platforms you get a clear list of changes and help putting them in place.',
+      },
+      {
+        q: 'Do I need a new website?',
+        a: 'Usually not. Most problems are missing or wrong metadata, structured data, redirects or indexing settings, and they can be fixed on the site you already have.',
+      },
+      {
+        q: 'Which languages do you work in?',
+        a: 'German and English. I am based in Switzerland and work remotely, so location is not a problem.',
       },
     ],
   },
@@ -242,6 +278,40 @@ export const de: SeoCopy = {
         kicker: 'Referenz',
         title: 'voegele.dev',
         text: 'Diese Website nutzt das komplette Setup: Entity-Graph, Metadaten pro Seite, Sitemap und generierte Link-Vorschauen.',
+      },
+    ],
+  },
+  faq: {
+    eyebrow: 'FAQ',
+    title: 'Häufige Fragen',
+    items: [
+      {
+        q: 'Was kostet SEO?',
+        a: 'Das hängt von der Grösse der Website ab und davon, was zu beheben ist. Nach einer ersten Analyse schicke ich Ihnen eine Offerte für das ganze Projekt. So kennen Sie den Preis, bevor die Arbeit beginnt.',
+      },
+      {
+        q: 'Wie lange dauert es, bis man Ergebnisse sieht?',
+        a: 'Technische Fixes sind live, sobald sie veröffentlicht sind. Danach muss Google die Seiten neu crawlen, was meist einige Tage bis wenige Wochen dauert. Änderungen beim Ranking oder im Knowledge Panel können Wochen bis Monate brauchen.',
+      },
+      {
+        q: 'Garantieren Sie Platz eins auf Google?',
+        a: 'Nein, und das kann niemand ehrlich versprechen. Über das Ranking entscheidet Google. Ich beseitige die technischen Probleme, die eine Website bremsen, damit die Inhalte die Position bekommen, die sie verdienen.',
+      },
+      {
+        q: 'Können Sie mir ein Google Knowledge Panel verschaffen?',
+        a: 'Direkt erstellen kann es niemand; Google zeigt es an, wenn es sicher ist, wer Sie sind. Ich sorge dafür, dass die Fakten auf Ihrer Website, in den strukturierten Daten, in Ihren Profilen und auf Wikidata (wo die Kriterien erfüllt sind) klar und einheitlich sind. Haben Sie bereits ein Panel, helfe ich beim Beanspruchen und beim Korrigieren falscher Angaben.',
+      },
+      {
+        q: 'Arbeiten Sie nur mit Next.js-Websites?',
+        a: 'Nein. Das Audit funktioniert mit jeder öffentlichen Website, ob WordPress, Wix, Shopify oder eigener Code. Bei Next.js liefere ich die Fixes als Pull Requests, bei anderen Plattformen bekommen Sie eine klare Liste der Änderungen und Unterstützung bei der Umsetzung.',
+      },
+      {
+        q: 'Brauche ich eine neue Website?',
+        a: 'Meistens nicht. Die meisten Probleme sind fehlende oder falsche Metadaten, strukturierte Daten, Weiterleitungen oder Indexierungs-Einstellungen, und die lassen sich auf Ihrer bestehenden Website beheben.',
+      },
+      {
+        q: 'In welchen Sprachen arbeiten Sie?',
+        a: 'Auf Deutsch und Englisch. Ich bin in der Schweiz und arbeite remote, der Standort spielt also keine Rolle.',
       },
     ],
   },

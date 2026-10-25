@@ -15,6 +15,16 @@ export interface PostMeta {
  */
 export const posts: PostMeta[] = [
   {
+    slug: 'knowledge-panel-back',
+    title: 'How I got my Google knowledge panel back',
+    seoTitle: 'How I got my knowledge panel back',
+    date: '2026-10-25',
+    excerpt:
+      'My knowledge panel looked gone after a redesign and called me a graphic designer. The cause: my own sources disagreed. What I fixed.',
+    readingTime: '4 min',
+    tags: ['SEO', 'Knowledge Panel', 'Structured Data'],
+  },
+  {
     slug: 'turbopack-ate-my-backdrop-filter',
     title: 'Turbopack quietly ate my backdrop-filter',
     date: '2026-06-12',
